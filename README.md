@@ -84,10 +84,10 @@ ionic serve
 ```
 
 5. Build for Android:
-
+   
 ```bash
 # Build the app
-ionic capacitor build
+   ionic capacitor build
 
 # Sync web code to native project
 npx cap sync

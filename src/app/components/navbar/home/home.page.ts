@@ -34,7 +34,7 @@ export class HomePage implements OnInit, OnDestroy {
   imageFile: File | null = null;
   postText = '';
   imageSrc: string | ArrayBuffer | null = null;
-  selectedSegment = 'for-you'
+  selectedSegment = 'explore'
   loading!: HTMLIonLoadingElement;
   private modalInstance!: HTMLIonModalElement;
   onlineStatusSubscription!: Subscription;
@@ -441,5 +441,9 @@ export class HomePage implements OnInit, OnDestroy {
 
   navigateToEvents() {
     this.navCtrl.navigateForward('/tabs/home/events');
+  }
+
+  openUrl(url: string) {
+    window.open(url, '_blank');
   }
 }

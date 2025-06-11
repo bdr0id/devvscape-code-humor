@@ -13,16 +13,13 @@ ion-content {
   background-color: transparent;
   border: none;
   outline: none;
-  font-size: 1.5rem;
-  color: var(--ion-color-medium);
-  transition: color 0.2s ease;
-  padding: 8px;
-  border-radius: 50%;
-
-  &:hover {
-    color: var(--ion-color-dark);
-    background-color: rgba(0, 0, 0, 0.05);
-  }
+  font-size: 30px;
+  font-family: "Spotify";
+  font-weight: bold;
+  float: right;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  margin-top: 18px;
 }
 
 ion-card {

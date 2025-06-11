@@ -66,35 +66,38 @@
       </ion-card>
 
       <ion-item-group class="shadow rounded">
-        <ion-item>
-          <ion-label style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BESTSTORIES' | transloco }}</ion-label>
+        <ion-item lines="none">
+          <ion-label (click)="navigateToNews()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BESTSTORIES' | transloco }}</ion-label>
           <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToNews()" style="color: #2B7A78;"></ion-icon>
           <ion-spinner name="lines-sharp" *ngIf="!(bestStories$ | async)?.length"></ion-spinner>
         </ion-item>
-        <swiper-container class="news" space-between="30" slides-per-view="auto">
+        <swiper-container class="news" space-between="25" slides-per-view="auto">
           <swiper-slide class="news-slide" *ngFor="let story of bestStories$ | async">
-            <ion-card>
+            <ion-card (click)="openUrl(story.url)">
               <ion-card-header>
                 <ion-card-title>{{ story.title }}</ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
-                <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
+                <ion-button fill="clear" [href]="story.url" target="_blank" (click)="$event.stopPropagation()">
+                  {{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}
+                  <ion-icon name="arrow-forward" slot="end"></ion-icon>
+                </ion-button>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
         </swiper-container>
+      </ion-item-group>      
+  
+      <ion-item-group class="shadow rounded">
+        <ion-item lines="none">
+          <ion-label (click)="navigateToEvents()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.EVENTS' | transloco }}</ion-label>
+          <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToEvents()" style="color: #2B7A78;"></ion-icon>
+        </ion-item>
       </ion-item-group>
 
       <div class="ad-banner" id="home-banner-ad"></div>
-      
-  
-      <ion-item-group class="shadow rounded">
-        <ion-item>
-          <ion-label>Events (Coming Soon)</ion-label>
-          <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToEvents()"></ion-icon>
-        </ion-item>
-      </ion-item-group>
+
     </div>
   </ng-container>
   
