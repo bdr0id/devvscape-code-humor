@@ -89,12 +89,12 @@
       <div class="ad-banner" id="home-banner-ad"></div>
       
   
-      <!-- <ion-item-group class="shadow rounded">
+      <ion-item-group class="shadow rounded">
         <ion-item>
           <ion-label>Events (Coming Soon)</ion-label>
           <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToEvents()"></ion-icon>
         </ion-item>
-      </ion-item-group> -->
+      </ion-item-group>
     </div>
   </ng-container>
   
@@ -105,7 +105,7 @@
         <ion-spinner class="preloader" aria-label="Loading"></ion-spinner>
       </ng-container>
 
-      <ion-list *ngIf="(images$ | async) as images">
+      <ion-list lines="none" *ngIf="(images$ | async) as images">
         <ng-container *ngIf="images.length > 0">
           <app-image
             *ngFor="let image of images; trackBy: trackImage"

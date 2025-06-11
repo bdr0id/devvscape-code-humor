@@ -283,6 +283,16 @@ export class ImageDetailsComponent implements OnInit {
     this.isTextTruncated = !this.isTextTruncated;
   }
 
+  onCommentChange(): void {
+    // Trim the comment text to remove leading/trailing whitespace
+    this.commentText = this.commentText.trim();
+    
+    // If the comment text is longer than maxLength, truncate it
+    if (this.commentText.length > this.maxLength) {
+      this.commentText = this.commentText.substring(0, this.maxLength);
+    }
+  }
+
   async downloadImage(image: Image): Promise<void> {
     console.log(image);
     const permissionResult = await this.androidPermissions.checkPermission(

@@ -18,8 +18,8 @@
       </ion-label>
     </ion-item>
 
-    <div class="card" *ngIf="!imageLoaded">
-      <div class="shimmer shimmer_large_para"></div>
+    <div class="shimmer-container" *ngIf="!imageLoaded">
+      <div class="shimmer"></div>
     </div>
 
     <img
@@ -27,7 +27,7 @@
       [src]="image.imageUrl"
       [alt]="image.postText"
       (load)="imageLoaded = true"
-      style="position: relative"
+      [class.hidden]="!imageLoaded"
     />
 
     <ion-card-header>
@@ -38,7 +38,6 @@
       <a
         *ngIf="image.postText.length > 200"
         class="read-more"
-        style="color: blue; text-decoration: none; cursor: pointer"
         (click)="toggleText()"
         >{{ isTextTruncated ? "Read More" : "Show Less" }}</a
       >
