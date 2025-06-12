@@ -67,12 +67,12 @@
 
       <ion-item-group class="shadow rounded">
         <ion-item lines="none">
-          <ion-label (click)="navigateToNews()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BESTSTORIES' | transloco }}</ion-label>
+          <ion-label (click)="navigateToNews()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.NEWSTORIES' | transloco }}</ion-label>
           <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToNews()" style="color: #2B7A78;"></ion-icon>
-          <ion-spinner name="lines-sharp" *ngIf="!(bestStories$ | async)?.length"></ion-spinner>
+          <ion-spinner name="lines-sharp" *ngIf="!(newStories$ | async)?.length"></ion-spinner>
         </ion-item>
         <swiper-container class="news" space-between="25" slides-per-view="auto">
-          <swiper-slide class="news-slide" *ngFor="let story of bestStories$ | async">
+          <swiper-slide class="news-slide" *ngFor="let story of newStories$ | async">
             <ion-card (click)="openUrl(story.url)">
               <ion-card-header>
                 <ion-card-title>{{ story.title }}</ion-card-title>

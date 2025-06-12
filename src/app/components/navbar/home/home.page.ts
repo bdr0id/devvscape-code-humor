@@ -18,8 +18,8 @@ import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 import { Image } from 'src/app/core/models/data/image.interface';
 import { ImageService } from 'src/app/core/services/image.service';
 import { loadImages } from 'src/app/core/store/actions/image.actions';
-import { loadBestStories } from 'src/app/core/store/actions/hacker-news.actions';
-import { selectBestStories } from 'src/app/core/store/selectors/hacker-news.selectors';
+import { loadBestStories, loadNewStories } from 'src/app/core/store/actions/hacker-news.actions';
+import { selectBestStories, selectNewStories } from 'src/app/core/store/selectors/hacker-news.selectors';
 import { AdMobService } from 'src/app/core/services/ad-mob.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class HomePage implements OnInit, OnDestroy {
   private modalInstance!: HTMLIonModalElement;
   onlineStatusSubscription!: Subscription;
   imagesLoaded$!: Observable<boolean>;
-  bestStories$ = this.store.pipe(select(selectBestStories));
+  newStories$ = this.store.pipe(select(selectNewStories));
 
   constructor(private auth: Auth,
     private platform: Platform,
@@ -57,7 +57,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkOnlineStatus();
-    this.store.dispatch(loadBestStories());
+    this.store.dispatch(loadNewStories());
     this.presentingElement = document.querySelector('.ion-page');
     this.notificationStatus();
 
@@ -85,7 +85,7 @@ export class HomePage implements OnInit, OnDestroy {
 
   refresh(ev: any) {
     this.store.dispatch(loadImages());
-    this.bestStories$ = this.store.pipe(select(selectBestStories));
+    this.newStories$ = this.store.pipe(select(selectNewStories));
     setTimeout(() => {
       ev.detail.complete();
     }, 3000);

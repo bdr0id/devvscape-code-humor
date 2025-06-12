@@ -1,0 +1,182 @@
+{
+  "APP": {
+    "TITLE": "Devvscape",
+    "WELCOME_MESSAGE": "Willkommen bei Devvscape! Betritt das Paradies der Programmierer.",
+    "ALERT_HEADER": "Code-Escape-Portal",
+    "ALERT_MESSAGE": "Bereit, die Code-Matrix zu verlassen und die reale Welt zu konfrontieren? Wähle dein Schicksal!",
+    "CANCEL_BUTTON": "Bleiben",
+    "EXIT_BUTTON": "Entkommen",
+    "DELETE_BUTTON": "Löschen"
+  },
+  "COMPONENTS": {
+    "AUTH": {
+      "AUTH-FORM": {
+        "EMAIL": "DevMail",
+        "EMAIL-PLACEHOLDER": "Deine heilige E-Mail (kein Spam, nur Stack Overflow Links)",
+        "EMAIL-ERROR": "Das ist keine gültige E-Mail, versuch’s nochmal wie ein echter Dev.",
+        "USERNAME": "Handle",
+        "USERNAME-PLACEHOLDER": "z. B. BugSlayer9000",
+        "USERNAME-ERROR": "Halt es unter 25 Zeichen, kein Roman. Sei kurz, sei 1337.",
+        "PASSWORD": "Passphrase",
+        "PASSWORD-PLACEHOLDER": "Pssst... es ist ein Geheimnis",
+        "PASSWORD-ERROR": "Muss länger sein als 'admin123' (wir haben’s geprüft, das ist nicht sicher)"
+      },
+      "LOGIN": {
+        "TITLE": "Anmelden",
+        "SIGNUP": "Erstelle ein neues, fantastisches Konto",
+        "FORGOT-PASSWORD": "Ich habe mein Zauberwort vergessen",
+        "GITHUB": "Mit GitHub fortfahren (weil echte Devs GitHub nutzen)",
+        "OR": "oder",
+        "ACTION-BUTTON": "Anmelden"
+      },
+      "SIGNUP": {
+        "TITLE": "Registrieren",
+        "SIGNIN": "Ich habe bereits ein episches Konto",
+        "GITHUB": "Mit GitHub fortfahren (weil echte Devs GitHub nutzen)",
+        "OR": "oder",
+        "ACTION-BUTTON": "Konto erstellen"
+      },
+      "RESET_PASSWORD": {
+        "TITLE": "Passwort vergessen",
+        "ACTION-BUTTON": "Passwort zurücksetzen"
+      },
+      "PROFILE": {
+        "TITLE": "Konto",
+        "PROFILE": "Profil",
+        "JOINED": "Dem Commit-Log beigetreten am",
+        "ACTIVITY": "Aktivitätsprotokolle",
+        "TABS": {
+          "POSTS": "Beiträge",
+          "COMMENTS": "Kommentare",
+          "STARS": "Sterne"
+        }
+      }
+    },
+    "NAVBAR": {
+      "HOME": {
+        "TITLE": "Startseite",
+        "TABS": {
+          "EXPLORE": {
+            "TITLE": "Entdecken",
+            "TOPSTORIES": "Top-Geschichten",
+            "BESTSTORIES": "Beste Geschichten",
+            "NEWSTORIES": "Neue Geschichten",
+            "NEWS": "Nachrichten",
+            "BY": "von",
+            "READMORE": "Eintauchen",
+            "EVENTS": "Veranstaltungen",
+            "COMINGSOON": "Demnächst... wie asynchrone Daten"
+          },
+          "FOR-YOU": {
+            "TITLE": "Für dich",
+            "LOADING": "Laden... (hol dir einen Kaffee)"
+          },
+          "TRIVIA": {
+            "TITLE": "Trivia",
+            "TRIVIASETTINGS": "Trivia-Einstellungen",
+            "CONFIRM": "Bestätigen",
+            "NOOFQUESTIONS": "Anzahl der Fragen: ",
+            "SELECTDIFFICULTY": "Schwierigkeitsgrad auswählen: ",
+            "ANYDIFFICULTY": "Beliebiger Schwierigkeitsgrad",
+            "EASY": "Wie Hallo Welt",
+            "MEDIUM": "Fortgeschrittene if-else Magie",
+            "HARD": "Stack Overflow Niveau",
+            "FOOTER": "Hinweis: Dieses Trivia wird nicht gespeichert. Genau wie deine ungespeicherte VSCode-Datei. 😬"
+          }
+        },
+        "MODAL": {
+          "CREATE-POST": "Beitrag erstellen",
+          "SAY-SOMETHING": "Sag etwas Witziges über das Bild",
+          "SELECT-IMAGE": "Klick, um ein Meme... äh, Bild hochzuladen",
+          "POST": "Posten"
+        }
+      },
+      "SEARCH": {
+        "TITLE": "Suchen"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "Benachrichtigungen",
+        "NO-NOTIFICATIONS": "0 Benachrichtigungen. Du bist offiziell bugfrei (fürs Erste)"
+      },
+      "SETTINGS": {
+        "TITLE": "Einstellungen",
+        "APP-SETTINGS": "App-Einstellungen",
+        "APPERANCE": "Erscheinungsbild",
+        "SUPPORT&INFO": "Support & Info",
+        "REVIEW&SHARE": "Bewerten und Teilen",
+        "DEVELOPERS": "Entwickler",
+        "BUGS": "Code hacken",
+        "ISSUES": "Feature-Anfrage",
+        "TERMS&CONDITIONS": "Nutzungsbedingungen",
+        "PRIVACY": "Datenschutzrichtlinie",
+        "VERSION": "Aktuelle Version",
+        "ACCOUNT-MANAGEMENT": "Kontomanagement",
+        "DELETE": "Konto löschen",
+        "TAGLINE": "Die nächste Generation von SilkwebHQ und SilkCommunity — jetzt mit 50% mehr Memes",
+        "UPDATEHEADER": "Update verfügbar",
+        "UPDATEMESSAGE": "Eine glänzende neue Version ist verfügbar. Bitte aktualisiere, um dein Abenteuer fortzusetzen.",
+        "DELETEHEADER": "Konto löschen",
+        "DELETEMESSAGE": "Du willst dein Konto löschen? Gib dein Passwort ein, um diesen mutigen Schritt zu bestätigen:",
+        "LATER": "Später",
+        "UPDATE": "Patch herunterladen",
+        "QUIZ": "Quiz",
+        "NOTIFICATIONS": {
+          "TITLE": "Benachrichtigungen"
+        },
+        "APPEARANCE": {
+          "TITLE": "Visuelles"
+        },
+        "LANGUAGE": {
+          "TITLE": "Sprache",
+          "SELECT_LANGUAGE": "Wähle deine Sprache",
+          "EN": "Englisch",
+          "ES": "Spanisch",
+          "FR": "Französisch",
+          "DE": "Deutsch",
+          "SW": "Swahili",
+          "PT": "Portugiesisch"
+        },
+        "GAMES": {
+          "GENERAL": "Allgemeinwissen",
+          "BOOKS": "Unterhaltung: Bücher",
+          "FILM": "Unterhaltung: Film",
+          "MUSIC": "Unterhaltung: Musik",
+          "MUSICAL": "Unterhaltung: Musicals & Theater",
+          "TELEVISION": "Unterhaltung: Fernsehen",
+          "VIDEOGAMES": "Unterhaltung: Videospiele",
+          "BOARDGAMES": "Unterhaltung: Brettspiele",
+          "NATURE": "Wissenschaft & Natur",
+          "COMPUTERS": "Wissenschaft: Computer",
+          "MATHEMATICS": "Wissenschaft: Mathematik",
+          "MYTHOLOGY": "Mythologie",
+          "SPORTS": "Sport",
+          "GEOGRAPHY": "Geografie",
+          "HISTORY": "Geschichte",
+          "POLITICS": "Politik",
+          "ART": "Kunst",
+          "CELEBRITIES": "Prominente",
+          "ANIMALS": "Tiere",
+          "VEHICLES": "Fahrzeuge",
+          "COMICS": "Unterhaltung: Comics",
+          "GADGETS": "Wissenschaft: Gadgets",
+          "JAPANESEANIME": "Unterhaltung: Japanische Anime & Manga",
+          "CARTOON": "Unterhaltung: Cartoons & Animationen"
+        }
+      }
+    },
+    "SHARED": {
+      "IMAGE": {
+        "TITLE": "Bild"
+      },
+      "IMAGE-DETAILS": {
+        "TITLE": "Bilddetails"
+      }
+    },
+    "TABS": {
+      "HOME": "Für dich",
+      "SEARCH": "Suchen",
+      "NOTIFICATIONS": "Benachrichtigungen",
+      "SETTINGS": "Einstellungen"
+    }
+  }
+}
