@@ -43,18 +43,16 @@
       >
       <div class="interaction-buttons">
         <div class="left-buttons">
-          <ion-button fill="clear" size="small" (click)="likeImage(image)">
-            <ion-icon name="star-outline" slot="start"></ion-icon>
-            {{ 'COMPONENTS.SHARED.IMAGE.STAR' | transloco }}
+          <ion-button fill="clear" (click)="likeImage(image)" [class.liked]="isLiked">
+            <ion-icon [name]="isLiked ? 'star' : 'star-outline'" slot="icon-only"></ion-icon>
+            <span>{{ image.stars || 0 }}</span>
           </ion-button>
-          <ion-button fill="clear" size="small" (click)="openImage(image.id)">
-            <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-            {{ 'COMPONENTS.SHARED.IMAGE.REPLY' | transloco }}
+          <ion-button fill="clear" (click)="toggleReply()" [class.active]="isReplyActive">
+            <ion-icon name="chatbubble-outline" slot="icon-only"></ion-icon>
+            <span>{{ 'COMPONENTS.SHARED.IMAGE.REPLY' | transloco }}</span>
           </ion-button>
         </div>
-        <ion-button fill="clear" size="small" class="save-button">
-          <ion-icon name="bookmark-outline"></ion-icon>
-        </ion-button>
+       
       </div>
     </ion-card-header>
   </ion-card>

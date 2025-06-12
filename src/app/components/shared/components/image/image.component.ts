@@ -17,6 +17,8 @@ export class ImageComponent implements OnInit, OnDestroy {
   isTextTruncated = true;
   currentUser: any;
   permissionSubscription!: Subscription;
+  isLiked = false;
+  isReplyActive = false;
   reportReasons: string[] = [
     'Inappropriate Content',
     'Spam or Advertisement',
@@ -36,11 +38,18 @@ export class ImageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.currentUser = this.auth.currentUser?.uid;
+    this.checkLikeStatus();
   }
 
   ngOnDestroy(): void {
     if (this.permissionSubscription) {
       this.permissionSubscription.unsubscribe();
+    }
+  }
+
+  private checkLikeStatus() {
+    if (this.image?.likedBy && this.currentUser) {
+      this.isLiked = this.image.likedBy.includes(this.currentUser);
     }
   }
 
@@ -126,7 +135,6 @@ export class ImageComponent implements OnInit, OnDestroy {
     await alert.present();
   }
 
-
   async reportImage(image: Image) {
     this.alertCtrl
       .create({
@@ -191,16 +199,20 @@ export class ImageComponent implements OnInit, OnDestroy {
     const user = this.auth.currentUser;
 
     if (user) {
-      this.imageService
-        .likeImage(image.id, user.uid)
-        .then(() => {
-          //console.log(`${image.id}` + 'has been liked by' + `${user.uid}`);
-        })
-        .catch(async (error) => {
-          await this.presentErrorToast(`Error liking image: ${error.error}`);
-        });
-    } else {
-      //console.warn('User is not authenticated.');
+      try {
+        await this.imageService.likeImage(image.id, user.uid);
+        this.isLiked = !this.isLiked;
+        this.image.stars = this.isLiked ? (this.image.stars || 0) + 1 : (this.image.stars || 0) - 1;
+      } catch (error) {
+        await this.presentErrorToast(`Error liking image: ${error}`);
+      }
+    }
+  }
+
+  toggleReply() {
+    this.isReplyActive = !this.isReplyActive;
+    if (this.isReplyActive) {
+      this.openImage(this.image.id);
     }
   }
 

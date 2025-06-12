@@ -26,6 +26,7 @@ export class ProfilePage implements OnDestroy, OnInit {
   comments: Comment[] = [];
   user: any;
   userPostsComments$!: Observable<Comment[]>;
+  starredImages$!: Observable<Image[]>;
   fullNames: string = '';
   imageLoaded: boolean = false;
   isTextTruncated: boolean = true;
@@ -50,9 +51,10 @@ export class ProfilePage implements OnDestroy, OnInit {
     });
     this.fetchImages();
     this.fetchUserPostComments();
+    this.fetchStarredImages();
     this.profileService.getUserProfile().subscribe((userProfile: UserProfile) => {
-        this.fullNames = userProfile.fullName;
-      });
+      this.fullNames = userProfile.fullName;
+    });
   }
 
   ngOnDestroy(): void {
@@ -210,8 +212,7 @@ export class ProfilePage implements OnDestroy, OnInit {
 
   async fetchImages() {
     if (this.selectedSegment === 'posts') {
-      const loading = await this.loadingCtrl.create({
-      });
+      const loading = await this.loadingCtrl.create({});
       await loading.present();
       this.images$ = this.imageService.getUserPosts();
       this.images$.subscribe({
@@ -221,6 +222,8 @@ export class ProfilePage implements OnDestroy, OnInit {
       });
     } else if (this.selectedSegment === 'comments') {
       this.fetchUserPostComments();
+    } else if (this.selectedSegment === 'stars') {
+      this.fetchStarredImages();
     }
   }
 
@@ -234,6 +237,17 @@ export class ProfilePage implements OnDestroy, OnInit {
         this.comments = comments;
         loading.dismiss();
       },
+      error: () => loading.dismiss(),
+      complete: () => loading.dismiss(),
+    });
+  }
+
+  async fetchStarredImages() {
+    const loading = await this.loadingCtrl.create({});
+    await loading.present();
+    this.starredImages$ = this.imageService.getStarredImages(this.currentUser?.uid);
+    this.starredImages$.subscribe({
+      next: () => loading.dismiss(),
       error: () => loading.dismiss(),
       complete: () => loading.dismiss(),
     });
@@ -367,5 +381,25 @@ export class ProfilePage implements OnDestroy, OnInit {
 
   toggleText(): void {
     this.isTextTruncated = !this.isTextTruncated;
+  }
+
+  async unstarImage(image: Image) {
+    const user = this.auth.currentUser;
+    if (user) {
+      try {
+        await this.imageService.likeImage(image.id, user.uid);
+        // Refresh the starred images list
+        this.fetchStarredImages();
+        const toast = await this.toastCtrl.create({
+          message: 'Image unstarred successfully',
+          duration: 2000,
+          position: 'bottom',
+          color: 'success',
+        });
+        await toast.present();
+      } catch (error) {
+        await this.presentErrorToast(`Error unstarring image: ${error}`);
+      }
+    }
   }
 }
