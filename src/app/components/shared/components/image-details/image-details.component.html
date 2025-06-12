@@ -60,14 +60,32 @@
               <p>{{ comment.text }}</p>
             </div>
             <div class="comment-actions">
-              <ion-button fill="clear" size="small" class="comment-action-button">
-                <ion-icon name="heart-outline" slot="start"></ion-icon>
-                {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.LIKE' | transloco }}
+              <ion-button fill="clear" size="small" class="comment-action-button" (click)="likeComment(comment)" [class.liked]="isCommentLiked(comment)">
+                <ion-icon [name]="isCommentLiked(comment) ? 'heart' : 'heart-outline'" slot="start"></ion-icon>
+                {{ comment.stars || 0 }}
               </ion-button>
-              <ion-button fill="clear" size="small" class="comment-action-button">
-                <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-                {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.REPLY' | transloco }}
-              </ion-button>
+            </div>
+
+            <!-- Replies Section -->
+            <div class="replies-section" *ngIf="comment.replies && comment.replies.length > 0">
+              <ion-item *ngFor="let reply of comment.replies" class="reply-item">
+                <ion-label>
+                  <div class="reply-content">
+                    <h4>{{ reply?.displayName || "devvscape_user" }} ~ <span class="comment-time">{{ reply?.createdAt | dateAgo }}</span></h4>
+                    <p>{{ reply.text }}</p>
+                  </div>
+                  <div class="comment-actions">
+                    <ion-button fill="clear" size="small" class="comment-action-button" (click)="likeComment(reply)" [class.liked]="isCommentLiked(reply)">
+                      <ion-icon [name]="isCommentLiked(reply) ? 'heart' : 'heart-outline'" slot="start"></ion-icon>
+                      {{ reply.stars || 0 }}
+                    </ion-button>
+                    <ion-button fill="clear" size="small" class="comment-action-button" (click)="startReply(reply)">
+                      <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
+                      {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.REPLY' | transloco }}
+                    </ion-button>
+                  </div>
+                </ion-label>
+              </ion-item>
             </div>
           </ion-label>
         </ion-item>
@@ -80,10 +98,18 @@
         </ion-avatar>
         <ion-input
           [(ngModel)]="commentText"
-          [placeholder]="'COMPONENTS.SHARED.IMAGE_DETAILS.ADD_COMMENT' | transloco"
+          [placeholder]="replyingTo ? ('COMPONENTS.SHARED.IMAGE_DETAILS.REPLY_TO' | transloco: { name: replyingTo.displayName }) : ('COMPONENTS.SHARED.IMAGE_DETAILS.ADD_COMMENT' | transloco)"
           [maxlength]="maxLength"
           (ionChange)="onCommentChange()"
         ></ion-input>
+        <ion-button
+          *ngIf="replyingTo"
+          slot="end"
+          fill="clear"
+          (click)="cancelReply()"
+        >
+          {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.CANCEL' | transloco }}
+        </ion-button>
         <ion-button
           *ngIf="image"
           slot="end"

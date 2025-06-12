@@ -25,6 +25,7 @@ export class ImageDetailsComponent implements OnInit {
   imageLoaded = false;
   currentUser: any;
   loading!: HTMLIonLoadingElement;
+  replyingTo: Comment | null = null;
 
   constructor(
     private auth: Auth,
@@ -183,6 +184,52 @@ export class ImageDetailsComponent implements OnInit {
     }
   }
 
+  async likeComment(comment: Comment) {
+    if (!this.currentUser) return;
+
+    try {
+      const userIndex = comment.likedBy.indexOf(this.currentUser.uid);
+      if (userIndex === -1) {
+        // Like the comment
+        comment.likedBy.push(this.currentUser.uid);
+        comment.stars += 1;
+      } else {
+        // Unlike the comment
+        comment.likedBy.splice(userIndex, 1);
+        comment.stars -= 1;
+      }
+
+      // Update the comment in the database
+      await this.imageService.updateComment(this.image.id, comment.id!, comment);
+
+      // Create notification for comment owner
+      if (comment.postedBy !== this.currentUser.uid) {
+        const notification: Notification = {
+          title: 'New Like',
+          body: `${this.currentUser.displayName} liked your comment`,
+          isRead: false,
+          createdAt: new Date(),
+          type: 'like',
+          imageId: this.image.id,
+        };
+        await this.notificationService.addNotification(comment.postedBy, notification);
+      }
+    } catch (error) {
+      console.error('Error liking comment:', error);
+      await this.presentErrorToast('Error liking comment');
+    }
+  }
+
+  startReply(comment: Comment) {
+    this.replyingTo = comment;
+    this.commentText = `@${comment.displayName} `;
+  }
+
+  cancelReply() {
+    this.replyingTo = null;
+    this.commentText = '';
+  }
+
   async imagePostComment(image: Image) {
     const user = this.auth.currentUser;
 
@@ -191,17 +238,28 @@ export class ImageDetailsComponent implements OnInit {
 
       try {
         if (user) {
-          console.log(user)
-          await this.imageService.addComment(image.id, user.uid, user.displayName || 'devvscape_user', this.commentText.replace(/\n/g, '\\n'));
-          console.log('Comment text:', this.commentText);
+          const commentData = {
+            text: this.commentText.replace(/\n/g, '\\n'),
+            parentCommentId: this.replyingTo?.id
+          };
+
+          await this.imageService.addComment(
+            image.id, 
+            user.uid, 
+            user.displayName || 'devvscape_user', 
+            commentData.text,
+            commentData.parentCommentId
+          );
 
           const isCommentedByOwner = user.uid === image.postedBy;
-          const notificationMessage = isCommentedByOwner
-            ? 'You added a comment on your post'
-            : `${user.displayName} commented on your post`;
+          const notificationMessage = this.replyingTo 
+            ? `${user.displayName} replied to your comment`
+            : isCommentedByOwner
+              ? 'You added a comment on your post'
+              : `${user.displayName} commented on your post`;
 
           const notification: Notification = {
-            title: 'New Comment',
+            title: this.replyingTo ? 'New Reply' : 'New Comment',
             body: notificationMessage,
             isRead: false,
             createdAt: new Date(),
@@ -209,7 +267,9 @@ export class ImageDetailsComponent implements OnInit {
             imageId: image.id,
           };
 
-          await this.notificationService.addNotification(image.postedBy, notification);
+          // Send notification to post owner or comment owner if replying
+          const notificationRecipient = this.replyingTo ? this.replyingTo.postedBy : image.postedBy;
+          await this.notificationService.addNotification(notificationRecipient, notification);
         }
 
         const toast = await this.toastCtrl.create({
@@ -221,13 +281,11 @@ export class ImageDetailsComponent implements OnInit {
         await toast.present();
 
         this.hideLoading();
-
         this.commentText = '';
+        this.replyingTo = null;
         this.loadImageDetails();
       } catch (error) {
         console.error('Error while posting comment:', error);
-        console.log('Comment text on error:', this.commentText);
-
         const errorToast = await this.toastCtrl.create({
           message: 'An error occurred while saving your comment. Please try again.',
           duration: 5000,
@@ -468,5 +526,9 @@ export class ImageDetailsComponent implements OnInit {
       .then((alert) => {
         alert.present();
       });
+  }
+
+  isCommentLiked(comment: Comment): boolean {
+    return this.currentUser && comment.likedBy.includes(this.currentUser.uid);
   }
 }

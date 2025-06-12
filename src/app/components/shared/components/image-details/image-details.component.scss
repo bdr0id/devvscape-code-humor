@@ -172,6 +172,7 @@ ion-refresher {
   padding: 12px;
   border-radius: 12px;
   margin-left: 44px;
+  background: var(--ion-color-light-shade);
 
   h4 {
     margin: 0 0 4px 0;
@@ -183,6 +184,42 @@ ion-refresher {
   p {
     margin: 0;
     font-size: 0.9rem;
+    color: var(--ion-color-dark);
+    line-height: 1.4;
+  }
+}
+
+.replies-section {
+  margin-left: 44px;
+  margin-top: 8px;
+}
+
+.reply-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.reply-content {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--ion-color-light);
+  border-left: 2px solid var(--ion-color-primary);
+
+  h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
     color: var(--ion-color-dark);
     line-height: 1.4;
   }
@@ -202,6 +239,10 @@ ion-refresher {
 
   &:hover {
     --color: var(--ion-color-dark);
+  }
+
+  &.liked {
+    --color: var(--ion-color-primary);
   }
 }
 

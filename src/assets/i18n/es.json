@@ -50,9 +50,9 @@
           "COMMENTS": "Comentarios",
           "STARS": "Estrellas"
         },
-        "NO_POSTS": "Nunca has subido un meme al repositorio de la app",
-        "NO_COMMENTS": "Comenta en algunos memes del repositorio para verlos aquí",
-        "NO_STARS": "Próximamente. Dale estrellas a algunos memes del repositorio para verlos aquí",
+        "NO_POSTS": "Nunca has compartido un meme en el repositorio de la app",
+        "NO_COMMENTS": "Comenta en algunos memes en el repositorio de la app para que aparezcan aquí",
+        "NO_STARS": "Da estrella a algunos memes en el repositorio de la app para que aparezcan aquí",
         "READ_MORE": "Leer Más",
         "SHOW_LESS": "Mostrar Menos",
         "LOADING": "Cargando"
@@ -176,7 +176,7 @@
         "READ_MORE": "Leer Más",
         "SHOW_LESS": "Mostrar Menos",
         "STAR": "Estrella",
-        "REPLY": "Responder",
+        "COMMENT": "Comentar",
         "SAVE": "Guardar",
         "PROFILE_PICTURE": "Foto de Perfil",
         "YOUR_AVATAR": "Tu Avatar"

@@ -49,7 +49,13 @@
           "POSTS": "Postagens",
           "COMMENTS": "Comentários",
           "STARS": "Estrelas"
-        }
+        },
+        "NO_POSTS": "Você nunca compartilhou um meme no repositório da app",
+        "NO_COMMENTS": "Comente alguns memes no repositório da app para vê-los aqui",
+        "NO_STARS": "Dê estrelas a alguns memes no repositório da app para vê-los aqui",
+        "READ_MORE": "Ler Mais",
+        "SHOW_LESS": "Mostrar Menos",
+        "LOADING": "Carregando"
       }
     },
     "NAVBAR": {
@@ -77,7 +83,7 @@
             "CONFIRM": "Confirmar",
             "NOOFQUESTIONS": "Número de Perguntas: ",
             "SELECTDIFFICULTY": "Selecionar Dificuldade: ",
-            "ANYDIFFICULTY": "Qualquer Dificuldade",
+            "ANYDIFFICULTY": "Qualquer Dificultade",
             "EASY": "Como Olá Mundo",
             "MEDIUM": "Magia intermediária de if-else",
             "HARD": "Nível Stack Overflow",
@@ -166,10 +172,25 @@
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Imagem"
+        "TITLE": "Imagem",
+        "READ_MORE": "Ler Mais",
+        "SHOW_LESS": "Mostrar Menos",
+        "STAR": "Estrela",
+        "COMMENT": "Comentar",
+        "SAVE": "Salvar",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Seu Avatar"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Detalhes da Imagem"
+      "IMAGE_DETAILS": {
+        "TITLE": "Detalhes da Imagem",
+        "READ_MORE": "Ler Mais",
+        "SHOW_LESS": "Mostrar Menos",
+        "LIKE": "Curtir",
+        "REPLY": "Responder",
+        "POST": "Postar",
+        "ADD_COMMENT": "Adicionar um comentário...",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Seu Avatar"
       }
     },
     "TABS": {

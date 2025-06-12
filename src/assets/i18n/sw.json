@@ -49,7 +49,13 @@
           "POSTS": "Machapisho",
           "COMMENTS": "Maoni",
           "STARS": "Nyota"
-        }
+        },
+        "NO_POSTS": "Hujawahi kuchangia meme kwenye hazina ya app",
+        "NO_COMMENTS": "Toa maoni kwenye baadhi ya meme kwenye hazina ya app ili zionekane hapa",
+        "NO_STARS": "Weka nyota kwenye baadhi ya meme kwenye hazina ya app ili zionekane hapa",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "LOADING": "Inapakia"
       }
     },
     "NAVBAR": {
@@ -166,10 +172,25 @@
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Picha"
+        "TITLE": "Picha",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "STAR": "Nyota",
+        "COMMENT": "Maoni",
+        "SAVE": "Hifadhi",
+        "PROFILE_PICTURE": "Picha ya Profaili",
+        "YOUR_AVATAR": "Avatar Yako"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Maelezo ya Picha"
+      "IMAGE_DETAILS": {
+        "TITLE": "Maelezo ya Picha",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "LIKE": "Penda",
+        "REPLY": "Jibu",
+        "POST": "Chapisha",
+        "ADD_COMMENT": "Ongeza maoni...",
+        "PROFILE_PICTURE": "Picha ya Profaili",
+        "YOUR_AVATAR": "Avatar Yako"
       }
     },
     "TABS": {
