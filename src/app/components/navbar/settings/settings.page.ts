@@ -19,7 +19,7 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 })
 export class SettingsPage implements OnInit {
   currentVersion!: string;
-  appVersion = '2.0.2'; 
+  appVersion = '2.0.3'; 
   languages = ['en', 'es','fr', 'de', 'sw','pt'];
   selectedLanguage = 'en';
   private loadingSubject = new Subject<boolean>();
