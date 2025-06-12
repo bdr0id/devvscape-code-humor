@@ -20,7 +20,7 @@
     <ion-card>
       <ion-item lines="none">
         <ion-avatar slot="start" (click)="openProfile(image?.postedBy)">
-          <img [src]="generateAvatarUrl(image?.displayName || 'devvscape_user')" alt="Profile Picture">
+          <img [src]="generateAvatarUrl(image?.displayName || 'devvscape_user')" [attr.alt]="'COMPONENTS.SHARED.IMAGE_DETAILS.PROFILE_PICTURE' | transloco">
         </ion-avatar>
         <ion-label>
           <h2>{{ image?.displayName || "devvscape_user" }}</h2>
@@ -46,13 +46,12 @@
           *ngIf="image?.postText.length > 200"
           class="read-more"
           (click)="toggleText()"
-        >{{ isTextTruncated ? "Read More" : "Show Less" }}</a>
+        >{{ isTextTruncated ? ('COMPONENTS.SHARED.IMAGE_DETAILS.READ_MORE' | transloco) : ('COMPONENTS.SHARED.IMAGE_DETAILS.SHOW_LESS' | transloco) }}</a>
       </ion-card-header>
     </ion-card>
 
     <!-- Comments Section -->
     <div class="comments-section">
-      <h3>Comments</h3>
       <ion-list lines="none">
         <ion-item *ngFor="let comment of image?.comments" class="comment-item">
           <ion-label>
@@ -63,11 +62,11 @@
             <div class="comment-actions">
               <ion-button fill="clear" size="small" class="comment-action-button">
                 <ion-icon name="heart-outline" slot="start"></ion-icon>
-                Like
+                {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.LIKE' | transloco }}
               </ion-button>
               <ion-button fill="clear" size="small" class="comment-action-button">
                 <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-                Reply
+                {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.REPLY' | transloco }}
               </ion-button>
             </div>
           </ion-label>
@@ -77,22 +76,22 @@
       <!-- Comment Input -->
       <ion-item class="comment-input">
         <ion-avatar slot="start">
-          <img [src]="generateAvatarUrl(currentUser?.displayName)" alt="Your Avatar">
+          <img [src]="generateAvatarUrl(currentUser?.displayName)" [attr.alt]="'COMPONENTS.SHARED.IMAGE_DETAILS.YOUR_AVATAR' | transloco">
         </ion-avatar>
         <ion-input
           [(ngModel)]="commentText"
-          placeholder="Add a comment..."
+          [placeholder]="'COMPONENTS.SHARED.IMAGE_DETAILS.ADD_COMMENT' | transloco"
           [maxlength]="maxLength"
           (ionChange)="onCommentChange()"
         ></ion-input>
         <ion-button
-        *ngIf="image"
+          *ngIf="image"
           slot="end"
           fill="clear"
           [disabled]="!commentText.trim()"
           (click)="imagePostComment(image)"
         >
-          Post
+          {{ 'COMPONENTS.SHARED.IMAGE_DETAILS.POST' | transloco }}
         </ion-button>
       </ion-item>
       <div class="input-counter" *ngIf="commentText">

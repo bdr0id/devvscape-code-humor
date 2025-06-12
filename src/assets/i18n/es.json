@@ -49,7 +49,13 @@
           "POSTS": "Publicaciones",
           "COMMENTS": "Comentarios",
           "STARS": "Estrellas"
-        }
+        },
+        "NO_POSTS": "Nunca has subido un meme al repositorio de la app",
+        "NO_COMMENTS": "Comenta en algunos memes del repositorio para verlos aquí",
+        "NO_STARS": "Próximamente. Dale estrellas a algunos memes del repositorio para verlos aquí",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "LOADING": "Cargando"
       }
     },
     "NAVBAR": {
@@ -166,10 +172,25 @@
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Imagen"
+        "TITLE": "Imagen",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "STAR": "Estrella",
+        "REPLY": "Responder",
+        "SAVE": "Guardar",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Tu Avatar"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Detalles de la Imagen"
+      "IMAGE_DETAILS": {
+        "TITLE": "Detalles de la Imagen",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "LIKE": "Me Gusta",
+        "REPLY": "Responder",
+        "POST": "Publicar",
+        "ADD_COMMENT": "Añadir un comentario...",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Tu Avatar"
       }
     },
     "TABS": {

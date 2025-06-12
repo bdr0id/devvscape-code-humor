@@ -60,6 +60,9 @@
 
   <ng-container *ngIf="selectedSegment === 'posts'">
     <ng-container *ngIf="(images$ | async) as images">
+      <div id="preloader" *ngIf="!images">
+        <ion-spinner class="preloader" [attr.aria-label]="'COMPONENTS.AUTH.PROFILE.LOADING' | transloco"></ion-spinner>
+      </div>
       <ion-list *ngIf="images.length > 0">
         <ion-item *ngFor="let image of images" [detail]="false">
           <ion-card>
@@ -78,9 +81,7 @@
               </ion-label>
             </ion-item>
   
-            <div class="card" *ngIf="!imageLoaded">
-              <div class="shimmer shimmer_large_para"></div>
-            </div>
+            <div class="shimmer" *ngIf="!imageLoaded"></div>
   
             <img
               (click)="openImage(image.id)"
@@ -101,13 +102,13 @@
                 class="read-more"
                 style="color: blue; text-decoration: none; cursor: pointer"
                 (click)="toggleText()"
-                >{{ isTextTruncated ? "Read More" : "Show Less" }}</a>
+                >{{ isTextTruncated ? ('COMPONENTS.AUTH.PROFILE.READ_MORE' | transloco) : ('COMPONENTS.AUTH.PROFILE.SHOW_LESS' | transloco) }}</a>
             </ion-card-header>
           </ion-card>
         </ion-item>
       </ion-list>
       <div class="no-posts" *ngIf="images.length === 0">
-        You have never committed a meme to the app repository
+        {{ 'COMPONENTS.AUTH.PROFILE.NO_POSTS' | transloco }}
       </div>
     </ng-container>
   </ng-container>
@@ -131,7 +132,7 @@
         </ion-item-sliding>
       </ion-list>
       <div class="no-comments" *ngIf="comments.length === 0">
-        Comment on some memes in the app repository to have them here.
+        {{ 'COMPONENTS.AUTH.PROFILE.NO_COMMENTS' | transloco }}
       </div>
     </ng-container>
   </ng-container>
@@ -140,7 +141,7 @@
 
   <ng-container *ngIf="selectedSegment === 'stars'">
     <div class="no-stars">
-      Coming soon. Star on some memes in the app repository to have them here.
+      {{ 'COMPONENTS.AUTH.PROFILE.NO_STARS' | transloco }}
     </div>
   </ng-container>
 

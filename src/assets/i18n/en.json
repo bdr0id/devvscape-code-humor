@@ -13,7 +13,7 @@
       "AUTH-FORM": {
         "EMAIL": "DevMail",
         "EMAIL-PLACEHOLDER": "Your sacred email (no spam, only Stack Overflow links)",
-        "EMAIL-ERROR": "That’s not a valid email, try again like a real dev.",
+        "EMAIL-ERROR": "That's not a valid email, try again like a real dev.",
         "USERNAME": "Handle",
         "USERNAME-PLACEHOLDER": "e.g. BugSlayer9000",
         "USERNAME-ERROR": "Keep it under 25 chars, not a novel. Be brief, be 1337.",
@@ -49,7 +49,13 @@
           "POSTS": "Posts",
           "COMMENTS": "Comments",
           "STARS": "Stars"
-        }
+        },
+        "NO_POSTS": "You have never committed a meme to the app repository",
+        "NO_COMMENTS": "Comment on some memes in the app repository to have them here",
+        "NO_STARS": "Coming soon. Star on some memes in the app repository to have them here",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "LOADING": "Loading"
       }
     },
     "NAVBAR": {
@@ -81,7 +87,7 @@
             "EASY": "Like Hello World",
             "MEDIUM": "Intermediate if-else wizardry",
             "HARD": "Stack Overflow level",
-            "FOOTER": "Note: This trivia isn’t saved. Just like your unsaved VSCode file. 😬"
+            "FOOTER": "Note: This trivia isn't saved. Just like your unsaved VSCode file. 😬"
           }
         },
         "MODAL": {
@@ -96,7 +102,7 @@
       },
       "NOTIFICATIONS": {
         "TITLE": "Notifications",
-        "NO-NOTIFICATIONS": "0 notifications. You’re officially bug-free (for now)"
+        "NO-NOTIFICATIONS": "0 notifications. You're officially bug-free (for now)"
       },
       "SETTINGS": {
         "TITLE": "Settings",
@@ -166,10 +172,25 @@
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Image"
+        "TITLE": "Image",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "STAR": "Star",
+        "REPLY": "Reply",
+        "SAVE": "Save",
+        "PROFILE_PICTURE": "Profile Picture",
+        "YOUR_AVATAR": "Your Avatar"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Image Details"
+      "IMAGE_DETAILS": {
+        "TITLE": "Image Details",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "LIKE": "Like",
+        "REPLY": "Reply",
+        "POST": "Post",
+        "ADD_COMMENT": "Add a comment...",
+        "PROFILE_PICTURE": "Profile Picture",
+        "YOUR_AVATAR": "Your Avatar"
       }
     },
     "TABS": {
