@@ -11,6 +11,7 @@ import { Image } from 'src/app/core/models/data/image.interface';
 import { UserProfile } from 'src/app/core/models/data/user.interface';
 import { Comment } from 'src/app/core/models/data/comment.interface.ts';
 import { AdMobService } from 'src/app/core/services/ad-mob.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-profile',
@@ -183,6 +184,8 @@ export class ProfilePage implements OnDestroy, OnInit {
       duration: 3000, // Adjust the duration as needed
     });
     await loading.present();
+
+    await Preferences.remove({ key: 'lang' });
 
     this.authService.logout().subscribe({
       next: async () => {
