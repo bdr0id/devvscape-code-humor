@@ -32,8 +32,8 @@ ion-list-header {
   --min-height: 48px;
 
   ion-label {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 900;
     cursor: pointer;
   }
 
@@ -42,3 +42,17 @@ ion-list-header {
     cursor: pointer;
   }
 }
+
+.news-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+

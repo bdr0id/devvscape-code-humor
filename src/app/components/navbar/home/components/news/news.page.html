@@ -24,7 +24,7 @@
     </ion-list-header>
     <ion-item *ngFor="let story of newStories$ | async">
       <ion-label (click)="openUrl(story.url)">
-        <h2>{{ story.title }}</h2>
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>
@@ -38,7 +38,7 @@
     </ion-list-header>
     <ion-item *ngFor="let story of bestStories$ | async">
       <ion-label (click)="openUrl(story.url)">
-        <h2>{{ story.title }}</h2>
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>
@@ -52,7 +52,7 @@
     </ion-list-header>
     <ion-item *ngFor="let story of topStories$ | async">
       <ion-label (click)="openUrl(story.url)">
-        <h2>{{ story.title }}</h2>
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>

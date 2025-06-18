@@ -41,7 +41,7 @@
         (click)="toggleText()"
         >{{ isTextTruncated ? ('COMPONENTS.SHARED.IMAGE.READ_MORE' | transloco) : ('COMPONENTS.SHARED.IMAGE.SHOW_LESS' | transloco) }}</a
       >
-      <div class="interaction-buttons">
+      <div class="interaction-buttons" *ngIf="imageLoaded">
         <div class="left-buttons">
           <ion-button fill="clear" (click)="likeImage(image)" [class.liked]="isLiked">
             <ion-icon [name]="isLiked ? 'star' : 'star-outline'" slot="icon-only"></ion-icon>

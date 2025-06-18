@@ -80,3 +80,5 @@ src/environments/environment.ts
 # Other
 /android
 /.nx
+
+resources/android/**/*
