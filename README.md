@@ -1,5 +1,12 @@
 # Developers Escape (Devvscape) 🚀
 
+[![Angular](https://img.shields.io/badge/Angular-18.0.6-red.svg)](https://angular.io/)
+[![Ionic](https://img.shields.io/badge/Ionic-8.6.1-blue.svg)](https://ionicframework.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4.5-blue.svg)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Code Style](https://img.shields.io/badge/code%20style-prettier-brightgreen.svg)](https://prettier.io/)
+
 A mobile-first application providing code-related humor and entertainment for developers. Built with modern web technologies and following best practices in mobile development.
 
 ## 📥 Download
@@ -8,86 +15,108 @@ A mobile-first application providing code-related humor and entertainment for de
 
 ## ✨ Features
 
-- [x] Code-related humor content
-- [x] Mobile-first responsive design
-- [x] Push notifications support
-- [x] In-app browser functionality
-- [x] AdMob integration
-- [x] Offline support with service workers
-- [x] Multi-language support
-- [x] Progressive Web App (PWA) capabilities
+- 🎭 **Code Humor**: Curated collection of programming jokes and memes
+- 📱 **Mobile-First**: Responsive design optimized for mobile devices
+- 🔔 **Push Notifications**: Stay updated with new content
+- 🌐 **In-App Browser**: Seamless web browsing experience
+- 💰 **AdMob Integration**: Monetization through Google AdMob
+- 🔄 **Offline Support**: Service workers for offline functionality
+- 🌍 **Multi-Language**: Internationalization support
+- 📲 **PWA Ready**: Progressive Web App capabilities
+- 🔐 **Authentication**: Secure user authentication with Firebase
+- 📊 **Analytics**: Built-in analytics and tracking
+- 🎨 **Modern UI**: Clean, intuitive user interface
 
 ## 🛠️ Technology Stack
 
-- [x] Angular 18
-- [x] Ionic Framework
-- [x] Firebase Backend
-- [x] Capacitor for Native Features
-- [x] TypeScript
-- [x] RxJS for Reactive Programming
-- [x] NgRx for State Management
-- [x] Transloco for Internationalization
+### Frontend
+- **Angular 18** - Progressive web application framework
+- **Ionic Framework** - Mobile-first UI components
+- **TypeScript** - Type-safe JavaScript
+- **RxJS** - Reactive programming library
+- **NgRx** - State management with Redux pattern
+
+### Backend & Services
+- **Firebase** - Backend-as-a-Service
+  - Firestore - NoSQL database
+  - Authentication - User management
+  - Storage - File storage
+  - Analytics - User analytics
+  - Messaging - Push notifications
+
+### Mobile & Native
+- **Capacitor** - Native functionality bridge
+- **Android** - Native Android support
+- **PWA** - Progressive Web App
+
+### Development Tools
+- **ESLint** - Code linting
+- **Prettier** - Code formatting
+- **Jasmine/Karma** - Testing framework
+- **Transloco** - Internationalization
 
 ## 📱 Platform Support
 
-- [x] Web Application
-- [x] Android Mobile App
-- [x] Progressive Web App (PWA)
+- ✅ **Web Application** - Modern browsers
+- ✅ **Android Mobile App** - Google Play Store
+- ✅ **Progressive Web App** - Installable web app
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- [ ] Node.js (Latest LTS version)
-- [ ] npm (comes with Node.js)
-- [ ] Android Studio (for Android development)
-- [ ] Firebase Account
+- **Node.js** (v18 or higher)
+- **npm** (v9 or higher)
+- **Android Studio** (for Android development)
+- **Firebase Account**
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/{your-username}/devvscape-code-humor.git
+   cd devvscape-code-humor
+   ```
 
-```bash
-git clone https://github.com/{your-username}/devvscape-code-humor.git
-cd devvscape
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-2. Install dependencies:
-
-```bash
-npm install --force
-```
-
-3. Configure Firebase:
-
-- Create a Firebase project at https://console.firebase.google.com/
-- Copy your Firebase configuration to `src/environments/environment.ts`:
-
-```typescript
-export const environment = {
-  production: false,
-  firebaseConfig: {
-    apiKey: 'your-api-key',
-    authDomain: 'your-auth-domain',
-    projectId: 'your-project-id',
-    storageBucket: 'your-storage-bucket',
-    messagingSenderId: 'your-messaging-sender-id',
-    appId: 'your-app-id',
-  },
-};
-```
-
-4. Run the development server:
-
-```bash
-ionic serve
-```
-
-5. Build for Android:
+3. **Environment Setup**
    
+   Create `src/environments/environment.ts`:
+   ```typescript
+   export const environment = {
+     production: false,
+     firebaseConfig: {
+       apiKey: 'your-api-key',
+       authDomain: 'your-auth-domain',
+       projectId: 'your-project-id',
+       storageBucket: 'your-storage-bucket',
+       messagingSenderId: 'your-messaging-sender-id',
+       appId: 'your-app-id',
+     },
+   };
+   ```
+
+4. **Run development server**
+   ```bash
+   npm start
+   # or
+   ionic serve
+   ```
+
+5. **Build for production**
+   ```bash
+   npm run build
+   ```
+
+### Android Development
+
 ```bash
 # Build the app
-   ionic capacitor build
+ionic capacitor build
 
 # Sync web code to native project
 npx cap sync
@@ -96,36 +125,114 @@ npx cap sync
 npx cap open android
 ```
 
-Visit `http://localhost:4200` in your browser to see the web version.
-
 ## 🏗️ Project Structure
 
 ```
-devvscape/
-├── src/                    # Source files
-├── android/               # Android native project
-├── www/                   # Web build output
-├── resources/            # App resources
-├── public/              # Public assets
-└── ...config files
+devvscape-code-humor/
+├── src/                          # Source files
+│   ├── app/                      # Application code
+│   │   ├── core/                 # Core modules
+│   │   │   ├── services/         # Application services
+│   │   │   ├── store/            # NgRx state management
+│   │   │   ├── guards/           # Route guards
+│   │   │   └── models/           # Data models
+│   │   ├── components/           # Reusable components
+│   │   ├── tabs/                 # Tab-based navigation
+│   │   └── shared/               # Shared modules
+│   ├── assets/                   # Static assets
+│   ├── environments/             # Environment configurations
+│   └── theme/                    # Global styles
+├── android/                      # Android native project
+├── www/                          # Web build output
+├── resources/                    # App resources (icons, splash)
+├── public/                       # Public assets
+└── docs/                         # Documentation
+```
+
+## 🧪 Testing
+
+```bash
+# Run unit tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run e2e tests
+npm run e2e
+```
+
+## 📦 Build & Deploy
+
+### Web Build
+```bash
+# Development build
+npm run build
+
+# Production build
+npm run build:prod
+```
+
+### Android Build
+```bash
+# Build for Android
+ionic capacitor build android
+
+# Build APK
+ionic capacitor build android --prod
 ```
 
 ## 🤝 Contributing
 
-We welcome contributions! Please check out our contributing guidelines before submitting pull requests.
+We love your input! We want to make contributing to Devvscape as easy and transparent as possible, whether it's:
 
-## 📱 Connect With Us
+- 🐛 Reporting a bug
+- 💡 Discussing the current state of the code
+- 🔧 Submitting a fix
+- ✨ Proposing new features
+- 📖 Becoming a maintainer
 
-- [Twitter](https://twitter.com/l00pinfinity)
+See our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📋 Development Workflow
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+## 🐛 Bug Reports
+
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/{your-username}/devvscape-code-humor/issues/new).
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
-Made with ❤️ by the Devvscape Team
+- **Ionic Team** - For the amazing mobile framework
+- **Angular Team** - For the robust web framework
+- **Firebase Team** - For the powerful backend services
+- **Our Contributors** - For making this project better
+
+## 📞 Support
+
+- 📧 **Email**: support@devvscape.com
+- 🐦 **Twitter**: [@l00pinfinity](https://twitter.com/l00pinfinity)
+- 💬 **Discord**: [Join our community](https://discord.gg/devvscape)
+- 📖 **Documentation**: [docs.devvscape.com](https://docs.devvscape.com)
+
+## 📊 Project Status
+
+![GitHub last commit](https://img.shields.io/github/last-commit/{your-username}/devvscape-code-humor)
+![GitHub issues](https://img.shields.io/github/issues/{your-username}/devvscape-code-humor)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/{your-username}/devvscape-code-humor)
+![GitHub stars](https://img.shields.io/github/stars/{your-username}/devvscape-code-humor)
 
 ---
 
-**Note**: This project is actively maintained. For any issues or feature requests, please open an issue in the repository.
+**Made with ❤️ by the Devvscape Team**
+
+*This project is actively maintained. For any issues or feature requests, please open an issue in the repository.*
