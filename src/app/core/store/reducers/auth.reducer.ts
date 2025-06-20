@@ -24,7 +24,7 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.loginSuccess, AuthActions.signupSuccess, (state, { user }) => ({
     ...state,
-    user: user.user,
+    user,
     loading: false,
   })),
   on(AuthActions.logoutSuccess, state => ({
@@ -49,7 +49,7 @@ export const authReducer = createReducer(
   })),
   on(AuthActions.continueWithGithubSuccess, (state, { user }) => ({
     ...state,
-    user: user.user,
+    user,
     error: null,
   })),
   on(AuthActions.continueWithGithubFailure, (state, { error }) => ({

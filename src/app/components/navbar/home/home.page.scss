@@ -26,7 +26,7 @@ ion-toolbar {
 #open-post-modal:focus,
 ion-segment-button:focus,
 ion-textarea:focus {
-  outline: 2px solid #4a90e2; /* Custom focus style */
+  outline: 2px solid #4a90e2;
   outline-offset: 2px;
 }
 
@@ -165,7 +165,7 @@ cdk-virtual-scroll-viewport {
 }
 
 .explore {
-  padding: 20px;
+  padding: 16px;
 }
 
 .news,
@@ -207,12 +207,124 @@ swiper-slide {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 250px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
   }
+}
+
+.shadow.rounded {
+  border-radius: 16px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+ion-item-group {
+  .news {
+    padding: 16px;
+    --swiper-pagination-bullet-inactive-color: var(--ion-color-medium);
+    --swiper-pagination-color: var(--ion-color-primary);
+  }
+
+  .news-slide {
+    width: 300px;
+    height: 100%;
+  }
+
+  ion-card {
+    margin: 0;
+    height: 100%;
+    // display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    // transition: transform 0.3s ease, box-shadow 0.3s ease;
+    // background: var(--ion-color-light);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    &:hover {
+      transform: translateY(-4px);
+    }
+
+    ion-card-header {
+      padding: 16px 16px 8px;
+      // flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    ion-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 4.5em;
+    }
+
+    ion-card-content {
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      p {
+        margin: 0;
+        color: var(--ion-color-medium);
+        font-size: 0.9rem;
+      }
+
+      ion-button {
+        --padding-start: 0;
+        --padding-end: 0;
+        margin: 0;
+        height: 36px;
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+    }
+  }
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 48px;
+
+  ion-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  ion-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.ad-banner {
+  margin: 24px 0;
+  height: 100px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,9 +1,9 @@
 {
   "APP": {
     "TITLE": "Devvscape",
-    "WELCOME_MESSAGE": "¡Bienvenido a Devvscape! Entra en el paraíso del programador.",
-    "ALERT_HEADER": "Portal de Escape del Código",
-    "ALERT_MESSAGE": "¿Listo para salir de la matriz del código y enfrentarte al mundo real? Elige tu destino.",
+    "WELCOME_MESSAGE": "¡Bienvenido a Devvscape! Entra al paraíso del programador.",
+    "ALERT_HEADER": "Portal de Escape de Código",
+    "ALERT_MESSAGE": "¿Listo para salir de la matriz de código y enfrentar el mundo real? ¡Elige tu destino!",
     "CANCEL_BUTTON": "Quedarse",
     "EXIT_BUTTON": "Escapar",
     "DELETE_BUTTON": "Eliminar"
@@ -11,45 +11,51 @@
   "COMPONENTS": {
     "AUTH": {
       "AUTH-FORM": {
-        "EMAIL": "Correo electrónico",
-        "EMAIL-PLACEHOLDER": "Tu dirección de correo electrónico (¡sin spam, lo prometemos!)",
-        "EMAIL-ERROR": "Por favor, introduce una dirección de correo válida (no te juzgaremos... mucho)",
-        "USERNAME": "Nombre de usuario",
-        "USERNAME-PLACEHOLDER": "Tu nombre de usuario genial",
-        "USERNAME-ERROR": "Por favor, introduce un nombre de usuario válido, menos de 25 caracteres (sé conciso, sé genial)",
+        "EMAIL": "Correo Dev",
+        "EMAIL-PLACEHOLDER": "Tu correo sagrado (sin spam, solo enlaces a Stack Overflow)",
+        "EMAIL-ERROR": "Ese no es un correo válido, intenta de nuevo como verdadero dev.",
+        "USERNAME": "Alias",
+        "USERNAME-PLACEHOLDER": "Ej. Matabichos9000",
+        "USERNAME-ERROR": "Mantenlo bajo 25 caracteres, no es una novela. Sé breve, sé 1337.",
         "PASSWORD": "Contraseña",
-        "PASSWORD-PLACEHOLDER": "Tu código secreto",
-        "PASSWORD-ERROR": "Tu contraseña necesita más de 6 caracteres (más larga que '123456')"
+        "PASSWORD-PLACEHOLDER": "Shhh... es un secreto",
+        "PASSWORD-ERROR": "Debe ser más larga que 'admin123' (lo comprobamos, no es segura)"
       },
       "LOGIN": {
-        "TITLE": "Iniciar sesión",
-        "SIGNUP": "Crear una nueva cuenta genial",
+        "TITLE": "Iniciar Sesión",
+        "SIGNUP": "Crear una cuenta épica",
         "FORGOT-PASSWORD": "Olvidé mi palabra mágica",
-        "GITHUB": "Continuar con GitHub (porque los verdaderos devs usan GitHub)",
+        "GITHUB": "Continuar con GitHub (porque los devs reales usan GitHub)",
         "OR": "o",
-        "ACTION-BUTTON": "Iniciar sesión"
+        "ACTION-BUTTON": "Iniciar Sesión"
       },
       "SIGNUP": {
         "TITLE": "Registrarse",
         "SIGNIN": "Ya tengo una cuenta épica",
-        "GITHUB": "Continuar con GitHub (donde se juntan los chicos cool)",
+        "GITHUB": "Continuar con GitHub (porque los devs reales usan GitHub)",
         "OR": "o",
         "ACTION-BUTTON": "Crear Cuenta"
       },
       "RESET_PASSWORD": {
-        "TITLE": "Olvidé mi contraseña",
-        "ACTION-BUTTON": "Restablecer contraseña"
+        "TITLE": "Olvidé mi Contraseña",
+        "ACTION-BUTTON": "Restablecer Contraseña"
       },
       "PROFILE": {
         "TITLE": "Cuenta",
         "PROFILE": "Perfil",
-        "JOINED": "Se unió a la fiesta en",
-        "ACTIVITY": "Actividad",
+        "JOINED": "Se unió al registro de commits en",
+        "ACTIVITY": "Registros de Actividad",
         "TABS": {
           "POSTS": "Publicaciones",
           "COMMENTS": "Comentarios",
           "STARS": "Estrellas"
-        }
+        },
+        "NO_POSTS": "Nunca has compartido un meme en el repositorio de la app",
+        "NO_COMMENTS": "Comenta en algunos memes en el repositorio de la app para que aparezcan aquí",
+        "NO_STARS": "Da estrella a algunos memes en el repositorio de la app para que aparezcan aquí",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "LOADING": "Cargando"
       }
     },
     "NAVBAR": {
@@ -58,34 +64,36 @@
         "TABS": {
           "EXPLORE": {
             "TITLE": "Explorar",
-            "TOPSTORIES": "Historias principales",
-            "BESTSTORIES": "Mejores historias",
-            "NEWSTORIES": "Historias nuevas",
+            "TOPSTORIES": "Historias Principales",
+            "BESTSTORIES": "Mejores Historias",
+            "NEWSTORIES": "Nuevas Historias",
             "NEWS": "Noticias",
             "BY": "por",
-            "READMORE": "Sumérgete"
+            "READMORE": "Sumérgete",
+            "EVENTS": "Eventos",
+            "COMINGSOON": "Próximamente... como datos asíncronos"
           },
           "FOR-YOU": {
-            "TITLE": "Para ti",
-            "LOADING": "Cargando... (tómate un café)"
+            "TITLE": "Para Ti",
+            "LOADING": "Cargando... (toma un café)"
           },
           "TRIVIA": {
             "TITLE": "Trivia",
             "TRIVIASETTINGS": "Configuración de Trivia",
             "CONFIRM": "Confirmar",
-            "NOOFQUESTIONS": "Número de preguntas: ",
-            "SELECTDIFFICULTY": "Selecciona la dificultad: ",
-            "ANYDIFFICULTY": "Cualquier dificultad",
-            "EASY": "Fácil",
-            "MEDIUM": "Medio",
-            "HARD": "Difícil",
-            "FOOTER": "Nota: Esta trivia no guarda tu progreso. Siéntete libre de responder preguntas y convertirte en un maestro de la trivia."
+            "NOOFQUESTIONS": "Número de Preguntas: ",
+            "SELECTDIFFICULTY": "Seleccionar Dificultad: ",
+            "ANYDIFFICULTY": "Cualquier Dificultad",
+            "EASY": "Como Hola Mundo",
+            "MEDIUM": "Magia intermedia de if-else",
+            "HARD": "Nivel Stack Overflow",
+            "FOOTER": "Nota: Esta trivia no se guarda. Como tu archivo de VSCode sin guardar. 😬"
           }
         },
         "MODAL": {
           "CREATE-POST": "Crear Publicación",
           "SAY-SOMETHING": "Di algo ingenioso sobre la imagen",
-          "SELECT-IMAGE": "Haz clic para elegir una imagen genial",
+          "SELECT-IMAGE": "Haz clic para subir un meme... quiero decir, una imagen",
           "POST": "Publicar"
         }
       },
@@ -94,30 +102,30 @@
       },
       "NOTIFICATIONS": {
         "TITLE": "Notificaciones",
-        "NO-NOTIFICATIONS": "Sin notificaciones. ¡Estás al día!"
+        "NO-NOTIFICATIONS": "0 notificaciones. Estás oficialmente libre de bugs (por ahora)"
       },
       "SETTINGS": {
         "TITLE": "Configuración",
-        "APP-SETTINGS": "Configuración de la aplicación",
+        "APP-SETTINGS": "Configuración de la App",
         "APPERANCE": "Apariencia",
         "SUPPORT&INFO": "Soporte e Información",
         "REVIEW&SHARE": "Reseñar y Compartir",
         "DEVELOPERS": "Desarrolladores",
-        "BUGS": "Hackea el Código",
-        "ISSUES": "Solicitud de función",
+        "BUGS": "Hackear el Código",
+        "ISSUES": "Solicitud de Funcionalidad",
         "TERMS&CONDITIONS": "Términos y Condiciones",
         "PRIVACY": "Política de Privacidad",
-        "VERSION": "Versión de la Aplicación",
-        "ACCOUNT-MANAGEMENT": "Gestión de la Cuenta",
+        "VERSION": "Compilación Actual",
+        "ACCOUNT-MANAGEMENT": "Gestión de Cuenta",
         "DELETE": "Eliminar Cuenta",
-        "TAGLINE": "El Futuro de SilkwebHQ y la Comunidad de Silk",
+        "TAGLINE": "La próxima generación de SilkwebHQ y SilkCommunity — ahora con 50% más memes",
         "UPDATEHEADER": "Actualización Disponible",
         "UPDATEMESSAGE": "Una nueva versión brillante está disponible. Por favor, actualiza para continuar tu aventura.",
         "DELETEHEADER": "Eliminar Cuenta",
-        "DELETEMESSAGE": "¿Estás a punto de eliminar tu cuenta? Introduce tu contraseña para confirmar este movimiento audaz:",
+        "DELETEMESSAGE": "¿A punto de eliminar tu cuenta? Ingresa tu contraseña para confirmar este movimiento audaz:",
         "LATER": "Más tarde",
-        "UPDATE": "Actualizar",
-        "QUIZ": "Quiz",
+        "UPDATE": "Descargar Parche",
+        "QUIZ": "Cuestionario",
         "NOTIFICATIONS": {
           "TITLE": "Notificaciones"
         },
@@ -126,12 +134,16 @@
         },
         "LANGUAGE": {
           "TITLE": "Idioma",
-          "SELECT_LANGUAGE": "Selecciona tu idioma",
+          "SELECT_LANGUAGE": "Selecciona tu Idioma",
           "EN": "Inglés",
-          "ES": "Español"
+          "ES": "Español",
+          "FR": "Francés",
+          "DE": "Alemán",
+          "SW": "Suajili",
+          "PT": "Portugués"
         },
         "GAMES": {
-          "GENERAL": "Conocimientos Generales",
+          "GENERAL": "Conocimiento General",
           "BOOKS": "Entretenimiento: Libros",
           "FILM": "Entretenimiento: Cine",
           "MUSIC": "Entretenimiento: Música",
@@ -154,20 +166,35 @@
           "COMICS": "Entretenimiento: Cómics",
           "GADGETS": "Ciencia: Gadgets",
           "JAPANESEANIME": "Entretenimiento: Anime y Manga Japonés",
-          "CARTOON": "Entretenimiento: Dibujos Animados y Animaciones"
+          "CARTOON": "Entretenimiento: Caricaturas y Animaciones"
         }
       }
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Imagen"
+        "TITLE": "Imagen",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "STAR": "Estrella",
+        "COMMENT": "Comentar",
+        "SAVE": "Guardar",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Tu Avatar"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Detalles de la Imagen"
+      "IMAGE_DETAILS": {
+        "TITLE": "Detalles de la Imagen",
+        "READ_MORE": "Leer Más",
+        "SHOW_LESS": "Mostrar Menos",
+        "LIKE": "Me Gusta",
+        "REPLY": "Responder",
+        "POST": "Publicar",
+        "ADD_COMMENT": "Añadir un comentario...",
+        "PROFILE_PICTURE": "Foto de Perfil",
+        "YOUR_AVATAR": "Tu Avatar"
       }
     },
     "TABS": {
-      "HOME": "Para ti",
+      "HOME": "Para Ti",
       "SEARCH": "Buscar",
       "NOTIFICATIONS": "Notificaciones",
       "SETTINGS": "Configuración"

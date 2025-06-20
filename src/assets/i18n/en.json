@@ -3,7 +3,7 @@
     "TITLE": "Devvscape",
     "WELCOME_MESSAGE": "Welcome to Devvscape! Enter the coder's paradise.",
     "ALERT_HEADER": "Code Escape Portal",
-    "ALERT_MESSAGE": "Ready to exit the code matrix and confront the real world? Pick your fate.",
+    "ALERT_MESSAGE": "Ready to exit the code matrix and confront the real world? Pick your fate!",
     "CANCEL_BUTTON": "Stay",
     "EXIT_BUTTON": "Escape",
     "DELETE_BUTTON": "Delete"
@@ -11,15 +11,15 @@
   "COMPONENTS": {
     "AUTH": {
       "AUTH-FORM": {
-        "EMAIL": "Email",
-        "EMAIL-PLACEHOLDER": "Your email address (no spam, we promise!)",
-        "EMAIL-ERROR": "Please enter a valid email address (we won't judge... much)",
-        "USERNAME": "Username",
-        "USERNAME-PLACEHOLDER": "Your cool username",
-        "USERNAME-ERROR": "Please enter a valid username, less than 25 characters (be concise, be cool)",
-        "PASSWORD": "Password",
-        "PASSWORD-PLACEHOLDER": "Your secret code",
-        "PASSWORD-ERROR": "Your password needs more than 6 characters (longer than '123456')"
+        "EMAIL": "DevMail",
+        "EMAIL-PLACEHOLDER": "Your sacred email (no spam, only Stack Overflow links)",
+        "EMAIL-ERROR": "That's not a valid email, try again like a real dev.",
+        "USERNAME": "Handle",
+        "USERNAME-PLACEHOLDER": "e.g. BugSlayer9000",
+        "USERNAME-ERROR": "Keep it under 25 chars, not a novel. Be brief, be 1337.",
+        "PASSWORD": "Passphrase",
+        "PASSWORD-PLACEHOLDER": "Shhh... it's a secret",
+        "PASSWORD-ERROR": "Must be longer than 'admin123' (we checked, that's not secure)"
       },
       "LOGIN": {
         "TITLE": "Login",
@@ -32,7 +32,7 @@
       "SIGNUP": {
         "TITLE": "Sign Up",
         "SIGNIN": "I already have an epic account",
-        "GITHUB": "Continue with GitHub (where the cool kids hang out)",
+        "GITHUB": "Continue with GitHub (because real devs use GitHub)",
         "OR": "or",
         "ACTION-BUTTON": "Create Account"
       },
@@ -43,13 +43,19 @@
       "PROFILE": {
         "TITLE": "Account",
         "PROFILE": "Profile",
-        "JOINED": "Joined the party on",
-        "ACTIVITY": "Activity",
+        "JOINED": "Joined the commit log on",
+        "ACTIVITY": "Activity Logs",
         "TABS": {
           "POSTS": "Posts",
           "COMMENTS": "Comments",
           "STARS": "Stars"
-        }
+        },
+        "NO_POSTS": "You have never committed a meme to the app repository",
+        "NO_COMMENTS": "Comment on some memes in the app repository to have them here",
+        "NO_STARS": "Star on some memes in the app repository to have them here",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "LOADING": "Loading"
       }
     },
     "NAVBAR": {
@@ -63,7 +69,9 @@
             "NEWSTORIES": "New Stories",
             "NEWS": "News",
             "BY": "by",
-            "READMORE": "Dive in"
+            "READMORE": "Dive In",
+            "EVENTS": "Events",
+            "COMINGSOON":"Coming soon... like async data"
           },
           "FOR-YOU": {
             "TITLE": "For You",
@@ -76,16 +84,16 @@
             "NOOFQUESTIONS": "Number of Questions: ",
             "SELECTDIFFICULTY": "Select Difficulty: ",
             "ANYDIFFICULTY": "Any Difficulty",
-            "EASY": "Easy Peasy",
-            "MEDIUM": "Not Too Hard",
-            "HARD": "Bring It On",
-            "FOOTER": "Note: This trivia doesn’t save your progress. Feel free to answer questions and become a trivia master."
+            "EASY": "Like Hello World",
+            "MEDIUM": "Intermediate if-else wizardry",
+            "HARD": "Stack Overflow level",
+            "FOOTER": "Note: This trivia isn't saved. Just like your unsaved VSCode file. 😬"
           }
         },
         "MODAL": {
           "CREATE-POST": "Create Post",
           "SAY-SOMETHING": "Say something witty about the image",
-          "SELECT-IMAGE": "Click to choose an awesome image",
+          "SELECT-IMAGE": "Click to upload a meme... I mean image",
           "POST": "Post"
         }
       },
@@ -94,7 +102,7 @@
       },
       "NOTIFICATIONS": {
         "TITLE": "Notifications",
-        "NO-NOTIFICATIONS": "No notifications. You're all caught up!"
+        "NO-NOTIFICATIONS": "0 notifications. You're officially bug-free (for now)"
       },
       "SETTINGS": {
         "TITLE": "Settings",
@@ -107,16 +115,16 @@
         "ISSUES":"Feature request",
         "TERMS&CONDITIONS": "Terms & Conditions",
         "PRIVACY": "Privacy Policy",
-        "VERSION": "App Version",
+        "VERSION": "Current Build",
         "ACCOUNT-MANAGEMENT": "Account Management",
         "DELETE": "Delete Account",
-        "TAGLINE": "The Future of SilkwebHQ and the SilkCommunity",
+        "TAGLINE": "Next-gen of SilkwebHQ and SilkCommunity — now with 50% more memes",
         "UPDATEHEADER": "Update Available",
         "UPDATEMESSAGE": "A shiny new version is available. Please update to continue your adventure.",
         "DELETEHEADER": "Delete Account",
         "DELETEMESSAGE": "About to delete your account? Enter your password to confirm this bold move:",
         "LATER": "Later",
-        "UPDATE": "Update",
+        "UPDATE": "Download Patch",
         "QUIZ": "Quiz",
         "NOTIFICATIONS": {
           "TITLE": "Notifications"
@@ -128,7 +136,11 @@
           "TITLE": "Language",
           "SELECT_LANGUAGE": "Select Your Language",
           "EN": "English",
-          "ES": "Spanish"
+          "ES": "Spanish",
+          "FR": "French",
+          "DE": "German",
+          "SW": "Swahili",
+          "PT": "Portuguese"
         },
         "GAMES": {
           "GENERAL": "General Knowledge",
@@ -160,10 +172,25 @@
     },
     "SHARED": {
       "IMAGE": {
-        "TITLE": "Image"
+        "TITLE": "Image",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "STAR": "Star",
+        "COMMENT": "Comment",
+        "SAVE": "Save",
+        "PROFILE_PICTURE": "Profile Picture",
+        "YOUR_AVATAR": "Your Avatar"
       },
-      "IMAGE-DETAILS": {
-        "TITLE": "Image Details"
+      "IMAGE_DETAILS": {
+        "TITLE": "Image Details",
+        "READ_MORE": "Read More",
+        "SHOW_LESS": "Show Less",
+        "LIKE": "Like",
+        "REPLY": "Reply",
+        "POST": "Post",
+        "ADD_COMMENT": "Add a comment...",
+        "PROFILE_PICTURE": "Profile Picture",
+        "YOUR_AVATAR": "Your Avatar"
       }
     },
     "TABS": {

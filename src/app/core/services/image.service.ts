@@ -3,10 +3,10 @@ import { Auth } from "@angular/fire/auth";
 import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { Firestore, collection, doc, getDoc, getDocs, limit, orderBy, query } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { Observable, catchError, from, map, of } from "rxjs";
+import { Observable, catchError, from, map, of, throwError } from "rxjs";
 import { Image } from "../models/data/image.interface";
 import { Comment } from "../models/data/comment.interface.ts";
-import { DocumentSnapshot, addDoc, collectionGroup, deleteDoc, getFirestore, serverTimestamp, updateDoc, where, writeBatch } from "@angular/fire/firestore";
+import { DocumentData, DocumentSnapshot, QuerySnapshot, addDoc, collectionGroup, deleteDoc, getFirestore, serverTimestamp, updateDoc, where, writeBatch } from "@angular/fire/firestore";
 
 @Injectable({
   providedIn: 'root',
@@ -14,21 +14,19 @@ import { DocumentSnapshot, addDoc, collectionGroup, deleteDoc, getFirestore, ser
 export class ImageService {
   constructor(private auth: Auth, private firestore: Firestore, private storage: Storage, private router: Router) { }
 
+  private mapToImages(querySnapshot: QuerySnapshot<DocumentData>): Image[] {
+    return querySnapshot.docs.map((document) => {
+      const data = document.data() as Image;
+      const id = document.id;
+      return { ...data, id };
+    });
+  }
+
   getImagePosts(): Observable<Image[]> {
     const q = query(collection(this.firestore, 'posts',), orderBy('createdAt', 'desc'), limit(40));
 
     return from(getDocs(q)).pipe(
-      map((querySnapshot) => {
-        return querySnapshot.docs.map((document) => {
-          const data = document.data() as Image;
-          const id = document.id;
-          return { ...data, id };
-        });
-      }),
-      catchError(error => {
-        console.error('Error fetching image posts:', error);
-        return of([]); // Return an empty array in case of error
-      })
+      map(this.mapToImages)
     );
   }
 
@@ -43,10 +41,6 @@ export class ImageService {
         } else {
           return null;
         }
-      }),
-      catchError(error => {
-        console.error('Error fetching image post by ID:', error);
-        return of(null); // Return null in case of error
       })
     );
   }
@@ -90,17 +84,7 @@ export class ImageService {
       );
 
       return from(getDocs(q)).pipe(
-        map((querySnapshot) => {
-          return querySnapshot.docs.map((document) => {
-            const data = document.data() as Image;
-            const id = document.id;
-            return { ...data, id };
-          });
-        }),
-        catchError(error => {
-          console.error('Error fetching user posts:', error);
-          return of([]);
-        })
+        map(this.mapToImages)
       );
     } else {
       return of([]);
@@ -132,10 +116,6 @@ export class ImageService {
           });
         });
         return userComments;
-      }),
-      catchError((error) => {
-        console.error('Error fetching user comments:', error);
-        return of([]); // Return an empty array in case of error
       })
     );
   }
@@ -175,17 +155,7 @@ export class ImageService {
     );
 
     return from(getDocs(q)).pipe(
-      map((querySnapshot) => {
-        return querySnapshot.docs.map((document) => {
-          const data = document.data() as Image;
-          const id = document.id;
-          return { ...data, id };
-        });
-      }),
-      catchError((error) => {
-        console.error('Error fetching starred images:', error);
-        return of([]); // Return an empty array in case of error
-      })
+      map(this.mapToImages)
     );
   }
 
@@ -193,7 +163,8 @@ export class ImageService {
     postId: string,
     userId: string,
     displayName: string,
-    commentText: string
+    commentText: string,
+    parentCommentId?: string
   ): Promise<void> {
     try {
       const commentsCollection = collection(
@@ -208,6 +179,7 @@ export class ImageService {
         stars: 0,
         likedBy: [],
         createdAt: new Date(),
+        parentCommentId
       };
 
       await addDoc(commentsCollection, newComment);
@@ -215,6 +187,25 @@ export class ImageService {
       console.log('Comment added successfully.');
     } catch (error) {
       console.error('Error adding comment:', error);
+      throw error;
+    }
+  }
+
+  async updateComment(postId: string, commentId: string, comment: Comment): Promise<void> {
+    try {
+      const commentRef = doc(
+        this.firestore,
+        `posts/${postId}/comments/${commentId}`
+      );
+
+      await updateDoc(commentRef, {
+        stars: comment.stars,
+        likedBy: comment.likedBy
+      });
+
+      console.log('Comment updated successfully.');
+    } catch (error) {
+      console.error('Error updating comment:', error);
       throw error;
     }
   }
@@ -291,17 +282,34 @@ export class ImageService {
         `posts/${imageId}/comments`
       );
 
-      const q = query(commentsCollection);
+      const q = query(commentsCollection, orderBy('createdAt', 'asc'));
 
       const querySnapshot = await getDocs(q);
 
       const imageComments: Comment[] = [];
+      const commentsMap = new Map<string, Comment>();
 
+      // First pass: create all comments
       querySnapshot.forEach((document) => {
         const data = document.data() as Comment;
         const id = document.id;
+        const comment = { id, ...data, replies: [] };
+        commentsMap.set(id, comment);
+      });
 
-        imageComments.push({ id, ...data });
+      // Second pass: organize comments and replies
+      commentsMap.forEach((comment) => {
+        if (comment.parentCommentId) {
+          // This is a reply, add it to its parent's replies
+          const parentComment = commentsMap.get(comment.parentCommentId);
+          if (parentComment) {
+            parentComment.replies = parentComment.replies || [];
+            parentComment.replies.push(comment);
+          }
+        } else {
+          // This is a top-level comment
+          imageComments.push(comment);
+        }
       });
 
       return imageComments;

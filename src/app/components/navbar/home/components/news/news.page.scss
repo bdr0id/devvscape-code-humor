@@ -20,3 +20,39 @@ ion-content {
   margin-bottom: 30px;
   margin-top: 18px;
 }
+
+.shadow {
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+ion-list-header {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 48px;
+
+  ion-label {
+    font-size: 1.5rem;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  ion-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+.news-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+
+

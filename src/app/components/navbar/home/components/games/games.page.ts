@@ -78,11 +78,10 @@ export class GamesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.adMobService.showBannerAd('game-banner-ad', 'ca-app-pub-6424707922606590/4972331204');
+    this.adMobService.showBannerAd('game-banner-ad', 'ca-app-pub-6424707922606590~3309927104');
   }
 
   private shuffleCategories() {
-    // Fisher-Yates shuffle algorithm
     for (let i = this.categories.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [this.categories[i], this.categories[j]] = [this.categories[j], this.categories[i]];

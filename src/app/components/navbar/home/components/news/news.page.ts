@@ -28,4 +28,8 @@ export class NewsPage implements OnInit {
   ionViewWillEnter() {
     this.adMobService.showBannerAd('news-banner-ad','ca-app-pub-6424707922606590/7406922852');
   }
+
+  openUrl(url: string) {
+    window.open(url, '_blank');
+  }
 }

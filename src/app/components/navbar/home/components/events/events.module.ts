@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { EventsPageRoutingModule } from './events-routing.module';
+import { TranslocoModule } from '@jsverse/transloco';
 
 import { EventsPage } from './events.page';
 
@@ -13,7 +14,8 @@ import { EventsPage } from './events.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    EventsPageRoutingModule
+    EventsPageRoutingModule,
+    TranslocoModule
   ],
   declarations: [EventsPage]
 })

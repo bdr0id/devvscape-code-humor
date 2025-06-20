@@ -10,49 +10,49 @@
     <ion-col size="6">
       <h2 class="section-header">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.NEWS' | transloco }}</h2>
     </ion-col>
-    <ion-col size="4">
-      <!-- <button class="top-right-button">
-        <ion-icon name="settings-outline"></ion-icon>
-      </button> -->
-    </ion-col>
+    <!-- <ion-col size="4">
+      <button class="top-right-button">
+        <ion-icon name="list-outline"></ion-icon>
+      </button>
+    </ion-col> -->
   </ion-row>
 
   <ion-list>
-    <ion-list-header lines="full">
+    <ion-list-header class="shadow" lines="full">
       <ion-label style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.NEWSTORIES' | transloco }}</ion-label>
       <ion-spinner name="lines-sharp" *ngIf="!(newStories$ | async)?.length"></ion-spinner>
     </ion-list-header>
     <ion-item *ngFor="let story of newStories$ | async">
-      <ion-label>
-        <h2>{{ story.title }}</h2>
+      <ion-label (click)="openUrl(story.url)">
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>
     </ion-item>
 
-    <ion-item-divider></ion-item-divider>
-
-    <ion-list-header lines="full">
+    <br>
+    
+    <ion-list-header class="shadow" lines="full">
       <ion-label style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BESTSTORIES' | transloco }}</ion-label>
       <ion-spinner name="lines-sharp" *ngIf="!(bestStories$ | async)?.length"></ion-spinner>
     </ion-list-header>
     <ion-item *ngFor="let story of bestStories$ | async">
-      <ion-label>
-        <h2>{{ story.title }}</h2>
+      <ion-label (click)="openUrl(story.url)">
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>
     </ion-item>
 
-    <ion-item-divider></ion-item-divider>
+    <br>
 
-    <ion-list-header lines="full">
+    <ion-list-header class="shadow" lines="full">
       <ion-label style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.TOPSTORIES' | transloco }}</ion-label>
       <ion-spinner name="lines-sharp" *ngIf="!(topStories$ | async)?.length"></ion-spinner>
     </ion-list-header>
     <ion-item *ngFor="let story of topStories$ | async">
-      <ion-label>
-        <h2>{{ story.title }}</h2>
+      <ion-label (click)="openUrl(story.url)">
+        <h2 class="news-title">{{ story.title }}</h2>
         <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
         <ion-button fill="clear" [href]="story.url" target="_blank">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}</ion-button>
       </ion-label>

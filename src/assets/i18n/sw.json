@@ -1,0 +1,203 @@
+{
+  "APP": {
+    "TITLE": "Devvscape",
+    "WELCOME_MESSAGE": "Karibu Devvscape! Ingia kwenye paradiso ya waprogramu.",
+    "ALERT_HEADER": "Lango la Kutoroka la Msimbo",
+    "ALERT_MESSAGE": "Uko tayari kutoka kwenye matrix ya msimbo na kukabiliana na ulimwengu wa kweli? Chagua hatima yako!",
+    "CANCEL_BUTTON": "Kaa",
+    "EXIT_BUTTON": "Toroka",
+    "DELETE_BUTTON": "Futa"
+  },
+  "COMPONENTS": {
+    "AUTH": {
+      "AUTH-FORM": {
+        "EMAIL": "DevMail",
+        "EMAIL-PLACEHOLDER": "Barua pepe yako takatifu (hakuna spam, viungo vya Stack Overflow pekee)",
+        "EMAIL-ERROR": "Hiyo sio barua pepe halali, jaribu tena kama dev wa kweli.",
+        "USERNAME": "Jina la Mtumiaji",
+        "USERNAME-PLACEHOLDER": "mfano BugSlayer9000",
+        "USERNAME-ERROR": "Iwe chini ya herufi 25, sio riwaya. Fupisha, kuwa 1337.",
+        "PASSWORD": "Nenosiri",
+        "PASSWORD-PLACEHOLDER": "Shhh... ni siri",
+        "PASSWORD-ERROR": "Lazima liwe refu kuliko 'admin123' (tumekagua, hiyo sio salama)"
+      },
+      "LOGIN": {
+        "TITLE": "Ingia",
+        "SIGNUP": "Unda akaunti mpya ya kustaajabisha",
+        "FORGOT-PASSWORD": "Nimesahau neno langu la uchawi",
+        "GITHUB": "Endelea na GitHub (kwa sababu waprogramu wa kweli hutumia GitHub)",
+        "OR": "au",
+        "ACTION-BUTTON": "Ingia"
+      },
+      "SIGNUP": {
+        "TITLE": "Jisajili",
+        "SIGNIN": "Tayari nina akaunti ya kipekee",
+        "GITHUB": "Endelea na GitHub (kwa sababu waprogramu wa kweli hutumia GitHub)",
+        "OR": "au",
+        "ACTION-BUTTON": "Unda Akaunti"
+      },
+      "RESET_PASSWORD": {
+        "TITLE": "Umesahau Nenosiri",
+        "ACTION-BUTTON": "Weka Upya Nenosiri"
+      },
+      "PROFILE": {
+        "TITLE": "Akaunti",
+        "PROFILE": "Profaili",
+        "JOINED": "Alishiriki katika logi ya kumudu tangu",
+        "ACTIVITY": "Rekodi za Shughuli",
+        "TABS": {
+          "POSTS": "Machapisho",
+          "COMMENTS": "Maoni",
+          "STARS": "Nyota"
+        },
+        "NO_POSTS": "Hujawahi kuchangia meme kwenye hazina ya app",
+        "NO_COMMENTS": "Toa maoni kwenye baadhi ya meme kwenye hazina ya app ili zionekane hapa",
+        "NO_STARS": "Weka nyota kwenye baadhi ya meme kwenye hazina ya app ili zionekane hapa",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "LOADING": "Inapakia"
+      }
+    },
+    "NAVBAR": {
+      "HOME": {
+        "TITLE": "Nyumbani",
+        "TABS": {
+          "EXPLORE": {
+            "TITLE": "Chunguza",
+            "TOPSTORIES": "Hadithi za Juu",
+            "BESTSTORIES": "Hadithi Bora",
+            "NEWSTORIES": "Hadithi Mpya",
+            "NEWS": "Habari",
+            "BY": "na",
+            "READMORE": "Zama Ndani",
+            "EVENTS": "Matukio",
+            "COMINGSOON": "Inakuja hivi karibuni... kama data ya async"
+          },
+          "FOR-YOU": {
+            "TITLE": "Kwa Ajili Yako",
+            "LOADING": "Inapakia... (chukua kahawa)"
+          },
+          "TRIVIA": {
+            "TITLE": "Trivia",
+            "TRIVIASETTINGS": "Mipangilio ya Trivia",
+            "CONFIRM": "Thibitisha",
+            "NOOFQUESTIONS": "Idadi ya Maswali: ",
+            "SELECTDIFFICULTY": "Chagua Ugumu: ",
+            "ANYDIFFICULTY": "Ugumu Wowote",
+            "EASY": "Kama Hello World",
+            "MEDIUM": "Uchawi wa kati wa if-else",
+            "HARD": "Kiwango cha Stack Overflow",
+            "FOOTER": "Kumbuka: Trivia hii haihifadhiwi. Kama faili yako ya VSCode ambayo haijahifadhiwa. 😬"
+          }
+        },
+        "MODAL": {
+          "CREATE-POST": "Unda Chapisho",
+          "SAY-SOMETHING": "Sema kitu cha busara kuhusu picha",
+          "SELECT-IMAGE": "Bonyeza kupakia meme... namaanisha picha",
+          "POST": "Chapisha"
+        }
+      },
+      "SEARCH": {
+        "TITLE": "Tafuta"
+      },
+      "NOTIFICATIONS": {
+        "TITLE": "Arifa",
+        "NO-NOTIFICATIONS": "Arifa 0. Uko rasmi bila hitilafu (kwa sasa)"
+      },
+      "SETTINGS": {
+        "TITLE": "Mipangilio",
+        "APP-SETTINGS": "Mipangilio ya Programu",
+        "APPERANCE": "Muonekano",
+        "SUPPORT&INFO": "Msaada na Taarifa",
+        "REVIEW&SHARE": "Kagua na Shiriki",
+        "DEVELOPERS": "Wasanidi",
+        "BUGS": "Dukua Msimbo",
+        "ISSUES": "Ombi la Kipengele",
+        "TERMS&CONDITIONS": "Sheria na Masharti",
+        "PRIVACY": "Sera ya Faragha",
+        "VERSION": "Toleo la Sasa",
+        "ACCOUNT-MANAGEMENT": "Usimamizi wa Akaunti",
+        "DELETE": "Futa Akaunti",
+        "TAGLINE": "Kizazi cha pili cha SilkwebHQ na SilkCommunity — sasa na memes zaidi kwa 50%",
+        "UPDATEHEADER": "Sasisho Linapatikana",
+        "UPDATEMESSAGE": "Toleo jipya la kumudu linapatikana. Tafadhali sasisha ili kuendelea na adventure yako.",
+        "DELETEHEADER": "Futa Akaunti",
+        "DELETEMESSAGE": "Karibu kufuta akaunti yako? Ingiza nenosiri lako kuthibitisha hatua hii ya ujasiri:",
+        "LATER": "Baadaye",
+        "UPDATE": "Pakua Kiraka",
+        "QUIZ": "Jaribio",
+        "NOTIFICATIONS": {
+          "TITLE": "Arifa"
+        },
+        "APPEARANCE": {
+          "TITLE": "Visura"
+        },
+        "LANGUAGE": {
+          "TITLE": "Lugha",
+          "SELECT_LANGUAGE": "Chagua Lugha Yako",
+          "EN": "Kiingereza",
+          "ES": "Kihispania",
+          "FR": "Kifaransa",
+          "DE": "Kijerumani",
+          "SW": "Kiswahili",
+          "PT": "Kireno"
+        },
+        "GAMES": {
+          "GENERAL": "Maarifa ya Jumla",
+          "BOOKS": "Burudani: Vitabu",
+          "FILM": "Burudani: Filamu",
+          "MUSIC": "Burudani: Muziki",
+          "MUSICAL": "Burudani: Muziki na Maigizo",
+          "TELEVISION": "Burudani: Televisheni",
+          "VIDEOGAMES": "Burudani: Michezo ya Video",
+          "BOARDGAMES": "Burudani: Michezo ya Bodi",
+          "NATURE": "Sayansi na Asili",
+          "COMPUTERS": "Sayansi: Kompyuta",
+          "MATHEMATICS": "Sayansi: Hisabati",
+          "MYTHOLOGY": "Hadithi za Kale",
+          "SPORTS": "Michezo",
+          "GEOGRAPHY": "Jiografia",
+          "HISTORY": "Historia",
+          "POLITICS": "Siasa",
+          "ART": "Sanaa",
+          "CELEBRITIES": "Watu Mashuhuri",
+          "ANIMALS": "Wanyama",
+          "VEHICLES": "Magari",
+          "COMICS": "Burudani: Vichekesho",
+          "GADGETS": "Sayansi: Vifaa",
+          "JAPANESEANIME": "Burudani: Anime na Manga za Kijapani",
+          "CARTOON": "Burudani: Katuni na Animations"
+        }
+      }
+    },
+    "SHARED": {
+      "IMAGE": {
+        "TITLE": "Picha",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "STAR": "Nyota",
+        "COMMENT": "Maoni",
+        "SAVE": "Hifadhi",
+        "PROFILE_PICTURE": "Picha ya Profaili",
+        "YOUR_AVATAR": "Avatar Yako"
+      },
+      "IMAGE_DETAILS": {
+        "TITLE": "Maelezo ya Picha",
+        "READ_MORE": "Soma Zaidi",
+        "SHOW_LESS": "Onyesha Kidogo",
+        "LIKE": "Penda",
+        "REPLY": "Jibu",
+        "POST": "Chapisha",
+        "ADD_COMMENT": "Ongeza maoni...",
+        "PROFILE_PICTURE": "Picha ya Profaili",
+        "YOUR_AVATAR": "Avatar Yako"
+      }
+    },
+    "TABS": {
+      "HOME": "Kwa Ajili Yako",
+      "SEARCH": "Tafuta",
+      "NOTIFICATIONS": "Arifa",
+      "SETTINGS": "Mipangilio"
+    }
+  }
+}

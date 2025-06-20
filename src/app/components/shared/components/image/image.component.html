@@ -3,7 +3,7 @@
     <ion-item>
       <ion-avatar slot="start" (click)="openProfile(image.postedBy)">
         <img
-          alt="DP"
+          [attr.alt]="'COMPONENTS.SHARED.IMAGE.PROFILE_PICTURE' | transloco"
           [src]="generateAvatarUrl(image.displayName || 'devvscape_user')"
         />
       </ion-avatar>
@@ -18,8 +18,8 @@
       </ion-label>
     </ion-item>
 
-    <div class="card" *ngIf="!imageLoaded">
-      <div class="shimmer shimmer_large_para"></div>
+    <div class="shimmer-container" *ngIf="!imageLoaded">
+      <div class="shimmer"></div>
     </div>
 
     <img
@@ -27,7 +27,7 @@
       [src]="image.imageUrl"
       [alt]="image.postText"
       (load)="imageLoaded = true"
-      style="position: relative"
+      [class.hidden]="!imageLoaded"
     />
 
     <ion-card-header>
@@ -38,10 +38,22 @@
       <a
         *ngIf="image.postText.length > 200"
         class="read-more"
-        style="color: blue; text-decoration: none; cursor: pointer"
         (click)="toggleText()"
-        >{{ isTextTruncated ? "Read More" : "Show Less" }}</a
+        >{{ isTextTruncated ? ('COMPONENTS.SHARED.IMAGE.READ_MORE' | transloco) : ('COMPONENTS.SHARED.IMAGE.SHOW_LESS' | transloco) }}</a
       >
+      <div class="interaction-buttons" *ngIf="imageLoaded">
+        <div class="left-buttons">
+          <ion-button fill="clear" (click)="likeImage(image)" [class.liked]="isLiked">
+            <ion-icon [name]="isLiked ? 'star' : 'star-outline'" slot="icon-only"></ion-icon>
+            <span>{{ image.stars || 0 }}</span>
+          </ion-button>
+          <ion-button fill="clear" (click)="toggleReply()" [class.active]="isReplyActive">
+            <ion-icon name="chatbubble-outline" slot="icon-only"></ion-icon>
+            <span>{{ 'COMPONENTS.SHARED.IMAGE.COMMENT' | transloco }}</span>
+          </ion-button>
+        </div>
+       
+      </div>
     </ion-card-header>
   </ion-card>
 </ion-item>

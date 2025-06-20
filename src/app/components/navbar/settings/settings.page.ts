@@ -19,8 +19,8 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 })
 export class SettingsPage implements OnInit {
   currentVersion!: string;
-  appVersion = '2.0.2'; 
-  languages = ['en', 'es'];
+  appVersion = '2.0.3'; 
+  languages = ['en', 'es','fr', 'de', 'sw','pt'];
   selectedLanguage = 'en';
   private loadingSubject = new Subject<boolean>();
   loading!: HTMLIonLoadingElement;
@@ -104,23 +104,20 @@ export class SettingsPage implements OnInit {
     await alert.present();
   }
 
+
   async changeLanguage(lang: string) {
     this.translocoService.setActiveLang(lang);
-    this.selectedLanguage = lang;
-
-    await Preferences.set({
-      key: 'selectedLanguage',
-      value: lang,
-    });
+    await Preferences.set({ key: 'lang', value: lang });
   }
+  
 
   async loadSelectedLanguage() {
-    const { value } = await Preferences.get({ key: 'selectedLanguage' });
-    if (value) {
-      this.selectedLanguage = value;
-      this.translocoService.setActiveLang(value);
-    }
+    const lang = await Preferences.get({ key: 'lang' });
+    const selectedLang = lang.value || 'en';
+    this.selectedLanguage = selectedLang;
+    this.translocoService.setActiveLang(selectedLang);
   }
+  
 
   disableAccount(){}
 

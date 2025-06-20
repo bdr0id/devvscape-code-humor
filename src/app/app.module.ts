@@ -30,10 +30,6 @@ import { hackerNewsReducer } from './core/store/reducers/hacker-news.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
-export function initializeFirebaseApp(): FirebaseApp {
-  return initializeApp(environment.firebaseConfig);
-}
-
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent], imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, OnlineStatusModule, TranslocoRootModule, ServiceWorkerModule.register('ngsw-worker.js', {
@@ -43,7 +39,7 @@ export function initializeFirebaseApp(): FirebaseApp {
     registrationStrategy: 'registerWhenStable:30000'
   })], providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideFirebaseApp(() => initializeFirebaseApp()),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideAnalytics(() => getAnalytics()),
     provideFirestore(() => getFirestore()),
@@ -52,15 +48,11 @@ export function initializeFirebaseApp(): FirebaseApp {
     providePerformance(() => getPerformance()),
     provideStore({ auth: authReducer, image: imageReducer, hackerNews: hackerNewsReducer }),
     provideEffects(AuthEffects, ImageEffects, HackerNewsEffects),
-    provideState({ name: 'auth', reducer: authReducer }),
-    provideState({ name: 'image', reducer: imageReducer }),
-    provideState({ name: 'hackerNews', reducer: hackerNewsReducer }),
     ScreenTrackingService,
     UserTrackingService,
     AndroidPermissions,
     InAppBrowser,
-    provideHttpClient(withInterceptorsFromDi()),
-    provideHttpClient(withInterceptors([withHttpCacheInterceptor()])), 
+    provideHttpClient(withInterceptorsFromDi(), withInterceptors([withHttpCacheInterceptor()])),
     provideHttpCache()
   ]
 })
