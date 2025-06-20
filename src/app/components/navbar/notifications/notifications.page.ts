@@ -11,15 +11,14 @@ import { NotificationService } from 'src/app/core/services/notification.service'
   styleUrls: ['./notifications.page.scss'],
 })
 export class NotificationsPage implements OnInit {
-
   notifications: Notification[] = [];
 
   constructor(
     private auth: Auth,
     private notificationService: NotificationService,
     private router: Router,
-    private adMobService: AdMobService,
-  ) { }
+    private adMobService: AdMobService
+  ) {}
 
   ngOnInit() {
     this.getNotifications();
@@ -27,8 +26,10 @@ export class NotificationsPage implements OnInit {
 
   ionViewWillEnter() {
     this.getNotifications();
-    this.adMobService.showBannerAd('notification-banner-ad','ca-app-pub-6424707922606590/1224657880');
-
+    this.adMobService.showBannerAd(
+      'notification-banner-ad',
+      'ca-app-pub-6424707922606590/1224657880'
+    );
   }
 
   refresh(ev: any) {
@@ -41,7 +42,9 @@ export class NotificationsPage implements OnInit {
   async getNotifications() {
     const user = this.auth.currentUser;
     if (user) {
-      this.notifications = await this.notificationService.getNotifications(user.uid);
+      this.notifications = await this.notificationService.getNotifications(
+        user.uid
+      );
     } else {
       console.error('No authenticated user found');
     }
@@ -51,7 +54,7 @@ export class NotificationsPage implements OnInit {
     const user = this.auth.currentUser;
     if (user) {
       const notificationIds = this.notifications
-        .map((notification) => notification.id)
+        .map(notification => notification.id)
         .filter((id): id is string => id !== undefined); // Filter out undefined IDs
 
       if (notificationIds.length === 0) {
@@ -59,10 +62,13 @@ export class NotificationsPage implements OnInit {
       }
 
       try {
-        await this.notificationService.markBatchAsRead(user.uid, notificationIds);
+        await this.notificationService.markBatchAsRead(
+          user.uid,
+          notificationIds
+        );
 
         // Update the local state to mark notifications as read
-        this.notifications.forEach((notification) => {
+        this.notifications.forEach(notification => {
           notification.isRead = true;
         });
       } catch (error) {
@@ -80,7 +86,10 @@ export class NotificationsPage implements OnInit {
         switch (notification.type) {
           case 'comment':
             if (notification.imageId) {
-              await this.notificationService.markNotificationAsRead(user.uid, notification.id);
+              await this.notificationService.markNotificationAsRead(
+                user.uid,
+                notification.id
+              );
               this.router.navigate(['image', notification.imageId]);
             } else {
               console.error('Image ID is undefined for comment notification');
@@ -91,12 +100,18 @@ export class NotificationsPage implements OnInit {
           case 'promotional':
             break;
           case 'newUser':
-            await this.notificationService.markNotificationAsRead(user.uid, notification.id);
+            await this.notificationService.markNotificationAsRead(
+              user.uid,
+              notification.id
+            );
             this.getNotifications();
             // Add Welcome page to redirect users to
             break;
           default:
-            await this.notificationService.markNotificationAsRead(user.uid, notification.id);
+            await this.notificationService.markNotificationAsRead(
+              user.uid,
+              notification.id
+            );
           // console.log('Unsupported notification type');
         }
       } else {
@@ -111,7 +126,10 @@ export class NotificationsPage implements OnInit {
     const user = this.auth.currentUser;
     if (user) {
       if (notification.id) {
-        await this.notificationService.deleteNotification(user.uid, notification.id);
+        await this.notificationService.deleteNotification(
+          user.uid,
+          notification.id
+        );
         this.getNotifications();
       } else {
         console.error('Notification ID is undefined');

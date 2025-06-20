@@ -15,8 +15,8 @@ import { TranslocoModule } from '@jsverse/transloco';
     FormsModule,
     IonicModule,
     NewsPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
-  declarations: [NewsPage]
+  declarations: [NewsPage],
 })
 export class NewsPageModule {}

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ofType } from '@ngrx/effects';
@@ -20,7 +27,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
   private loadingSubject = new Subject<boolean>();
   loading$ = this.loadingSubject.asObservable();
   private actionsSubscription!: Subscription;
-  
+
   @Input() actionButtonText!: string;
   @Input() isPasswordResetPage = false;
   @Input() isLoginPage = false;
@@ -33,17 +40,25 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     private actionsSubject: ActionsSubject
   ) {
     this.authForm = this.formBuilder.group({
-      username: ['', [Validators.minLength(1),Validators.maxLength(25)]],
+      username: ['', [Validators.minLength(1), Validators.maxLength(25)]],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.minLength(6)],
     });
   }
 
-  ngOnInit() { 
-    this.actionsSubscription = this.actionsSubject.pipe(
-      ofType(AuthActions.loginFailure, AuthActions.signupFailure, AuthActions.logoutFailure, AuthActions.resetPasswordFailure, AuthActions.deleteAccountFailure),
-      tap(action => this.handleError(action.error))
-    ).subscribe();
+  ngOnInit() {
+    this.actionsSubscription = this.actionsSubject
+      .pipe(
+        ofType(
+          AuthActions.loginFailure,
+          AuthActions.signupFailure,
+          AuthActions.logoutFailure,
+          AuthActions.resetPasswordFailure,
+          AuthActions.deleteAccountFailure
+        ),
+        tap(action => this.handleError(action.error))
+      )
+      .subscribe();
   }
 
   ngOnDestroy() {
@@ -56,36 +71,41 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     if (!authForm.valid) {
       console.log('Form is not valid yet, current value:', authForm.value);
     } else {
-      this.showLoading().pipe(
-        tap(() => {
-          const credentials: SignupCredentials = {
-            username: authForm.value.username,
-            email: authForm.value.email,
-            password: authForm.value.password,
-          };
-          this.formSubmitted.emit(credentials);
-        }),
-        finalize(() => this.hideLoading())
-      ).subscribe();
+      this.showLoading()
+        .pipe(
+          tap(() => {
+            const credentials: SignupCredentials = {
+              username: authForm.value.username,
+              email: authForm.value.email,
+              password: authForm.value.password,
+            };
+            this.formSubmitted.emit(credentials);
+          }),
+          finalize(() => this.hideLoading())
+        )
+        .subscribe();
     }
   }
 
   showLoading(): Observable<void> {
     return new Observable<void>(observer => {
-      this.loadingCtrl.create({
-        message: 'Loading...',
-        cssClass: 'custom-loading',
-      }).then(loading => {
-        this.loading = loading;
-        this.loading.present().then(() => {
-          this.loadingSubject.next(true);
-          observer.next();
-          observer.complete();
+      this.loadingCtrl
+        .create({
+          message: 'Loading...',
+          cssClass: 'custom-loading',
+        })
+        .then(loading => {
+          this.loading = loading;
+          this.loading.present().then(() => {
+            this.loadingSubject.next(true);
+            observer.next();
+            observer.complete();
+          });
+        })
+        .catch(error => {
+          this.handleError(error);
+          observer.error(error);
         });
-      }).catch(error => {
-        this.handleError(error);
-        observer.error(error);
-      });
     });
   }
 

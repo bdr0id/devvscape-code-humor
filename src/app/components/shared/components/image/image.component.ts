@@ -1,6 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { ImageService } from 'src/app/core/services/image.service';
 import { Subscription } from 'rxjs';
 import { Image } from 'src/app/core/models/data/image.interface';
@@ -109,7 +113,10 @@ export class ImageComponent implements OnInit, OnDestroy {
   }
 
   generateAvatarUrl(name: string): string {
-    const initials = name.split(' ').map(n => n[0]).join('');
+    const initials = name
+      .split(' ')
+      .map(n => n[0])
+      .join('');
     return `https://ui-avatars.com/api/?name=${initials}&background=random&color=fff?format=svg`;
   }
 
@@ -155,7 +162,7 @@ export class ImageComponent implements OnInit, OnDestroy {
           {
             text: 'Report',
             role: 'danger',
-            handler: async (data) => {
+            handler: async data => {
               if (data && data.reason) {
                 const currentUserUid = this.currentUser;
                 const imageId = image.id;
@@ -190,7 +197,7 @@ export class ImageComponent implements OnInit, OnDestroy {
           },
         ],
       })
-      .then((alert) => {
+      .then(alert => {
         alert.present();
       });
   }
@@ -202,7 +209,9 @@ export class ImageComponent implements OnInit, OnDestroy {
       try {
         await this.imageService.likeImage(image.id, user.uid);
         this.isLiked = !this.isLiked;
-        this.image.stars = this.isLiked ? (this.image.stars || 0) + 1 : (this.image.stars || 0) - 1;
+        this.image.stars = this.isLiked
+          ? (this.image.stars || 0) + 1
+          : (this.image.stars || 0) - 1;
       } catch (error) {
         await this.presentErrorToast(`Error liking image: ${error}`);
       }

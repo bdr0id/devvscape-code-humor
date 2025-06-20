@@ -1,21 +1,52 @@
-import { Injectable } from "@angular/core";
-import { Auth } from "@angular/fire/auth";
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
-import { Firestore, collection, doc, getDoc, getDocs, limit, orderBy, query } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
-import { Observable, catchError, from, map, of, throwError } from "rxjs";
-import { Image } from "../models/data/image.interface";
-import { Comment } from "../models/data/comment.interface.ts";
-import { DocumentData, DocumentSnapshot, QuerySnapshot, addDoc, collectionGroup, deleteDoc, getFirestore, serverTimestamp, updateDoc, where, writeBatch } from "@angular/fire/firestore";
+import { Injectable } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import {
+  Storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from '@angular/fire/storage';
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+} from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { Observable, catchError, from, map, of, throwError } from 'rxjs';
+import { Image } from '../models/data/image.interface';
+import { Comment } from '../models/data/comment.interface.ts';
+import {
+  DocumentData,
+  DocumentSnapshot,
+  QuerySnapshot,
+  addDoc,
+  collectionGroup,
+  deleteDoc,
+  getFirestore,
+  serverTimestamp,
+  updateDoc,
+  where,
+  writeBatch,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageService {
-  constructor(private auth: Auth, private firestore: Firestore, private storage: Storage, private router: Router) { }
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private storage: Storage,
+    private router: Router
+  ) {}
 
   private mapToImages(querySnapshot: QuerySnapshot<DocumentData>): Image[] {
-    return querySnapshot.docs.map((document) => {
+    return querySnapshot.docs.map(document => {
       const data = document.data() as Image;
       const id = document.id;
       return { ...data, id };
@@ -23,18 +54,20 @@ export class ImageService {
   }
 
   getImagePosts(): Observable<Image[]> {
-    const q = query(collection(this.firestore, 'posts',), orderBy('createdAt', 'desc'), limit(40));
-
-    return from(getDocs(q)).pipe(
-      map(this.mapToImages)
+    const q = query(
+      collection(this.firestore, 'posts'),
+      orderBy('createdAt', 'desc'),
+      limit(40)
     );
+
+    return from(getDocs(q)).pipe(map(this.mapToImages));
   }
 
   getImagePostById(id: string): Observable<Image | null> {
     const docRef = doc(this.firestore, 'posts', id);
 
     return from(getDoc(docRef)).pipe(
-      map((docSnapshot) => {
+      map(docSnapshot => {
         if (docSnapshot.exists()) {
           const data = docSnapshot.data() as Image;
           return { ...data, id };
@@ -45,7 +78,11 @@ export class ImageService {
     );
   }
 
-  async reportImage(imageId: string, userId: string, reason: string): Promise<void> {
+  async reportImage(
+    imageId: string,
+    userId: string,
+    reason: string
+  ): Promise<void> {
     try {
       const reportsRef = collection(this.firestore, 'reports');
       const querySnapshot = await getDocs(
@@ -83,9 +120,7 @@ export class ImageService {
         orderBy('createdAt', 'desc')
       );
 
-      return from(getDocs(q)).pipe(
-        map(this.mapToImages)
-      );
+      return from(getDocs(q)).pipe(map(this.mapToImages));
     } else {
       return of([]);
     }
@@ -99,9 +134,9 @@ export class ImageService {
     );
 
     return from(getDocs(q)).pipe(
-      map((querySnapshot) => {
+      map(querySnapshot => {
         const userComments: Comment[] = [];
-        querySnapshot.forEach((document) => {
+        querySnapshot.forEach(document => {
           const data = document.data() as Comment;
           const commentId = document.id;
 
@@ -131,7 +166,7 @@ export class ImageService {
 
       if (!querySnapshot.empty) {
         const batch = writeBatch(this.firestore);
-        querySnapshot.forEach((document) => {
+        querySnapshot.forEach(document => {
           batch.delete(document.ref);
         });
 
@@ -154,9 +189,7 @@ export class ImageService {
       orderBy('createdAt', 'desc')
     );
 
-    return from(getDocs(q)).pipe(
-      map(this.mapToImages)
-    );
+    return from(getDocs(q)).pipe(map(this.mapToImages));
   }
 
   async addComment(
@@ -179,7 +212,7 @@ export class ImageService {
         stars: 0,
         likedBy: [],
         createdAt: new Date(),
-        parentCommentId
+        parentCommentId,
       };
 
       await addDoc(commentsCollection, newComment);
@@ -191,7 +224,11 @@ export class ImageService {
     }
   }
 
-  async updateComment(postId: string, commentId: string, comment: Comment): Promise<void> {
+  async updateComment(
+    postId: string,
+    commentId: string,
+    comment: Comment
+  ): Promise<void> {
     try {
       const commentRef = doc(
         this.firestore,
@@ -200,7 +237,7 @@ export class ImageService {
 
       await updateDoc(commentRef, {
         stars: comment.stars,
-        likedBy: comment.likedBy
+        likedBy: comment.likedBy,
       });
 
       console.log('Comment updated successfully.');
@@ -231,7 +268,12 @@ export class ImageService {
     }
   }
 
-  async uploadImageAndPostText(imageFile: File, postText: string, userId: string, displayName: string): Promise<void> {
+  async uploadImageAndPostText(
+    imageFile: File,
+    postText: string,
+    userId: string,
+    displayName: string
+  ): Promise<void> {
     try {
       // Upload image to Firebase Storage
       const storageRef = ref(this.storage, 'images/' + imageFile.name);
@@ -244,7 +286,7 @@ export class ImageService {
       const hashtags = postText.match(/#(\w+)/g) || [];
 
       // Check for common programming words in postText
-      const tags = this.words.filter((word) =>
+      const tags = this.words.filter(word =>
         postText.toLowerCase().includes(word)
       );
 
@@ -268,7 +310,6 @@ export class ImageService {
       // Save image URL and postText to Firestore
       const postsCollection = collection(this.firestore, 'posts');
       await addDoc(postsCollection, postData);
-
     } catch (error) {
       console.error('Error uploading image and creating post:', error);
       throw new Error(`Error uploading image and creating post: ${error}`);
@@ -290,7 +331,7 @@ export class ImageService {
       const commentsMap = new Map<string, Comment>();
 
       // First pass: create all comments
-      querySnapshot.forEach((document) => {
+      querySnapshot.forEach(document => {
         const data = document.data() as Comment;
         const id = document.id;
         const comment = { id, ...data, replies: [] };
@@ -298,7 +339,7 @@ export class ImageService {
       });
 
       // Second pass: organize comments and replies
-      commentsMap.forEach((comment) => {
+      commentsMap.forEach(comment => {
         if (comment.parentCommentId) {
           // This is a reply, add it to its parent's replies
           const parentComment = commentsMap.get(comment.parentCommentId);
@@ -369,7 +410,7 @@ export class ImageService {
         await updateDoc(postRef, {
           stars: newStars,
           likedBy: userLiked
-            ? likedBy.filter((id) => id !== userId)
+            ? likedBy.filter(id => id !== userId)
             : [...likedBy, userId],
         });
 

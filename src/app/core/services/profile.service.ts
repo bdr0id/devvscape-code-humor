@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import {
   doc,
@@ -30,7 +29,7 @@ export class ProfileService {
 
   getUserProfileReference(): Observable<DocumentReference<DocumentData>> {
     return this.authService.getUser().pipe(
-      switchMap((user) => {
+      switchMap(user => {
         if (user) {
           this.currentUser = user;
           return of(doc(this.firestore, `users/${user.uid}`));
@@ -44,8 +43,9 @@ export class ProfileService {
 
   getUserProfile(): Observable<UserProfile> {
     return this.getUserProfileReference().pipe(
-      switchMap((userProfileReference) =>
-        docData(userProfileReference) as Observable<UserProfile>
+      switchMap(
+        userProfileReference =>
+          docData(userProfileReference) as Observable<UserProfile>
       ),
       catchError(() => EMPTY)
     );
@@ -53,10 +53,10 @@ export class ProfileService {
 
   updateName(fullName: string): Observable<void> {
     return this.getUserProfileReference().pipe(
-      concatMap((userProfileReference) =>
+      concatMap(userProfileReference =>
         from(setDoc(userProfileReference, { fullName }, { merge: true }))
       ),
-      catchError((error) => {
+      catchError(error => {
         console.error('Error updating name:', error);
         return EMPTY;
       })
@@ -89,7 +89,7 @@ export class ProfileService {
                 )
               )
             ),
-            catchError((error) => {
+            catchError(error => {
               console.error('Error updating email:', error);
               throw error;
             })
@@ -113,10 +113,8 @@ export class ProfileService {
             oldPassword
           );
           return from(reauthenticateWithCredential(user, credential)).pipe(
-            switchMap(() =>
-              from(updatePassword(user, newPassword))
-            ),
-            catchError((error) => {
+            switchMap(() => from(updatePassword(user, newPassword))),
+            catchError(error => {
               console.error('Error updating password:', error);
               throw error;
             })
@@ -144,7 +142,7 @@ export class ProfileService {
               from(user.delete()).pipe(
                 concatMap(() =>
                   this.getUserProfileReference().pipe(
-                    concatMap((userProfileReference) =>
+                    concatMap(userProfileReference =>
                       from(
                         setDoc(
                           userProfileReference,
@@ -157,7 +155,7 @@ export class ProfileService {
                 )
               )
             ),
-            catchError((error) => {
+            catchError(error => {
               console.error('Error closing account:', error);
               throw error;
             })

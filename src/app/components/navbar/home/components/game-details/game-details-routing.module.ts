@@ -6,8 +6,8 @@ import { GameDetailsPage } from './game-details.page';
 const routes: Routes = [
   {
     path: '',
-    component: GameDetailsPage
-  }
+    component: GameDetailsPage,
+  },
 ];
 
 @NgModule({

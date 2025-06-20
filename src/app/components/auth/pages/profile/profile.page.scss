@@ -13,7 +13,7 @@ ion-content {
   border: none;
   outline: none;
   font-size: 25px;
-  font-family: "Spotify";
+  font-family: 'Spotify';
   font-weight: bold;
   float: right;
   margin-right: 10px;
@@ -80,7 +80,7 @@ ion-avatar {
   height: 65px;
   background: center center no-repeat none;
   background-size: 65px 65px;
-  @each $prefix in -webkit-, -moz-, -ms-, -o-, "" {
+  @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
     #{$prefix}border-radius: 50%;
   }
   border-radius: 50%;

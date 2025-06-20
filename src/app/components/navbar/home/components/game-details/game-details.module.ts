@@ -15,8 +15,8 @@ import { TranslocoModule } from '@jsverse/transloco';
     FormsModule,
     IonicModule,
     GameDetailsPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
-  declarations: [GameDetailsPage]
+  declarations: [GameDetailsPage],
 })
 export class GameDetailsPageModule {}

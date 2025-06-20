@@ -15,8 +15,8 @@ import { EventsPage } from './events.page';
     FormsModule,
     IonicModule,
     EventsPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
-  declarations: [EventsPage]
+  declarations: [EventsPage],
 })
 export class EventsPageModule {}

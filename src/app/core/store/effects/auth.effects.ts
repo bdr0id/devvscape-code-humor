@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
-
-  constructor(private actions$: Actions,private authService: AuthService, private alertCtrl: AlertController, private router: Router) { }
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private alertCtrl: AlertController,
+    private router: Router
+  ) {}
 
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -18,7 +22,9 @@ export class AuthEffects {
       tap(() => setLoading({ loading: true })),
       mergeMap(action =>
         this.authService.login(action.email, action.password).pipe(
-          map(userCredential => AuthActions.loginSuccess({ user: userCredential.user })),
+          map(userCredential =>
+            AuthActions.loginSuccess({ user: userCredential.user })
+          ),
           catchError(error => {
             console.error('Login error:', error); // Log the error here
             return of(AuthActions.loginFailure({ error }));
@@ -28,23 +34,26 @@ export class AuthEffects {
       tap(() => setLoading({ loading: false }))
     )
   );
-  
 
   signup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signup),
       mergeMap(action =>
-        this.authService.signup(action.email, action.password, action.username).pipe(
-          map(userCredential => AuthActions.signupSuccess({ user: userCredential.user })),
-          catchError(error => {
-            console.error('Signup error:', error); // Log the error here
-            return of(AuthActions.signupFailure({ error }));
-          })
-        )
+        this.authService
+          .signup(action.email, action.password, action.username)
+          .pipe(
+            map(userCredential =>
+              AuthActions.signupSuccess({ user: userCredential.user })
+            ),
+            catchError(error => {
+              console.error('Signup error:', error); // Log the error here
+              return of(AuthActions.signupFailure({ error }));
+            })
+          )
       )
     )
   );
-  
+
   logout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.logout),
@@ -59,7 +68,7 @@ export class AuthEffects {
       )
     )
   );
-  
+
   getUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.getUser),
@@ -74,7 +83,7 @@ export class AuthEffects {
       )
     )
   );
-  
+
   resetPassword$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.resetPassword),
@@ -90,25 +99,26 @@ export class AuthEffects {
     )
   );
 
-  resetPasswordSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.resetPasswordSuccess),
-      tap(async () => {
-        const alert = await this.alertCtrl.create({
-          message: 'Check your inbox for the password reset link',
-          buttons: [
-            {
-              text: 'Ok',
-              role: 'cancel',
-              handler: () => {
-                this.router.navigateByUrl('login');
+  resetPasswordSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.resetPasswordSuccess),
+        tap(async () => {
+          const alert = await this.alertCtrl.create({
+            message: 'Check your inbox for the password reset link',
+            buttons: [
+              {
+                text: 'Ok',
+                role: 'cancel',
+                handler: () => {
+                  this.router.navigateByUrl('login');
+                },
               },
-            },
-          ],
-        });
-        await alert.present();
-      })
-    ),
+            ],
+          });
+          await alert.present();
+        })
+      ),
     { dispatch: false }
   );
 
@@ -117,17 +127,18 @@ export class AuthEffects {
       ofType(AuthActions.continueWithGithub),
       mergeMap(() =>
         this.authService.continueWithGithub().pipe(
-          map(userCredential => AuthActions.continueWithGithubSuccess({ user: userCredential.user })),
-          catchError(error =>{
-            console.log("Continue with Github",error)
+          map(userCredential =>
+            AuthActions.continueWithGithubSuccess({ user: userCredential.user })
+          ),
+          catchError(error => {
+            console.log('Continue with Github', error);
             return of(AuthActions.continueWithGithubFailure({ error }));
-
           })
         )
       )
     )
   );
-  
+
   deleteAccount$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.deleteAccount),
@@ -139,5 +150,4 @@ export class AuthEffects {
       )
     )
   );
-  
 }

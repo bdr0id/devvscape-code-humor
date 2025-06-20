@@ -1,9 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Auth, EmailAuthProvider, GithubAuthProvider, User, UserCredential, authState, createUserWithEmailAndPassword, deleteUser, reauthenticateWithCredential, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from '@angular/fire/auth';
+import {
+  Auth,
+  EmailAuthProvider,
+  GithubAuthProvider,
+  User,
+  UserCredential,
+  authState,
+  createUserWithEmailAndPassword,
+  deleteUser,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from '@angular/fire/auth';
 import { Observable, from, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
-import { Firestore, serverTimestamp, doc, setDoc, collection, deleteDoc, getDocs, query, where } from '@angular/fire/firestore';
+import {
+  Firestore,
+  serverTimestamp,
+  doc,
+  setDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  query,
+  where,
+} from '@angular/fire/firestore';
 
 interface ErrorResponse {
   code: string;
@@ -14,7 +39,11 @@ interface ErrorResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore, private toastCtrl: ToastController) { }
+  constructor(
+    private auth: Auth,
+    private firestore: Firestore,
+    private toastCtrl: ToastController
+  ) {}
 
   login(email: string, password: string): Observable<UserCredential> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
@@ -22,13 +51,21 @@ export class AuthService {
     );
   }
 
-  signup(email: string, password: string, username: string): Observable<UserCredential> {
-    return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
+  signup(
+    email: string,
+    password: string,
+    username: string
+  ): Observable<UserCredential> {
+    return from(
+      createUserWithEmailAndPassword(this.auth, email, password)
+    ).pipe(
       switchMap((userCredential: UserCredential) => {
         const user = userCredential.user;
         const avatarUrl = this.generateAvatarUrl(username);
 
-        return from(updateProfile(user, { displayName: username, photoURL: avatarUrl })).pipe(
+        return from(
+          updateProfile(user, { displayName: username, photoURL: avatarUrl })
+        ).pipe(
           switchMap(() => this.createUserProfile(user, username, avatarUrl)),
           map(() => userCredential),
           catchError(error => this.handleError(error))
@@ -39,11 +76,18 @@ export class AuthService {
   }
 
   generateAvatarUrl(name: string): string {
-    const initials = name.split(' ').map(n => n[0]).join('');
+    const initials = name
+      .split(' ')
+      .map(n => n[0])
+      .join('');
     return `https://ui-avatars.com/api/?name=${initials}&background=random&color=fff&format=svg`;
   }
 
-  private createUserProfile(user: User, username: string, avatarUrl: string): Observable<void> {
+  private createUserProfile(
+    user: User,
+    username: string,
+    avatarUrl: string
+  ): Observable<void> {
     const userProfile = {
       uid: user.uid,
       email: user.email,
@@ -121,13 +165,22 @@ export class AuthService {
 
           // Delete user's posts and related comments
           const postsCollection = collection(this.firestore, 'posts');
-          const postsQuery = query(postsCollection, where('postedBy', '==', userId));
+          const postsQuery = query(
+            postsCollection,
+            where('postedBy', '==', userId)
+          );
           const postsSnapshot = await getDocs(postsQuery);
 
           for (const postDoc of postsSnapshot.docs) {
             const postId = postDoc.id;
-            const commentsCollection = collection(this.firestore, `posts/${postId}/comments`);
-            const commentsQuery = query(commentsCollection, where('postedBy', '==', userId));
+            const commentsCollection = collection(
+              this.firestore,
+              `posts/${postId}/comments`
+            );
+            const commentsQuery = query(
+              commentsCollection,
+              where('postedBy', '==', userId)
+            );
             const commentsSnapshot = await getDocs(commentsQuery);
 
             for (const commentDoc of commentsSnapshot.docs) {
@@ -139,7 +192,10 @@ export class AuthService {
           }
 
           // Delete user's notifications
-          const notificationsCollection = collection(this.firestore, `users/${userId}/notifications`);
+          const notificationsCollection = collection(
+            this.firestore,
+            `users/${userId}/notifications`
+          );
           const notificationsQuery = query(notificationsCollection);
           const notificationsSnapshot = await getDocs(notificationsQuery);
 
@@ -167,31 +223,41 @@ export class AuthService {
 
   private handleError(error: ErrorResponse): Observable<never> {
     const errorMessages: Record<string, string> = {
-      'auth/email-already-in-use': 'Account with this email address is already in use. Please login.',
+      'auth/email-already-in-use':
+        'Account with this email address is already in use. Please login.',
       'auth/missing-password': 'Please enter a password to continue.',
       'auth/invalid-email': 'Please enter a valid email address to continue.',
       'auth/invalid-credential': 'Wrong password. Please try again.',
-      'auth/popup-closed-by-user': 'Popup was closed by the user. Please try again.',
-      'auth/popup-blocked': 'Popup window was blocked by your browser. Please allow popups and try again.',
-      'auth/cancelled-popup-request': 'Popup request was cancelled. Please try again.',
-      'auth/network-request-failed': 'Network request failed. Please check your internet connection and try again.',
+      'auth/popup-closed-by-user':
+        'Popup was closed by the user. Please try again.',
+      'auth/popup-blocked':
+        'Popup window was blocked by your browser. Please allow popups and try again.',
+      'auth/cancelled-popup-request':
+        'Popup request was cancelled. Please try again.',
+      'auth/network-request-failed':
+        'Network request failed. Please check your internet connection and try again.',
       'auth/user-not-found': 'User not found. Please check your email.',
       'auth/wrong-password': 'Wrong password. Please try again.',
-      'auth/account-exists-with-different-credential': 'An account already exists with the same email address but different sign-in credentials. Please use the appropriate sign-in method.',
-      'auth/too-many-requests': 'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.',
-      'auth/requires-recent-login': 'To delete account requires recent login, login and try again'
+      'auth/account-exists-with-different-credential':
+        'An account already exists with the same email address but different sign-in credentials. Please use the appropriate sign-in method.',
+      'auth/too-many-requests':
+        'Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.',
+      'auth/requires-recent-login':
+        'To delete account requires recent login, login and try again',
     };
 
     const errorMessage = errorMessages[error.code] || error.message;
 
     console.error('Error message:', errorMessage);
 
-    this.toastCtrl.create({
-      message: errorMessage,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    }).then(toast => toast.present());
+    this.toastCtrl
+      .create({
+        message: errorMessage,
+        duration: 5000,
+        position: 'bottom',
+        color: 'danger',
+      })
+      .then(toast => toast.present());
 
     return throwError(() => errorMessage);
   }

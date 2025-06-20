@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage implements OnInit, OnDestroy {
   count: number = 0;
@@ -40,12 +40,13 @@ export class TabsPage implements OnInit, OnDestroy {
     const userUid = this.auth.currentUser?.uid;
     if (userUid) {
       try {
-        const count = await this.notificationService.getUnreadNotificationCount(userUid);
+        const count = await this.notificationService.getUnreadNotificationCount(
+          userUid
+        );
         this.count = count;
       } catch (error) {
         console.error('Error fetching notification count:', error);
       }
     }
   }
-
 }

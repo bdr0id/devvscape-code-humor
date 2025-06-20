@@ -29,7 +29,7 @@ export class GameDetailsPage implements OnInit, OnDestroy {
     private adMobService: AdMobService,
     private alertCtrl: AlertController,
     private loadingCtrl: LoadingController
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.routeSub = this.route.queryParams.subscribe(params => {
@@ -48,7 +48,10 @@ export class GameDetailsPage implements OnInit, OnDestroy {
   }
 
   ionViewWillLeave() {
-    this.adMobService.showBannerAd('home-banner-ad','ca-app-pub-6424707922606590/3709250809');
+    this.adMobService.showBannerAd(
+      'home-banner-ad',
+      'ca-app-pub-6424707922606590/3709250809'
+    );
   }
 
   ngOnDestroy() {
@@ -114,7 +117,7 @@ export class GameDetailsPage implements OnInit, OnDestroy {
     const alert = await this.alertCtrl.create({
       header: 'Error',
       message: `Failed to load questions: ${error.message}`,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }

@@ -13,7 +13,7 @@ ion-content {
   border: none;
   outline: none;
   font-size: 25px;
-  font-family: "Spotify";
+  font-family: 'Spotify';
   font-weight: bold;
   float: right;
   margin-right: 10px;
@@ -32,7 +32,7 @@ ion-content {
   font-size: 24px;
   padding: 20px;
   margin: 10px;
-  background: #2B7A78;
+  background: #2b7a78;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.5px);
@@ -57,7 +57,7 @@ ion-content {
   }
 }
 
-ion-toolbar{
+ion-toolbar {
   margin: 4px;
   padding: 4px;
   text-align: center;
@@ -66,7 +66,6 @@ ion-toolbar{
 
 ion-footer {
   .small-text {
-    font-size: 12px; 
+    font-size: 12px;
   }
 }
-

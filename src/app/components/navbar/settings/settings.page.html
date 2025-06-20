@@ -113,7 +113,7 @@
       class="ion-activated"
       (click)="openWithSystemBrowser('https://github.com/l00pinfinity/devvscape-code-humor')"
     >
-    <ion-icon name="code-slash-outline" slot="start"></ion-icon>
+      <ion-icon name="code-slash-outline" slot="start"></ion-icon>
       <ion-label>{{ 'COMPONENTS.NAVBAR.SETTINGS.BUGS' | transloco }}</ion-label>
     </ion-item>
 
@@ -121,10 +121,11 @@
       class="ion-activated"
       (click)="openWithSystemBrowser('https://github.com/l00pinfinity/devvscape-code-humor/issues/new')"
     >
-    <ion-icon name="git-compare-outline" slot="start"></ion-icon>
-      <ion-label>{{ 'COMPONENTS.NAVBAR.SETTINGS.ISSUES' | transloco }}</ion-label>
+      <ion-icon name="git-compare-outline" slot="start"></ion-icon>
+      <ion-label
+        >{{ 'COMPONENTS.NAVBAR.SETTINGS.ISSUES' | transloco }}</ion-label
+      >
     </ion-item>
-
   </ion-item-group>
 
   <ion-item-group class="shadow-none rounded">

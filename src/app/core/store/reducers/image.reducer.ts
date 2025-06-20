@@ -29,7 +29,7 @@ export const initialState: ImageState = {
 
 export const imageReducer = createReducer(
   initialState,
-  
+
   on(ImageActions.loadImagesSuccess, (state, { images }) => ({
     ...state,
     images,
@@ -54,7 +54,7 @@ export const imageReducer = createReducer(
   })),
 
   // Report Image
-  on(ImageActions.reportImageSuccess, (state) => ({
+  on(ImageActions.reportImageSuccess, state => ({
     ...state,
     error: null,
   })),
@@ -86,7 +86,7 @@ export const imageReducer = createReducer(
   })),
 
   // Delete User Posts
-  on(ImageActions.deleteUserPostsSuccess, (state) => ({
+  on(ImageActions.deleteUserPostsSuccess, state => ({
     ...state,
     userPosts: [],
     error: null,
@@ -108,7 +108,7 @@ export const imageReducer = createReducer(
   })),
 
   // Add Comment
-  on(ImageActions.addCommentSuccess, (state) => ({
+  on(ImageActions.addCommentSuccess, state => ({
     ...state,
     error: null,
   })),
@@ -118,7 +118,7 @@ export const imageReducer = createReducer(
   })),
 
   // Delete Comment
-  on(ImageActions.deleteCommentSuccess, (state) => ({
+  on(ImageActions.deleteCommentSuccess, state => ({
     ...state,
     error: null,
   })),
@@ -128,7 +128,7 @@ export const imageReducer = createReducer(
   })),
 
   // Upload Image and Post Text
-  on(ImageActions.uploadImageAndPostTextSuccess, (state) => ({
+  on(ImageActions.uploadImageAndPostTextSuccess, state => ({
     ...state,
     error: null,
   })),
@@ -149,7 +149,7 @@ export const imageReducer = createReducer(
   })),
 
   // Download Image
-  on(ImageActions.downloadImageSuccess, (state) => ({
+  on(ImageActions.downloadImageSuccess, state => ({
     ...state,
     error: null,
   })),
@@ -159,7 +159,7 @@ export const imageReducer = createReducer(
   })),
 
   // Like Image
-  on(ImageActions.likeImageSuccess, (state) => ({
+  on(ImageActions.likeImageSuccess, state => ({
     ...state,
     error: null,
   })),

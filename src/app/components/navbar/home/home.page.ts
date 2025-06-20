@@ -11,15 +11,30 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Auth } from '@angular/fire/auth';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
-import { ActionPerformed, PushNotificationSchema, PushNotifications, Token, } from '@capacitor/push-notifications';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
 import { Platform } from '@ionic/angular';
-import { selectAllImages, selectImageState, selectImagesLoaded } from 'src/app/core/store/selectors/image.selectors';
+import {
+  selectAllImages,
+  selectImageState,
+  selectImagesLoaded,
+} from 'src/app/core/store/selectors/image.selectors';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 import { Image } from 'src/app/core/models/data/image.interface';
 import { ImageService } from 'src/app/core/services/image.service';
 import { loadImages } from 'src/app/core/store/actions/image.actions';
-import { loadBestStories, loadNewStories } from 'src/app/core/store/actions/hacker-news.actions';
-import { selectBestStories, selectNewStories } from 'src/app/core/store/selectors/hacker-news.selectors';
+import {
+  loadBestStories,
+  loadNewStories,
+} from 'src/app/core/store/actions/hacker-news.actions';
+import {
+  selectBestStories,
+  selectNewStories,
+} from 'src/app/core/store/selectors/hacker-news.selectors';
 import { AdMobService } from 'src/app/core/services/ad-mob.service';
 
 @Component({
@@ -28,20 +43,20 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, OnDestroy {
-
   images$!: Observable<Image[]>;
   presentingElement: Element | null = null;
   imageFile: File | null = null;
   postText = '';
   imageSrc: string | ArrayBuffer | null = null;
-  selectedSegment = 'explore'
+  selectedSegment = 'explore';
   loading!: HTMLIonLoadingElement;
   private modalInstance!: HTMLIonModalElement;
   onlineStatusSubscription!: Subscription;
   imagesLoaded$!: Observable<boolean>;
   newStories$ = this.store.pipe(select(selectNewStories));
 
-  constructor(private auth: Auth,
+  constructor(
+    private auth: Auth,
     private platform: Platform,
     private store: Store,
     private imageService: ImageService,
@@ -52,8 +67,8 @@ export class HomePage implements OnInit, OnDestroy {
     private loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private onlineStatusService: OnlineStatusService,
-  ) { }
+    private onlineStatusService: OnlineStatusService
+  ) {}
 
   ngOnInit(): void {
     this.checkOnlineStatus();
@@ -62,13 +77,15 @@ export class HomePage implements OnInit, OnDestroy {
     this.notificationStatus();
 
     this.imagesLoaded$ = this.store.select(selectImagesLoaded);
-    this.imagesLoaded$.pipe(
-      map(loaded => {
-        if (!loaded) {
-          this.fetchImagePosts();
-        }
-      })
-    ).subscribe();
+    this.imagesLoaded$
+      .pipe(
+        map(loaded => {
+          if (!loaded) {
+            this.fetchImagePosts();
+          }
+        })
+      )
+      .subscribe();
 
     this.images$ = this.store.select(selectAllImages);
   }
@@ -80,7 +97,10 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
-    this.adMobService.showBannerAd('home-banner-ad','ca-app-pub-6424707922606590/3709250809');
+    this.adMobService.showBannerAd(
+      'home-banner-ad',
+      'ca-app-pub-6424707922606590/3709250809'
+    );
   }
 
   refresh(ev: any) {
@@ -96,30 +116,32 @@ export class HomePage implements OnInit, OnDestroy {
       message: 'Loading...',
     });
     await loading.present();
-  
+
     const oneHour = 60 * 60 * 1000;
     const now = Date.now();
-  
+
     const imageState$ = this.store.select(selectImageState).pipe(
       map(state => {
-        if (!state.loaded || (state.lastUpdated && (now - state.lastUpdated) > oneHour)) {
+        if (
+          !state.loaded ||
+          (state.lastUpdated && now - state.lastUpdated > oneHour)
+        ) {
           this.store.dispatch(loadImages());
         }
         return state.loaded;
       })
     );
-  
+
     imageState$.subscribe({
-      next: (loaded) => {
+      next: loaded => {
         if (loaded) {
           loading.dismiss();
         }
       },
       error: () => loading.dismiss(),
-      complete: () => loading.dismiss()
+      complete: () => loading.dismiss(),
     });
   }
-  
 
   async openPostModal() {
     const hasPermission = await this.checkStoragePermission();
@@ -193,7 +215,8 @@ export class HomePage implements OnInit, OnDestroy {
         console.error('Error uploading image and post:', error);
 
         const errorToast = await this.toastCtrl.create({
-          message: 'An error occurred while uploading your post. Please try again.',
+          message:
+            'An error occurred while uploading your post. Please try again.',
           duration: 5000,
           position: 'bottom',
           color: 'danger',
@@ -205,19 +228,18 @@ export class HomePage implements OnInit, OnDestroy {
     }
   }
 
-  async onFileSelected(event: Event) { 
+  async onFileSelected(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length) {
       this.imageFile = inputElement.files[0];
       this.displaySelectedImage();
     }
   }
-  
 
   displaySelectedImage() {
     if (this.imageFile) {
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = event => {
         if (event.target?.result !== undefined) {
           this.imageSrc = event.target.result;
         }
@@ -235,7 +257,7 @@ export class HomePage implements OnInit, OnDestroy {
     return image.id;
   }
 
-  segmentChanged() { }
+  segmentChanged() {}
 
   async showLoading(): Promise<void> {
     try {
@@ -320,7 +342,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   async notificationStatus() {
-    PushNotifications.requestPermissions().then(async (result) => {
+    PushNotifications.requestPermissions().then(async result => {
       if (result.receive === 'granted') {
         PushNotifications.register();
       } else {
@@ -356,9 +378,9 @@ export class HomePage implements OnInit, OnDestroy {
     PushNotifications.addListener(
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-        console.log('Push notification received: ', notification
-        );
-      });
+        console.log('Push notification received: ', notification);
+      }
+    );
 
     // Method called when tapping on a notification
     PushNotifications.addListener(
@@ -396,13 +418,13 @@ export class HomePage implements OnInit, OnDestroy {
               // Open iOS app settings
               const settingsUrl = 'app-settings:';
               window.open(settingsUrl, '_system');
-            }
+            },
           },
           {
             text: 'Cancel',
-            role: 'cancel'
-          }
-        ]
+            role: 'cancel',
+          },
+        ],
       });
       await alert.present();
     }
@@ -410,10 +432,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   async checkOnlineStatus() {
     this.onlineStatusSubscription = this.onlineStatusService.status
-      .pipe(
-        map(status => status === OnlineStatusType.OFFLINE)
-      )
-      .subscribe(async (isOffline) => {
+      .pipe(map(status => status === OnlineStatusType.OFFLINE))
+      .subscribe(async isOffline => {
         if (isOffline) {
           const toast = await this.toastCtrl.create({
             message: 'Looks like you are in the land of offline adventures!',

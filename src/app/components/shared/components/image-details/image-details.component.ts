@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
 import { Http } from '@capacitor-community/http';
-import { Platform, AlertController, ToastController, LoadingController } from '@ionic/angular';
+import {
+  Platform,
+  AlertController,
+  ToastController,
+  LoadingController,
+} from '@ionic/angular';
 import { Auth } from '@angular/fire/auth';
 import { ImageService } from 'src/app/core/services/image.service';
 import { NotificationService } from 'src/app/core/services/notification.service';
@@ -39,7 +44,7 @@ export class ImageDetailsComponent implements OnInit {
     public toastCtrl: ToastController,
     private loadingCtrl: LoadingController,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.currentUser = this.auth.currentUser;
@@ -51,7 +56,10 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.adMobService.showBannerAd('home-banner-ad','ca-app-pub-6424707922606590/3709250809');
+    this.adMobService.showBannerAd(
+      'home-banner-ad',
+      'ca-app-pub-6424707922606590/3709250809'
+    );
   }
 
   refresh(ev: any) {
@@ -66,7 +74,10 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   generateAvatarUrl(name: string): string {
-    const initials = name.split(' ').map(n => n[0]).join('');
+    const initials = name
+      .split(' ')
+      .map(n => n[0])
+      .join('');
     return `https://ui-avatars.com/api/?name=${initials}&background=random&color=fff?format=svg`;
   }
 
@@ -99,7 +110,7 @@ export class ImageDetailsComponent implements OnInit {
 
   formatCommentCardSubtitle(image: any): string {
     if (!image || !image.comment) {
-      return ''; 
+      return '';
     }
 
     let formattedText = image.comment.text || '';
@@ -148,7 +159,7 @@ export class ImageDetailsComponent implements OnInit {
           {
             text: 'Cancel',
             role: 'cancel',
-            handler: () => { },
+            handler: () => {},
           },
           {
             text: 'Delete',
@@ -161,7 +172,8 @@ export class ImageDetailsComponent implements OnInit {
                   await this.imageService.deleteComment(imageId, commentId);
 
                   const toast = await this.toastCtrl.create({
-                    message: 'Your comment has been deleted from the app repository!',
+                    message:
+                      'Your comment has been deleted from the app repository!',
                     duration: 5000,
                     position: 'bottom',
                     color: 'danger',
@@ -180,7 +192,6 @@ export class ImageDetailsComponent implements OnInit {
       });
       await confirm.present();
     } else {
-
     }
   }
 
@@ -200,7 +211,11 @@ export class ImageDetailsComponent implements OnInit {
       }
 
       // Update the comment in the database
-      await this.imageService.updateComment(this.image.id, comment.id!, comment);
+      await this.imageService.updateComment(
+        this.image.id,
+        comment.id!,
+        comment
+      );
 
       // Create notification for comment owner
       if (comment.postedBy !== this.currentUser.uid) {
@@ -212,7 +227,10 @@ export class ImageDetailsComponent implements OnInit {
           type: 'like',
           imageId: this.image.id,
         };
-        await this.notificationService.addNotification(comment.postedBy, notification);
+        await this.notificationService.addNotification(
+          comment.postedBy,
+          notification
+        );
       }
     } catch (error) {
       console.error('Error liking comment:', error);
@@ -240,23 +258,23 @@ export class ImageDetailsComponent implements OnInit {
         if (user) {
           const commentData = {
             text: this.commentText.replace(/\n/g, '\\n'),
-            parentCommentId: this.replyingTo?.id
+            parentCommentId: this.replyingTo?.id,
           };
 
           await this.imageService.addComment(
-            image.id, 
-            user.uid, 
-            user.displayName || 'devvscape_user', 
+            image.id,
+            user.uid,
+            user.displayName || 'devvscape_user',
             commentData.text,
             commentData.parentCommentId
           );
 
           const isCommentedByOwner = user.uid === image.postedBy;
-          const notificationMessage = this.replyingTo 
+          const notificationMessage = this.replyingTo
             ? `${user.displayName} replied to your comment`
             : isCommentedByOwner
-              ? 'You added a comment on your post'
-              : `${user.displayName} commented on your post`;
+            ? 'You added a comment on your post'
+            : `${user.displayName} commented on your post`;
 
           const notification: Notification = {
             title: this.replyingTo ? 'New Reply' : 'New Comment',
@@ -268,8 +286,13 @@ export class ImageDetailsComponent implements OnInit {
           };
 
           // Send notification to post owner or comment owner if replying
-          const notificationRecipient = this.replyingTo ? this.replyingTo.postedBy : image.postedBy;
-          await this.notificationService.addNotification(notificationRecipient, notification);
+          const notificationRecipient = this.replyingTo
+            ? this.replyingTo.postedBy
+            : image.postedBy;
+          await this.notificationService.addNotification(
+            notificationRecipient,
+            notification
+          );
         }
 
         const toast = await this.toastCtrl.create({
@@ -287,7 +310,8 @@ export class ImageDetailsComponent implements OnInit {
       } catch (error) {
         console.error('Error while posting comment:', error);
         const errorToast = await this.toastCtrl.create({
-          message: 'An error occurred while saving your comment. Please try again.',
+          message:
+            'An error occurred while saving your comment. Please try again.',
           duration: 5000,
           position: 'bottom',
           color: 'danger',
@@ -344,7 +368,7 @@ export class ImageDetailsComponent implements OnInit {
   onCommentChange(): void {
     // Trim the comment text to remove leading/trailing whitespace
     this.commentText = this.commentText.trim();
-    
+
     // If the comment text is longer than maxLength, truncate it
     if (this.commentText.length > this.maxLength) {
       this.commentText = this.commentText.substring(0, this.maxLength);
@@ -365,12 +389,13 @@ export class ImageDetailsComponent implements OnInit {
       if (!hasPermission.hasPermission) {
         const confirm = await this.alertCtrl.create({
           header: 'Permission Denied',
-          message: 'Time to unleash the memes! Storage access needed for some pixel partying',
+          message:
+            'Time to unleash the memes! Storage access needed for some pixel partying',
           buttons: [
             {
               text: 'OK',
               role: 'cancel',
-              handler: () => { },
+              handler: () => {},
             },
           ],
         });
@@ -391,13 +416,13 @@ export class ImageDetailsComponent implements OnInit {
       url: imageUrl,
       filePath: fileName,
     })
-      .then(async (data) => {
+      .then(async data => {
         await this.presentSuccessToast(
           `Image downloaded successfully: ${data.path}`
         );
         await this.imageService.downloads(image.id, this.currentUser.uid);
       })
-      .catch(async (error) => {
+      .catch(async error => {
         await this.presentErrorToast(`Error downloading image: ${error.error}`);
       });
   }
@@ -426,16 +451,16 @@ export class ImageDetailsComponent implements OnInit {
 
   loadImageDetails() {
     const id = this.route.snapshot.paramMap.get('id');
-    
+
     if (!id) {
       this.errorMessage = 'The post is not available.';
       this.presentErrorToast(this.errorMessage);
       this.router.navigate(['tabs/home']);
       return;
     }
-  
+
     this.imageService.getImagePostById(id).subscribe(
-      (image) => {
+      image => {
         if (image) {
           this.getImageComments();
           this.image = image;
@@ -445,14 +470,14 @@ export class ImageDetailsComponent implements OnInit {
           this.router.navigate(['tabs/home']);
         }
       },
-      (error) => {
+      error => {
         console.error('Error loading image details:', error);
         this.errorMessage = 'An error occurred while loading the post details.';
         this.presentErrorToast(this.errorMessage);
         this.router.navigate(['tabs/home']);
       }
     );
-  }  
+  }
 
   private async presentErrorToast(message: string): Promise<void> {
     const toast = await this.toastCtrl.create({
@@ -494,7 +519,7 @@ export class ImageDetailsComponent implements OnInit {
           {
             text: 'Report',
             role: 'danger',
-            handler: async (data) => {
+            handler: async data => {
               if (data && data.reason) {
                 const currentUserUid = this.currentUser.uid;
                 const imageId = image.id;
@@ -523,7 +548,7 @@ export class ImageDetailsComponent implements OnInit {
           },
         ],
       })
-      .then((alert) => {
+      .then(alert => {
         alert.present();
       });
   }

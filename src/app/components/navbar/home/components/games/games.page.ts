@@ -10,32 +10,77 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
   styleUrls: ['./games.page.scss'],
 })
 export class GamesPage implements OnInit {
-
   @ViewChild(IonModal) modal!: IonModal;
-  general = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.GENERAL');
-  books = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.BOOKS');
-  film = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.FILM');
-  music = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.MUSIC');
-  musical = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.MUSICAL');
-  television = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.TELEVISION');
-  videogames = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.VIDEOGAMES');
-  boardgames = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.BOARDGAMES');
-  nature = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.NATURE');
-  computers = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.COMPUTERS');
-  mathematics = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.MATHEMATICS');
-  mythology = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.MYTHOLOGY');
-  sports = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.SPORTS');
-  geography = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.GEOGRAPHY');
-  history = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.HISTORY');
-  politics = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.POLITICS');
+  general = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.GENERAL'
+  );
+  books = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.BOOKS'
+  );
+  film = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.FILM'
+  );
+  music = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.MUSIC'
+  );
+  musical = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.MUSICAL'
+  );
+  television = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.TELEVISION'
+  );
+  videogames = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.VIDEOGAMES'
+  );
+  boardgames = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.BOARDGAMES'
+  );
+  nature = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.NATURE'
+  );
+  computers = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.COMPUTERS'
+  );
+  mathematics = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.MATHEMATICS'
+  );
+  mythology = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.MYTHOLOGY'
+  );
+  sports = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.SPORTS'
+  );
+  geography = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.GEOGRAPHY'
+  );
+  history = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.HISTORY'
+  );
+  politics = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.POLITICS'
+  );
   art = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.ART');
-  celebrities = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.CELEBRITIES');
-  animals = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.ANIMALS');
-  vehicles = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.VEHICLES');
-  comics = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.COMICS');
-  gadgets = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.GADGETS');
-  japaneseanime = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.JAPANESEANIME');
-  cartoon = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.GAMES.CARTOON');
+  celebrities = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.CELEBRITIES'
+  );
+  animals = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.ANIMALS'
+  );
+  vehicles = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.VEHICLES'
+  );
+  comics = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.COMICS'
+  );
+  gadgets = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.GADGETS'
+  );
+  japaneseanime = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.JAPANESEANIME'
+  );
+  cartoon = this.translocoService.translate(
+    'COMPONENTS.NAVBAR.SETTINGS.GAMES.CARTOON'
+  );
 
   categories = [
     { id: 9, name: this.general },
@@ -67,10 +112,15 @@ export class GamesPage implements OnInit {
   defaultSettings = {
     amount: 10,
     difficulty: 'any',
-    type: 'any'
+    type: 'any',
   };
 
-  constructor(private navCtrl: NavController, private translocoService: TranslocoService, private adMobService: AdMobService, private alertCtrl: AlertController) { }
+  constructor(
+    private navCtrl: NavController,
+    private translocoService: TranslocoService,
+    private adMobService: AdMobService,
+    private alertCtrl: AlertController
+  ) {}
 
   ngOnInit(): void {
     this.shuffleCategories();
@@ -78,13 +128,19 @@ export class GamesPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.adMobService.showBannerAd('game-banner-ad', 'ca-app-pub-6424707922606590~3309927104');
+    this.adMobService.showBannerAd(
+      'game-banner-ad',
+      'ca-app-pub-6424707922606590~3309927104'
+    );
   }
 
   private shuffleCategories() {
     for (let i = this.categories.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [this.categories[i], this.categories[j]] = [this.categories[j], this.categories[i]];
+      [this.categories[i], this.categories[j]] = [
+        this.categories[j],
+        this.categories[i],
+      ];
     }
   }
 
@@ -94,8 +150,8 @@ export class GamesPage implements OnInit {
         category: category.id,
         amount: this.defaultSettings.amount,
         difficulty: this.defaultSettings.difficulty,
-        type: this.defaultSettings.type
-      }
+        type: this.defaultSettings.type,
+      },
     });
   }
 
@@ -119,17 +175,12 @@ export class GamesPage implements OnInit {
     try {
       await Preferences.set({
         key: 'gameSettings',
-        value: JSON.stringify(settings)
+        value: JSON.stringify(settings),
       });
     } catch (error) {
       console.error('Error saving preferences:', error);
     }
   }
 
-  onWillDismiss(event: Event) {
-
-  }
-
-
-
+  onWillDismiss(event: Event) {}
 }

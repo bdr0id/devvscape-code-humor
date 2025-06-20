@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 import { AuthFormComponent } from '../../auth-form/auth-form.component';
 import { setLoading, signup } from 'src/app/core/store/actions/auth.actions';
 import { Store } from '@ngrx/store';
-import { selectAuthError, selectAuthLoading, selectUser } from 'src/app/core/store/selectors/auth.selectors';
+import {
+  selectAuthError,
+  selectAuthLoading,
+  selectUser,
+} from 'src/app/core/store/selectors/auth.selectors';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastController } from '@ionic/angular';
@@ -19,8 +23,14 @@ export class SignupPage implements OnInit {
 
   loading$: Observable<boolean>;
   error$: Observable<any>;
-  
-  constructor(private store: Store, private router:Router, private authService: AuthService, private adMobService: AdMobService,public toastCtrl: ToastController) {
+
+  constructor(
+    private store: Store,
+    private router: Router,
+    private authService: AuthService,
+    private adMobService: AdMobService,
+    public toastCtrl: ToastController
+  ) {
     this.loading$ = this.store.select(selectAuthLoading);
     this.error$ = this.store.select(selectAuthError);
   }
@@ -45,19 +55,25 @@ export class SignupPage implements OnInit {
   }
 
   ionViewWillLeave() {
-    this.adMobService.showBannerAd('home-banner-ad','ca-app-pub-6424707922606590/3709250809');
+    this.adMobService.showBannerAd(
+      'home-banner-ad',
+      'ca-app-pub-6424707922606590/3709250809'
+    );
   }
 
-  signupUser(credentials: { email: string; password: string; username: string }) {
+  signupUser(credentials: {
+    email: string;
+    password: string;
+    username: string;
+  }) {
     const { email, password, username } = credentials;
     this.store.dispatch(setLoading({ loading: true }));
-    this.store.dispatch(signup({ email, password, username}));
+    this.store.dispatch(signup({ email, password, username }));
 
-    this.store.select(selectUser).subscribe(user =>{
-      if (user){
+    this.store.select(selectUser).subscribe(user => {
+      if (user) {
         this.router.navigateByUrl('');
       }
-    })
+    });
   }
-
 }

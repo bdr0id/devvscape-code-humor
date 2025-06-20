@@ -40,9 +40,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadSelectedLanguage();
-    this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
-      this.exitConfirm();
-    });
+    this.backButtonSubscription =
+      this.platform.backButton.subscribeWithPriority(10, () => {
+        this.exitConfirm();
+      });
 
     this.lockScreenOrientation();
     this.checkOnlineStatus();
@@ -64,9 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
   initializeApp() {
     this.platform.ready().then(async () => {
       try {
-        const result = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
+        const result = await this.androidPermissions.checkPermission(
+          this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
+        );
         if (!result.hasPermission) {
-          const requestResult = await this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
+          const requestResult = await this.androidPermissions.requestPermission(
+            this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE
+          );
           if (!requestResult.hasPermission) {
             await this.showPermissionDeniedAlert();
           }
@@ -74,7 +79,7 @@ export class AppComponent implements OnInit, OnDestroy {
       } catch (error) {
         console.error('Error checking or requesting permission:', error);
       }
-      
+
       AdMob.initialize({
         initializeForTesting: false,
       });
@@ -115,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
         {
           text: 'OK',
           role: 'cancel',
-          handler: () => { },
+          handler: () => {},
         },
       ],
     });
@@ -135,7 +140,7 @@ export class AppComponent implements OnInit, OnDestroy {
         {
           text: cancel,
           role: 'cancel',
-          handler: () => { },
+          handler: () => {},
         },
         {
           text: exit,

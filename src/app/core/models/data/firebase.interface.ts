@@ -1,13 +1,11 @@
-export interface Firebase {
-}
-
+export interface Firebase {}
 
 export interface ErrorResponse {
-    code: string;
+  code: string;
+  message: string;
+  errors: {
     message: string;
-    errors: {
-        message: string;
-        domain: string;
-        reason: string;
-    }[];
+    domain: string;
+    reason: string;
+  }[];
 }

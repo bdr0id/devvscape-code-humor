@@ -6,24 +6,30 @@ import { HomePage } from './home.page';
 const routes: Routes = [
   {
     path: '',
-    component: HomePage
+    component: HomePage,
   },
   {
     path: 'events',
-    loadChildren: () => import('./components/events/events.module').then( m => m.EventsPageModule)
+    loadChildren: () =>
+      import('./components/events/events.module').then(m => m.EventsPageModule),
   },
   {
     path: 'news',
-    loadChildren: () => import('./components/news/news.module').then( m => m.NewsPageModule)
+    loadChildren: () =>
+      import('./components/news/news.module').then(m => m.NewsPageModule),
   },
   {
     path: 'games',
-    loadChildren: () => import('./components/games/games.module').then( m => m.GamesPageModule)
+    loadChildren: () =>
+      import('./components/games/games.module').then(m => m.GamesPageModule),
   },
   {
     path: 'game-details',
-    loadChildren: () => import('./components/game-details/game-details.module').then( m => m.GameDetailsPageModule)
-  }
+    loadChildren: () =>
+      import('./components/game-details/game-details.module').then(
+        m => m.GameDetailsPageModule
+      ),
+  },
 ];
 
 @NgModule({

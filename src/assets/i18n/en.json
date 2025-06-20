@@ -71,7 +71,7 @@
             "BY": "by",
             "READMORE": "Dive In",
             "EVENTS": "Events",
-            "COMINGSOON":"Coming soon... like async data"
+            "COMINGSOON": "Coming soon... like async data"
           },
           "FOR-YOU": {
             "TITLE": "For You",
@@ -110,9 +110,9 @@
         "APPERANCE": "Appearance",
         "SUPPORT&INFO": "Support & Info",
         "REVIEW&SHARE": "Review and Share",
-        "DEVELOPERS":"Developers",
-        "BUGS":"Hack the Code",
-        "ISSUES":"Feature request",
+        "DEVELOPERS": "Developers",
+        "BUGS": "Hack the Code",
+        "ISSUES": "Feature request",
         "TERMS&CONDITIONS": "Terms & Conditions",
         "PRIVACY": "Privacy Policy",
         "VERSION": "Current Build",

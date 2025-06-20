@@ -8,8 +8,15 @@ import { SharedModule } from 'src/app/core/modules/shared.module';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, IonicModule, RouterModule, SharedModule, TranslocoModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule,
+    SharedModule,
+    TranslocoModule,
+  ],
   declarations: [ImageComponent],
-  exports: [ImageComponent]
+  exports: [ImageComponent],
 })
-export class ImageModule { }
+export class ImageModule {}

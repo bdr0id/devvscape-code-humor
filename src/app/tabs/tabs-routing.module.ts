@@ -9,32 +9,44 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () => import('../components/navbar/home/home.module').then(m => m.HomePageModule)
+        loadChildren: () =>
+          import('../components/navbar/home/home.module').then(
+            m => m.HomePageModule
+          ),
       },
       {
         path: 'search',
-        loadChildren: () => import('../components/navbar/search/search.module').then(m => m.SearchPageModule)
+        loadChildren: () =>
+          import('../components/navbar/search/search.module').then(
+            m => m.SearchPageModule
+          ),
       },
       {
         path: 'notifications',
-        loadChildren: () => import('../components/navbar/notifications/notifications.module').then(m => m.NotificationsPageModule)
+        loadChildren: () =>
+          import(
+            '../components/navbar/notifications/notifications.module'
+          ).then(m => m.NotificationsPageModule),
       },
       {
         path: 'settings',
-        loadChildren: () => import('../components/navbar/settings/settings.module').then(m => m.SettingsPageModule)
+        loadChildren: () =>
+          import('../components/navbar/settings/settings.module').then(
+            m => m.SettingsPageModule
+          ),
       },
       {
         path: '',
         redirectTo: '/tabs/home',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: '',
     redirectTo: '/tabs/home',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

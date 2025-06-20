@@ -15,7 +15,7 @@ import { TranslocoModule } from '@jsverse/transloco';
     FormsModule,
     IonicModule,
     SearchPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
   declarations: [SearchPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

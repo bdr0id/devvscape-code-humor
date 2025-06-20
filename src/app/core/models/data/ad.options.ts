@@ -1,4 +1,9 @@
-import { BannerAdOptions, BannerAdSize, BannerAdPosition, AdOptions } from "@capacitor-community/admob";
+import {
+  BannerAdOptions,
+  BannerAdSize,
+  BannerAdPosition,
+  AdOptions,
+} from '@capacitor-community/admob';
 
 export const bannerTopOptions: BannerAdOptions = {
   adId: 'ca-app-pub-3940256099942544~3347511713',

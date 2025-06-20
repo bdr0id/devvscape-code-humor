@@ -5,44 +5,56 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { withCache } from '@ngneat/cashew';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HackerNewsService {
   private baseUrl = 'https://hacker-news.firebaseio.com/v0';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getTopStories(): Observable<any[]> {
-    return this.http.get<number[]>(`${this.baseUrl}/topstories.json`,{context:withCache({mode:'stateManagement'})}).pipe(
-      map(ids => ids.slice(0, 10)),
-      switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
-      catchError(error => {
-        console.error('Error fetching top stories', error);
-        return of([]);
+    return this.http
+      .get<number[]>(`${this.baseUrl}/topstories.json`, {
+        context: withCache({ mode: 'stateManagement' }),
       })
-    );
+      .pipe(
+        map(ids => ids.slice(0, 10)),
+        switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
+        catchError(error => {
+          console.error('Error fetching top stories', error);
+          return of([]);
+        })
+      );
   }
 
   getBestStories(): Observable<any[]> {
-    return this.http.get<number[]>(`${this.baseUrl}/beststories.json`,{context:withCache({mode:'stateManagement'})}).pipe(
-      map(ids => ids.slice(0, 10)),
-      switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
-      catchError(error => {
-        console.error('Error fetching best stories', error);
-        return of([]); 
+    return this.http
+      .get<number[]>(`${this.baseUrl}/beststories.json`, {
+        context: withCache({ mode: 'stateManagement' }),
       })
-    );
+      .pipe(
+        map(ids => ids.slice(0, 10)),
+        switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
+        catchError(error => {
+          console.error('Error fetching best stories', error);
+          return of([]);
+        })
+      );
   }
 
   getNewStories(): Observable<any[]> {
-    return this.http.get<number[]>(`${this.baseUrl}/newstories.json`,{context:withCache({mode:'stateManagement'})}).pipe(
-      map(ids => ids.slice(0, 10)),
-      switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
-      catchError(error => {
-        console.error('Error fetching new stories', error);
-        return of([]);
+    return this.http
+      .get<number[]>(`${this.baseUrl}/newstories.json`, {
+        context: withCache({ mode: 'stateManagement' }),
       })
-    );
+      .pipe(
+        map(ids => ids.slice(0, 10)),
+        switchMap(ids => forkJoin(ids.map(id => this.getStory(id)))),
+        catchError(error => {
+          console.error('Error fetching new stories', error);
+          return of([]);
+        })
+      );
   }
 
   getStory(id: number): Observable<any> {

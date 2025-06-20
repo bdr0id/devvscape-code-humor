@@ -8,7 +8,9 @@
       </ion-toolbar>
     </ion-col>
     <ion-col size="10">
-      <h2 class="section-header">{{ 'COMPONENTS.AUTH.SIGNUP.TITLE' | transloco }}</h2>
+      <h2 class="section-header">
+        {{ 'COMPONENTS.AUTH.SIGNUP.TITLE' | transloco }}
+      </h2>
     </ion-col>
   </ion-row>
   <app-auth-form
@@ -22,7 +24,7 @@
     <span>{{ 'COMPONENTS.AUTH.SIGNUP.OR' | transloco }}</span>
     <div class="line"></div>
   </div>
-  
+
   <ion-button expand="block" fill="clear" routerLink="/login">
     {{ 'COMPONENTS.AUTH.SIGNUP.SIGNIN' | transloco }}
   </ion-button>
@@ -30,6 +32,15 @@
 
 <ion-footer class="ion-no-border">
   <ion-toolbar>
-    <ion-text>By signing up to create an account I accept Company's <a href="https://l00pinfinity.vercel.app/terms.html" target="_blank">Terms of Use</a> and <a href="https://l00pinfinity.vercel.app/privacy.html" target="_blank">Privacy Policy</a></ion-text>
+    <ion-text
+      >By signing up to create an account I accept Company's
+      <a href="https://l00pinfinity.vercel.app/terms.html" target="_blank"
+        >Terms of Use</a
+      >
+      and
+      <a href="https://l00pinfinity.vercel.app/privacy.html" target="_blank"
+        >Privacy Policy</a
+      ></ion-text
+    >
   </ion-toolbar>
 </ion-footer>

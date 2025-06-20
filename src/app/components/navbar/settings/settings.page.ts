@@ -5,7 +5,13 @@ import {
   InAppBrowser,
   InAppBrowserOptions,
 } from '@awesome-cordova-plugins/in-app-browser/ngx';
-import { ActionSheetController, AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  AlertController,
+  LoadingController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { TranslocoService } from '@jsverse/transloco';
 import { Observable, Subject, finalize } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -19,8 +25,8 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 })
 export class SettingsPage implements OnInit {
   currentVersion!: string;
-  appVersion = '2.0.3'; 
-  languages = ['en', 'es','fr', 'de', 'sw','pt'];
+  appVersion = '2.0.3';
+  languages = ['en', 'es', 'fr', 'de', 'sw', 'pt'];
   selectedLanguage = 'en';
   private loadingSubject = new Subject<boolean>();
   loading!: HTMLIonLoadingElement;
@@ -43,23 +49,37 @@ export class SettingsPage implements OnInit {
     fullscreen: 'yes', //Windows only
   };
 
-
-  constructor(private authService: AuthService, private adMobService: AdMobService, private versionService: VersionService ,private translocoService: TranslocoService, private router: Router, private navCtrl: NavController, private alertCtrl: AlertController, public toastCtrl: ToastController, private loadingCtrl: LoadingController, private iab: InAppBrowser, private actionSheetCtrl: ActionSheetController) { }
+  constructor(
+    private authService: AuthService,
+    private adMobService: AdMobService,
+    private versionService: VersionService,
+    private translocoService: TranslocoService,
+    private router: Router,
+    private navCtrl: NavController,
+    private alertCtrl: AlertController,
+    public toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private iab: InAppBrowser,
+    private actionSheetCtrl: ActionSheetController
+  ) {}
 
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
-    this.loadSelectedLanguage()
+    this.loadSelectedLanguage();
     this.fetchCurrentVersion();
   }
 
   ionViewWillEnter() {
-    this.adMobService.showBannerAd('notification-banner-ad','ca-app-pub-6424707922606590/1224657880');
+    this.adMobService.showBannerAd(
+      'notification-banner-ad',
+      'ca-app-pub-6424707922606590/1224657880'
+    );
   }
 
   async fetchCurrentVersion() {
     try {
       this.currentVersion = await this.versionService.getCurrentVersion();
-      this.checkForUpdate()
+      this.checkForUpdate();
     } catch (error) {
       console.error('Error fetching current version:', error);
       // Handle error appropriately in your application
@@ -74,10 +94,18 @@ export class SettingsPage implements OnInit {
   }
 
   async presentUpdateAlert() {
-    const header = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.UPDATEHEADER');
-    const message = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.UPDATEMESSAGE');
-    const later = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.LATER');
-    const update = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.UPDATE');
+    const header = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.UPDATEHEADER'
+    );
+    const message = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.UPDATEMESSAGE'
+    );
+    const later = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.LATER'
+    );
+    const update = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.UPDATE'
+    );
 
     const alert = await this.alertCtrl.create({
       header,
@@ -89,27 +117,28 @@ export class SettingsPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             // Handle "Later" button action
-          }
+          },
         },
         {
           text: update,
           handler: () => {
             // Redirect to Google Play Store for update
-            window.open('https://play.google.com/store/apps/details?id=com.silkwebhq.devvscapecode', '_system');
-          }
-        }
-      ]
+            window.open(
+              'https://play.google.com/store/apps/details?id=com.silkwebhq.devvscapecode',
+              '_system'
+            );
+          },
+        },
+      ],
     });
 
     await alert.present();
   }
 
-
   async changeLanguage(lang: string) {
     this.translocoService.setActiveLang(lang);
     await Preferences.set({ key: 'lang', value: lang });
   }
-  
 
   async loadSelectedLanguage() {
     const lang = await Preferences.get({ key: 'lang' });
@@ -117,13 +146,16 @@ export class SettingsPage implements OnInit {
     this.selectedLanguage = selectedLang;
     this.translocoService.setActiveLang(selectedLang);
   }
-  
 
-  disableAccount(){}
+  disableAccount() {}
 
   async closeAccount() {
-    const header = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.DELETEHEADER');
-    const message = this.translocoService.translate('COMPONENTS.NAVBAR.SETTINGS.DELETEMESSAGE');
+    const header = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.DELETEHEADER'
+    );
+    const message = this.translocoService.translate(
+      'COMPONENTS.NAVBAR.SETTINGS.DELETEMESSAGE'
+    );
     const cancel = this.translocoService.translate('APP.CANCEL_BUTTON');
     const exit = this.translocoService.translate('APP.DELETE_BUTTON');
 
@@ -141,35 +173,42 @@ export class SettingsPage implements OnInit {
         {
           text: cancel,
           role: 'cancel',
-          handler: () => { },
+          handler: () => {},
         },
         {
           text: exit,
           role: 'exit',
-          handler: async (data) => {
+          handler: async data => {
             if (data && data.password) {
-              console.log(data.password)
+              console.log(data.password);
               this.showLoading().subscribe({
                 next: () => {
-                  this.authService.deleteAccount(data.password).pipe(
-                    finalize(() => this.hideLoading())
-                  ).subscribe({
-                    next: () => this.router.navigateByUrl('signup'),
-                    error: (error) => {
-                      if (error.code === 'auth/requires-recent-login') {
-                        console.log('Deleting your account requires you to have logged in recently. Please log in and try again.');
-                      } else {
-                        console.log('Error deleting account: ' + error.message);
-                      }
-                    }
-                  });
+                  this.authService
+                    .deleteAccount(data.password)
+                    .pipe(finalize(() => this.hideLoading()))
+                    .subscribe({
+                      next: () => this.router.navigateByUrl('signup'),
+                      error: error => {
+                        if (error.code === 'auth/requires-recent-login') {
+                          console.log(
+                            'Deleting your account requires you to have logged in recently. Please log in and try again.'
+                          );
+                        } else {
+                          console.log(
+                            'Error deleting account: ' + error.message
+                          );
+                        }
+                      },
+                    });
                 },
-                error: (error) => {
+                error: error => {
                   console.log('Error showing loading: ' + error.message);
-                }
+                },
               });
             } else {
-              console.log('You need to confirm account deletion by inputting your password');
+              console.log(
+                'You need to confirm account deletion by inputting your password'
+              );
             }
           },
         },
@@ -190,20 +229,23 @@ export class SettingsPage implements OnInit {
 
   showLoading(): Observable<void> {
     return new Observable<void>(observer => {
-      this.loadingCtrl.create({
-        message: 'Closing account...',
-        cssClass: 'custom-loading',
-      }).then(loading => {
-        this.loading = loading;
-        this.loading.present().then(() => {
-          this.loadingSubject.next(true);
-          observer.next();
-          observer.complete();
+      this.loadingCtrl
+        .create({
+          message: 'Closing account...',
+          cssClass: 'custom-loading',
+        })
+        .then(loading => {
+          this.loading = loading;
+          this.loading.present().then(() => {
+            this.loadingSubject.next(true);
+            observer.next();
+            observer.complete();
+          });
+        })
+        .catch(error => {
+          this.handleError(error);
+          observer.error(error);
         });
-      }).catch(error => {
-        this.handleError(error);
-        observer.error(error);
-      });
     });
   }
 
@@ -225,5 +267,4 @@ export class SettingsPage implements OnInit {
     });
     await toast.present();
   }
-
 }

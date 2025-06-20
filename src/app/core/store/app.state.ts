@@ -1,9 +1,9 @@
-import { AuthState } from "./reducers/auth.reducer";
-import { HackerNewsState } from "./reducers/hacker-news.reducer";
-import { ImageState } from "./reducers/image.reducer";
+import { AuthState } from './reducers/auth.reducer';
+import { HackerNewsState } from './reducers/hacker-news.reducer';
+import { ImageState } from './reducers/image.reducer';
 
 export interface AppState {
-    auth: AuthState,
-    image: ImageState,
-    hackerNews: HackerNewsState
+  auth: AuthState;
+  image: ImageState;
+  hackerNews: HackerNewsState;
 }

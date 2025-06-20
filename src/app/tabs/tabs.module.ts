@@ -14,8 +14,8 @@ import { TranslocoModule } from '@jsverse/transloco';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
-  declarations: [TabsPage]
+  declarations: [TabsPage],
 })
 export class TabsPageModule {}
