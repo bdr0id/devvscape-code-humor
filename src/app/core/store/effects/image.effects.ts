@@ -40,7 +40,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.reportImage),
       mergeMap((action) =>
-        defer(() => this.imageService.reportImage(action.imageId, action.userId, action.reason)).pipe(
+        from(this.imageService.reportImage(action.imageId, action.userId, action.reason)).pipe(
           map(() => ImageActions.reportImageSuccess()),
           catchError((error) => of(ImageActions.reportImageFailure({ error })))
         )
@@ -77,7 +77,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.deleteUserPosts),
       mergeMap((action) =>
-        defer(() => this.imageService.deleteUserPosts(action.userUid)).pipe(
+        from(this.imageService.deleteUserPosts(action.userUid)).pipe(
           map(() => ImageActions.deleteUserPostsSuccess()),
           catchError((error) => of(ImageActions.deleteUserPostsFailure({ error })))
         )
@@ -101,7 +101,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.addComment),
       mergeMap((action) =>
-        defer(() => this.imageService.addComment(action.postId, action.userId, action.displayName, action.commentText)).pipe(
+        from(this.imageService.addComment(action.postId, action.userId, action.displayName, action.commentText)).pipe(
           map(() => ImageActions.addCommentSuccess()),
           catchError((error) => of(ImageActions.addCommentFailure({ error })))
         )
@@ -113,7 +113,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.deleteComment),
       mergeMap((action) =>
-        defer(() => this.imageService.deleteComment(action.imageId, action.commentId)).pipe(
+        from(this.imageService.deleteComment(action.imageId, action.commentId)).pipe(
           map(() => ImageActions.deleteCommentSuccess()),
           catchError((error) => of(ImageActions.deleteCommentFailure({ error })))
         )
@@ -125,7 +125,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.uploadImageAndPostText),
       mergeMap((action) =>
-        defer(() => this.imageService.uploadImageAndPostText(action.imageFile, action.postText, action.userId, action.displayName)).pipe(
+        from(this.imageService.uploadImageAndPostText(action.imageFile, action.postText, action.userId, action.displayName)).pipe(
           map(() => ImageActions.uploadImageAndPostTextSuccess()),
           catchError((error) => of(ImageActions.uploadImageAndPostTextFailure({ error })))
         )
@@ -137,7 +137,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.loadImageComments),
       mergeMap((action) =>
-        defer(() => this.imageService.getImageComments(action.imageId)).pipe(
+        from(this.imageService.getImageComments(action.imageId)).pipe(
           map((comments) => ImageActions.loadImageCommentsSuccess({ comments })),
           catchError((error) => of(ImageActions.loadImageCommentsFailure({ error })))
         )
@@ -149,7 +149,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.downloadImage),
       mergeMap((action) =>
-        defer(() => this.imageService.downloads(action.imageId, action.userId)).pipe(
+        from(this.imageService.downloads(action.imageId, action.userId)).pipe(
           map(() => ImageActions.downloadImageSuccess()),
           catchError((error) => of(ImageActions.downloadImageFailure({ error })))
         )
@@ -161,7 +161,7 @@ export class ImageEffects {
     this.actions$.pipe(
       ofType(ImageActions.likeImage),
       mergeMap((action) =>
-        defer(() => this.imageService.likeImage(action.postId, action.userId)).pipe(
+        from(this.imageService.likeImage(action.postId, action.userId)).pipe(
           map(() => ImageActions.likeImageSuccess()),
           catchError((error) => of(ImageActions.likeImageFailure({ error })))
         )

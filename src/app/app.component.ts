@@ -20,7 +20,7 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  backButtonSubscription: any;
+  backButtonSubscription!: Subscription;
   onlineStatusSubscription!: Subscription;
   routerSubscription!: Subscription;
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initializeApp();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.loadSelectedLanguage();
     this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, () => {
       this.exitConfirm();
@@ -61,20 +61,20 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  async initializeApp() {
-    try {
-      const result = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
-      if (!result.hasPermission) {
-        const requestResult = await this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
-        if (!requestResult.hasPermission) {
-          await this.showPermissionDeniedAlert();
+  initializeApp() {
+    this.platform.ready().then(async () => {
+      try {
+        const result = await this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
+        if (!result.hasPermission) {
+          const requestResult = await this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE);
+          if (!requestResult.hasPermission) {
+            await this.showPermissionDeniedAlert();
+          }
         }
+      } catch (error) {
+        console.error('Error checking or requesting permission:', error);
       }
-    } catch (error) {
-      console.error('Error checking or requesting permission:', error);
-    }
-    
-    this.platform.ready().then(() => {
+      
       AdMob.initialize({
         initializeForTesting: false,
       });
@@ -86,24 +86,25 @@ export class AppComponent implements OnInit, OnDestroy {
       AdMob.setApplicationVolume({
         volume: 0.5,
       });
-    });
 
-    // Add other initialization logic here
-    // Example: Add listener for appUrlOpen
-    App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
-      this.zone.run(() => {
-        // Example url: https://devvscape.com/tabs/tab2
-        // slug = /tabs/tab2
-        const slug = event.url.split(".com").pop();
-        if (slug) {
-          this.router.navigateByUrl(slug);
-        }
+      // Add other initialization logic here
+      // Example: Add listener for appUrlOpen
+      App.addListener('appUrlOpen', (event: URLOpenListenerEvent) => {
+        this.zone.run(() => {
+          // Example url: https://devvscape.com/tabs/tab2
+          // slug = /tabs/tab2
+          const url = new URL(event.url);
+          const slug = url.pathname;
+          if (slug) {
+            this.router.navigateByUrl(slug);
+          }
+        });
       });
     });
   }
 
-  async lockScreenOrientation() {
-    await ScreenOrientation.lock({ orientation: 'portrait' });
+  lockScreenOrientation() {
+    ScreenOrientation.lock({ orientation: 'portrait' });
   }
 
   async showPermissionDeniedAlert() {
@@ -159,9 +160,6 @@ export class AppComponent implements OnInit, OnDestroy {
             color: 'danger',
           });
           await toast.present();
-          setTimeout(async () => {
-            await toast.dismiss();
-          }, 3000);
         }
       }
     );

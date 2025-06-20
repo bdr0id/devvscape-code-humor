@@ -18,7 +18,7 @@ export class AuthEffects {
       tap(() => setLoading({ loading: true })),
       mergeMap(action =>
         this.authService.login(action.email, action.password).pipe(
-          map(user => AuthActions.loginSuccess({ user })),
+          map(userCredential => AuthActions.loginSuccess({ user: userCredential.user })),
           catchError(error => {
             console.error('Login error:', error); // Log the error here
             return of(AuthActions.loginFailure({ error }));
@@ -35,7 +35,7 @@ export class AuthEffects {
       ofType(AuthActions.signup),
       mergeMap(action =>
         this.authService.signup(action.email, action.password, action.username).pipe(
-          map(user => AuthActions.signupSuccess({ user })),
+          map(userCredential => AuthActions.signupSuccess({ user: userCredential.user })),
           catchError(error => {
             console.error('Signup error:', error); // Log the error here
             return of(AuthActions.signupFailure({ error }));
@@ -117,7 +117,7 @@ export class AuthEffects {
       ofType(AuthActions.continueWithGithub),
       mergeMap(() =>
         this.authService.continueWithGithub().pipe(
-          map(user => AuthActions.continueWithGithubSuccess({ user })),
+          map(userCredential => AuthActions.continueWithGithubSuccess({ user: userCredential.user })),
           catchError(error =>{
             console.log("Continue with Github",error)
             return of(AuthActions.continueWithGithubFailure({ error }));
