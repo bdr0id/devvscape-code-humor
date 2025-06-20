@@ -226,10 +226,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📊 Project Status
 
-![GitHub last commit](https://img.shields.io/github/last-commit/{your-username}/devvscape-code-humor)
-![GitHub issues](https://img.shields.io/github/issues/{your-username}/devvscape-code-humor)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/{your-username}/devvscape-code-humor)
-![GitHub stars](https://img.shields.io/github/stars/{your-username}/devvscape-code-humor)
+![GitHub last commit](https://img.shields.io/github/last-commit/bdr0id/devvscape-code-humor)
+![GitHub issues](https://img.shields.io/github/issues/bdr0id/devvscape-code-humor)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/bdr0id/devvscape-code-humor)
+![GitHub stars](https://img.shields.io/github/stars/bdr0id/devvscape-code-humor)
 
 ---
 
