@@ -1,7 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HackerNewsState } from '../reducers/hacker-news.reducer';
 
-export const selectHackerNewsState = createFeatureSelector<HackerNewsState>('hackerNews');
+export const selectHackerNewsState =
+  createFeatureSelector<HackerNewsState>('hackerNews');
 
 export const selectTopStories = createSelector(
   selectHackerNewsState,

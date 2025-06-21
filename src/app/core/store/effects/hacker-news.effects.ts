@@ -7,30 +7,50 @@ import { HackerNewsService } from '../../services/hackers-news.service';
 
 @Injectable()
 export class HackerNewsEffects {
+  constructor(
+    private actions$: Actions,
+    private hackerNewsService: HackerNewsService
+  ) {}
 
-    constructor(private actions$: Actions, private hackerNewsService: HackerNewsService) {}
+  loadTopStories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HackerNewsActions.loadTopStories),
+      mergeMap(() =>
+        this.hackerNewsService.getTopStories().pipe(
+          map(stories => HackerNewsActions.loadTopStoriesSuccess({ stories })),
+          catchError(error =>
+            of(HackerNewsActions.loadTopStoriesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 
-  loadTopStories$ = createEffect(() => this.actions$.pipe(
-    ofType(HackerNewsActions.loadTopStories),
-    mergeMap(() => this.hackerNewsService.getTopStories().pipe(
-      map(stories => HackerNewsActions.loadTopStoriesSuccess({ stories })),
-      catchError(error => of(HackerNewsActions.loadTopStoriesFailure({ error })))
-    ))
-  ));
+  loadBestStories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HackerNewsActions.loadBestStories),
+      mergeMap(() =>
+        this.hackerNewsService.getBestStories().pipe(
+          map(stories => HackerNewsActions.loadBestStoriesSuccess({ stories })),
+          catchError(error =>
+            of(HackerNewsActions.loadBestStoriesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 
-  loadBestStories$ = createEffect(() => this.actions$.pipe(
-    ofType(HackerNewsActions.loadBestStories),
-    mergeMap(() => this.hackerNewsService.getBestStories().pipe(
-      map(stories => HackerNewsActions.loadBestStoriesSuccess({ stories })),
-      catchError(error => of(HackerNewsActions.loadBestStoriesFailure({ error })))
-    ))
-  ));
-
-  loadNewStories$ = createEffect(() => this.actions$.pipe(
-    ofType(HackerNewsActions.loadNewStories),
-    mergeMap(() => this.hackerNewsService.getNewStories().pipe(
-      map(stories => HackerNewsActions.loadNewStoriesSuccess({ stories })),
-      catchError(error => of(HackerNewsActions.loadNewStoriesFailure({ error })))
-    ))
-  ));
+  loadNewStories$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HackerNewsActions.loadNewStories),
+      mergeMap(() =>
+        this.hackerNewsService.getNewStories().pipe(
+          map(stories => HackerNewsActions.loadNewStoriesSuccess({ stories })),
+          catchError(error =>
+            of(HackerNewsActions.loadNewStoriesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }

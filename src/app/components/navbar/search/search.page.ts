@@ -7,14 +7,14 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+  constructor(private adMobService: AdMobService) {}
 
-  constructor(private adMobService: AdMobService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
-    this.adMobService.showBannerAd('notification-banner-ad','ca-app-pub-6424707922606590/1224657880');
+    this.adMobService.showBannerAd(
+      'notification-banner-ad',
+      'ca-app-pub-6424707922606590/1224657880'
+    );
   }
-
 }

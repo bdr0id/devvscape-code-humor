@@ -6,9 +6,18 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FirebaseApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import {
+  FirebaseApp,
+  initializeApp,
+  provideFirebaseApp,
+} from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
-import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
+import {
+  getAnalytics,
+  provideAnalytics,
+  ScreenTrackingService,
+  UserTrackingService,
+} from '@angular/fire/analytics';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getMessaging, provideMessaging } from '@angular/fire/messaging';
 import { getPerformance, providePerformance } from '@angular/fire/performance';
@@ -22,7 +31,11 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
 import { OnlineStatusModule } from 'ngx-online-status';
 import { ImageEffects } from './core/store/effects/image.effects';
 import { imageReducer } from './core/store/reducers/image.reducer';
-import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { HackerNewsEffects } from './core/store/effects/hacker-news.effects';
@@ -32,12 +45,21 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
 
 @NgModule({
   declarations: [AppComponent],
-  bootstrap: [AppComponent], imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, OnlineStatusModule, TranslocoRootModule, ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: !isDevMode(),
-    // Register the ServiceWorker as soon as the application is stable
-    // or after 30 seconds (whichever comes first).
-    registrationStrategy: 'registerWhenStable:30000'
-  })], providers: [
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    OnlineStatusModule,
+    TranslocoRootModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+  ],
+  providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
@@ -46,14 +68,21 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     provideStorage(() => getStorage()),
     provideMessaging(() => getMessaging()),
     providePerformance(() => getPerformance()),
-    provideStore({ auth: authReducer, image: imageReducer, hackerNews: hackerNewsReducer }),
+    provideStore({
+      auth: authReducer,
+      image: imageReducer,
+      hackerNews: hackerNewsReducer,
+    }),
     provideEffects(AuthEffects, ImageEffects, HackerNewsEffects),
     ScreenTrackingService,
     UserTrackingService,
     AndroidPermissions,
     InAppBrowser,
-    provideHttpClient(withInterceptorsFromDi(), withInterceptors([withHttpCacheInterceptor()])),
-    provideHttpCache()
-  ]
+    provideHttpClient(
+      withInterceptorsFromDi(),
+      withInterceptors([withHttpCacheInterceptor()])
+    ),
+    provideHttpCache(),
+  ],
 })
-export class AppModule { }
+export class AppModule {}

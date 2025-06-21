@@ -5,8 +5,7 @@ import { Firestore, doc, getDoc } from '@angular/fire/firestore';
   providedIn: 'root',
 })
 export class VersionService {
-
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore) {}
 
   async getCurrentVersion() {
     try {

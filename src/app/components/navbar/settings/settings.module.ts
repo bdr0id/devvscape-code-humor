@@ -15,8 +15,8 @@ import { TranslocoModule } from '@jsverse/transloco';
     FormsModule,
     IonicModule,
     SettingsPageRoutingModule,
-    TranslocoModule
+    TranslocoModule,
   ],
-  declarations: [SettingsPage]
+  declarations: [SettingsPage],
 })
 export class SettingsPageModule {}

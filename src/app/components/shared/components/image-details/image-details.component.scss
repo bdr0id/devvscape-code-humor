@@ -13,7 +13,7 @@ ion-content {
   border: none;
   outline: none;
   font-size: 30px;
-  font-family: "Spotify";
+  font-family: 'Spotify';
   font-weight: bold;
   float: right;
   margin-right: 10px;
@@ -98,10 +98,12 @@ ion-card-subtitle {
 .shimmer {
   width: 100%;
   height: 350px;
-  background: linear-gradient(90deg,
-      var(--ion-color-light) 0%,
-      var(--ion-color-light-shade) 50%,
-      var(--ion-color-light) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--ion-color-light) 0%,
+    var(--ion-color-light-shade) 50%,
+    var(--ion-color-light) 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   border-radius: 16px;

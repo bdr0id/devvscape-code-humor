@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/no-negated-async -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-row>
@@ -26,12 +27,14 @@
     <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged()">
       <ion-segment-button value="explore" aria-label="Explore">
         <ion-label
-          >{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.TITLE' | transloco }}</ion-label
+          >{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.TITLE' | transloco
+          }}</ion-label
         >
       </ion-segment-button>
       <ion-segment-button value="for-you" aria-label="For You">
         <ion-label
-          >{{ 'COMPONENTS.NAVBAR.HOME.TABS.FOR-YOU.TITLE' | transloco }}</ion-label
+          >{{ 'COMPONENTS.NAVBAR.HOME.TABS.FOR-YOU.TITLE' | transloco
+          }}</ion-label
         >
       </ion-segment-button>
     </ion-segment>
@@ -62,45 +65,78 @@
   <ng-container *ngIf="selectedSegment === 'explore'">
     <div class="explore">
       <ion-card class="games-card" (click)="navigateToGames()">
-          <img alt="Trivia Games" src="/assets/icon/quiz.gif" />
+        <img alt="Trivia Games" src="/assets/icon/quiz.gif" />
       </ion-card>
 
       <ion-item-group class="shadow rounded">
         <ion-item lines="none">
-          <ion-label (click)="navigateToNews()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.NEWSTORIES' | transloco }}</ion-label>
-          <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToNews()" style="color: #2B7A78;"></ion-icon>
-          <ion-spinner name="lines-sharp" *ngIf="!(newStories$ | async)?.length"></ion-spinner>
+          <ion-label (click)="navigateToNews()" style="color: #2b7a78"
+            >{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.NEWSTORIES' | transloco
+            }}</ion-label
+          >
+          <ion-icon
+            name="chevron-forward-circle"
+            slot="end"
+            (click)="navigateToNews()"
+            style="color: #2b7a78"
+          ></ion-icon>
+          <ion-spinner
+            name="lines-sharp"
+            *ngIf="!(newStories$ | async)?.length"
+          ></ion-spinner>
         </ion-item>
-        <swiper-container class="news" space-between="25" slides-per-view="auto">
-          <swiper-slide class="news-slide" *ngFor="let story of newStories$ | async">
+        <swiper-container
+          class="news"
+          space-between="25"
+          slides-per-view="auto"
+        >
+          <swiper-slide
+            class="news-slide"
+            *ngFor="let story of newStories$ | async"
+          >
             <ion-card (click)="openUrl(story.url)">
               <ion-card-header>
                 <ion-card-title>{{ story.title }}</ion-card-title>
               </ion-card-header>
               <ion-card-content>
-                <p>{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{ story.by }}</p>
-                <ion-button fill="clear" [href]="story.url" target="_blank" (click)="$event.stopPropagation()">
-                  {{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco }}
+                <p>
+                  {{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.BY' | transloco }} {{
+                  story.by }}
+                </p>
+                <ion-button
+                  fill="clear"
+                  [href]="story.url"
+                  target="_blank"
+                  (click)="$event.stopPropagation()"
+                >
+                  {{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.READMORE' | transloco
+                  }}
                   <ion-icon name="arrow-forward" slot="end"></ion-icon>
                 </ion-button>
               </ion-card-content>
             </ion-card>
           </swiper-slide>
         </swiper-container>
-      </ion-item-group>      
-  
+      </ion-item-group>
+
       <ion-item-group class="shadow rounded">
         <ion-item lines="none">
-          <ion-label (click)="navigateToEvents()" style="color: #2B7A78;">{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.EVENTS' | transloco }}</ion-label>
-          <ion-icon name="chevron-forward-circle" slot="end" (click)="navigateToEvents()" style="color: #2B7A78;"></ion-icon>
+          <ion-label (click)="navigateToEvents()" style="color: #2b7a78"
+            >{{ 'COMPONENTS.NAVBAR.HOME.TABS.EXPLORE.EVENTS' | transloco
+            }}</ion-label
+          >
+          <ion-icon
+            name="chevron-forward-circle"
+            slot="end"
+            (click)="navigateToEvents()"
+            style="color: #2b7a78"
+          ></ion-icon>
         </ion-item>
       </ion-item-group>
 
       <div class="ad-banner" id="home-banner-ad"></div>
-
     </div>
   </ng-container>
-  
 
   <ng-container *ngIf="selectedSegment === 'for-you'">
     <div class="for-you">
@@ -199,7 +235,6 @@
         >
           {{ 'COMPONENTS.NAVBAR.HOME.MODAL.POST' | transloco }}
         </ion-button>
-
       </ion-content>
     </ng-template>
   </ion-modal>

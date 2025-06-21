@@ -1,4 +1,4 @@
-import { Comment } from "./comment.interface.ts";
+import { Comment } from './comment.interface.ts';
 
 export interface Image {
   likedBy: any[];

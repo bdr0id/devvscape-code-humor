@@ -12,7 +12,7 @@ export const initialState: HackerNewsState = {
   topStories: [],
   bestStories: [],
   newStories: [],
-  error: null
+  error: null,
 };
 
 export const hackerNewsReducer = createReducer(
@@ -20,28 +20,28 @@ export const hackerNewsReducer = createReducer(
   on(HackerNewsActions.loadTopStoriesSuccess, (state, { stories }) => ({
     ...state,
     topStories: stories,
-    error: null
+    error: null,
   })),
   on(HackerNewsActions.loadBestStoriesSuccess, (state, { stories }) => ({
     ...state,
     bestStories: stories,
-    error: null
+    error: null,
   })),
   on(HackerNewsActions.loadNewStoriesSuccess, (state, { stories }) => ({
     ...state,
     newStories: stories,
-    error: null
+    error: null,
   })),
   on(HackerNewsActions.loadTopStoriesFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
   on(HackerNewsActions.loadBestStoriesFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
   on(HackerNewsActions.loadNewStoriesFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   }))
 );

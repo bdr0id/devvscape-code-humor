@@ -7,19 +7,28 @@ import {
   orderBy,
   writeBatch,
 } from '@angular/fire/firestore';
-import { deleteDoc, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
+import {
+  deleteDoc,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from '@angular/fire/firestore';
 import { Notification } from '../models/data/notification.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
-
-  constructor(private firestore: Firestore,) { }
+  constructor(private firestore: Firestore) {}
 
   async addNotification(userId: string, notification: Notification) {
     try {
-      const userNotificationsCollection = collection(this.firestore, `users/${userId}/notifications`);
+      const userNotificationsCollection = collection(
+        this.firestore,
+        `users/${userId}/notifications`
+      );
       const notificationDoc = { ...notification, createdAt: serverTimestamp() };
       await addDoc(userNotificationsCollection, notificationDoc);
     } catch (error) {
@@ -29,13 +38,14 @@ export class NotificationService {
 
   async getNotifications(userId: string): Promise<Notification[]> {
     try {
-      const q = query(collection(this.firestore, `users/${userId}/notifications`),
+      const q = query(
+        collection(this.firestore, `users/${userId}/notifications`),
         orderBy('createdAt', 'desc')
       );
 
       const querySnapshot = await getDocs(q);
 
-      return querySnapshot.docs.map((document) => {
+      return querySnapshot.docs.map(document => {
         const data = document.data() as Notification;
         const id = document.id;
         return { id, ...data };
@@ -45,9 +55,15 @@ export class NotificationService {
     }
   }
 
-  async deleteNotification(userId: string, notificationId: string): Promise<void> {
+  async deleteNotification(
+    userId: string,
+    notificationId: string
+  ): Promise<void> {
     try {
-      const notificationRef = doc(this.firestore, `users/${userId}/notifications/${notificationId}`);
+      const notificationRef = doc(
+        this.firestore,
+        `users/${userId}/notifications/${notificationId}`
+      );
 
       // Delete the notification document
       await deleteDoc(notificationRef);
@@ -56,9 +72,15 @@ export class NotificationService {
     }
   }
 
-  async markNotificationAsRead(userId: string, notificationId: string): Promise<void> {
+  async markNotificationAsRead(
+    userId: string,
+    notificationId: string
+  ): Promise<void> {
     try {
-      const notificationRef = doc(this.firestore, `users/${userId}/notifications/${notificationId}`);
+      const notificationRef = doc(
+        this.firestore,
+        `users/${userId}/notifications/${notificationId}`
+      );
 
       await updateDoc(notificationRef, { isRead: true });
     } catch (error) {
@@ -66,15 +88,18 @@ export class NotificationService {
     }
   }
 
-  async markBatchAsRead(userId: string, notificationIds: string[]): Promise<void> {
+  async markBatchAsRead(
+    userId: string,
+    notificationIds: string[]
+  ): Promise<void> {
     try {
       const batch = writeBatch(this.firestore);
 
-      const notificationRefs = notificationIds.map((notificationId) =>
+      const notificationRefs = notificationIds.map(notificationId =>
         doc(this.firestore, `users/${userId}/notifications/${notificationId}`)
       );
 
-      notificationRefs.forEach((notificationRef) => {
+      notificationRefs.forEach(notificationRef => {
         batch.update(notificationRef, { isRead: true });
       });
 
@@ -86,7 +111,8 @@ export class NotificationService {
 
   async getUnreadNotificationCount(userId: string): Promise<number> {
     try {
-      const q = query(collection(this.firestore, `users/${userId}/notifications`),
+      const q = query(
+        collection(this.firestore, `users/${userId}/notifications`),
         where('isRead', '==', false)
       );
 
@@ -97,5 +123,4 @@ export class NotificationService {
       throw new Error('Unable to fetch unread notification count');
     }
   }
-
 }

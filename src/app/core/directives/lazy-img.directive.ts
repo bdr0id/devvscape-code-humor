@@ -2,7 +2,6 @@ import { Directive, ElementRef } from '@angular/core';
 
 @Directive({ selector: 'appLazyImg' })
 export class LazyImgDirective {
-
   constructor({ nativeElement }: ElementRef<HTMLImageElement>) {
     const supports = 'loading' in HTMLImageElement.prototype;
 
@@ -10,5 +9,4 @@ export class LazyImgDirective {
       nativeElement.setAttribute('loading', 'lazy');
     }
   }
-
 }

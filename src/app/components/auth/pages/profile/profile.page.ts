@@ -1,12 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ToastController,
+} from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ProfileService } from 'src/app/core/services/profile.service';
-import { Auth, updateProfile, updateEmail, reauthenticateWithCredential, EmailAuthProvider } from '@angular/fire/auth';
+import {
+  Auth,
+  updateProfile,
+  updateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+} from '@angular/fire/auth';
 import { ImageService } from 'src/app/core/services/image.service';
-import { collection, deleteDoc, doc, getFirestore } from '@angular/fire/firestore';
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getFirestore,
+} from '@angular/fire/firestore';
 import { Image } from 'src/app/core/models/data/image.interface';
 import { UserProfile } from 'src/app/core/models/data/user.interface';
 import { Comment } from 'src/app/core/models/data/comment.interface.ts';
@@ -42,7 +57,7 @@ export class ProfilePage implements OnDestroy, OnInit {
     private alertCtrl: AlertController,
     public toastCtrl: ToastController,
     private loadingCtrl: LoadingController
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.auth.currentUser;
@@ -52,9 +67,11 @@ export class ProfilePage implements OnDestroy, OnInit {
     this.fetchImages();
     this.fetchUserPostComments();
     this.fetchStarredImages();
-    this.profileService.getUserProfile().subscribe((userProfile: UserProfile) => {
-      this.fullNames = userProfile.fullName;
-    });
+    this.profileService
+      .getUserProfile()
+      .subscribe((userProfile: UserProfile) => {
+        this.fullNames = userProfile.fullName;
+      });
   }
 
   ngOnDestroy(): void {
@@ -68,7 +85,10 @@ export class ProfilePage implements OnDestroy, OnInit {
   }
 
   ionViewWillLeave() {
-    this.adMobService.showBannerAd('home-banner-ad', 'ca-app-pub-6424707922606590/3709250809');
+    this.adMobService.showBannerAd(
+      'home-banner-ad',
+      'ca-app-pub-6424707922606590/3709250809'
+    );
   }
 
   refresh(ev: any) {
@@ -79,14 +99,17 @@ export class ProfilePage implements OnDestroy, OnInit {
     }, 3000);
   }
 
-  changeDP() { }
+  changeDP() {}
 
   openProfile(author: string) {
     console.log(`Opening profile of ${author}`);
   }
 
   generateAvatarUrl(name: string): string {
-    const initials = name.split(' ').map(n => n[0]).join('');
+    const initials = name
+      .split(' ')
+      .map(n => n[0])
+      .join('');
     return `https://ui-avatars.com/api/?name=${initials}&background=random&color=fff&format=svg`;
   }
 
@@ -99,7 +122,7 @@ export class ProfilePage implements OnDestroy, OnInit {
         { text: 'Cancel' },
         {
           text: 'Save',
-          handler: async (data) => {
+          handler: async data => {
             const newDisplayName = data.username;
             const user = this.auth.currentUser;
             if (user) {
@@ -141,12 +164,15 @@ export class ProfilePage implements OnDestroy, OnInit {
         { text: 'Cancel' },
         {
           text: 'Save',
-          handler: async (data) => {
+          handler: async data => {
             const newEmail = data.newEmail;
             const password = data.password;
             const user = this.auth.currentUser;
             if (user && user.email) {
-              const credential = EmailAuthProvider.credential(user.email, password);
+              const credential = EmailAuthProvider.credential(
+                user.email,
+                password
+              );
               try {
                 await reauthenticateWithCredential(user, credential);
                 await updateEmail(user, newEmail);
@@ -194,7 +220,7 @@ export class ProfilePage implements OnDestroy, OnInit {
         await loading.dismiss();
         this.router.navigate(['/login']);
       },
-      error: async (error) => {
+      error: async error => {
         await loading.dismiss();
         const toast = await this.toastCtrl.create({
           message: 'Error logging out',
@@ -204,11 +230,11 @@ export class ProfilePage implements OnDestroy, OnInit {
         });
         await toast.present();
         console.error('Logout error', error);
-      }
+      },
     });
   }
 
-  segmentChanged() { }
+  segmentChanged() {}
 
   async fetchImages() {
     if (this.selectedSegment === 'posts') {
@@ -228,12 +254,13 @@ export class ProfilePage implements OnDestroy, OnInit {
   }
 
   async fetchUserPostComments() {
-    const loading = await this.loadingCtrl.create({
-    });
+    const loading = await this.loadingCtrl.create({});
     await loading.present();
-    this.userPostsComments$ = this.imageService.getUserPostsComments(this.currentUser?.uid);
+    this.userPostsComments$ = this.imageService.getUserPostsComments(
+      this.currentUser?.uid
+    );
     this.commentsSubscription = this.userPostsComments$.subscribe({
-      next: (comments) => {
+      next: comments => {
         this.comments = comments;
         loading.dismiss();
       },
@@ -245,7 +272,9 @@ export class ProfilePage implements OnDestroy, OnInit {
   async fetchStarredImages() {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
-    this.starredImages$ = this.imageService.getStarredImages(this.currentUser?.uid);
+    this.starredImages$ = this.imageService.getStarredImages(
+      this.currentUser?.uid
+    );
     this.starredImages$.subscribe({
       next: () => loading.dismiss(),
       error: () => loading.dismiss(),
@@ -267,7 +296,7 @@ export class ProfilePage implements OnDestroy, OnInit {
           {
             text: 'Cancel',
             role: 'cancel',
-            handler: () => { },
+            handler: () => {},
           },
           {
             text: 'Delete',
@@ -275,10 +304,14 @@ export class ProfilePage implements OnDestroy, OnInit {
             handler: async () => {
               try {
                 if (comment.postId && comment.id) {
-                  await this.imageService.deleteComment(comment.postId, comment.id);
+                  await this.imageService.deleteComment(
+                    comment.postId,
+                    comment.id
+                  );
 
                   const toast = await this.toastCtrl.create({
-                    message: 'Your comment has been deleted from the app repository!',
+                    message:
+                      'Your comment has been deleted from the app repository!',
                     duration: 5000,
                     position: 'bottom',
                     color: 'danger',
@@ -287,7 +320,9 @@ export class ProfilePage implements OnDestroy, OnInit {
 
                   await this.fetchUserPostComments();
                 } else {
-                  await this.presentErrorToast('Error: Comment or post ID is missing.');
+                  await this.presentErrorToast(
+                    'Error: Comment or post ID is missing.'
+                  );
                 }
               } catch (error) {
                 console.error('Error deleting comment:', error);
@@ -299,7 +334,9 @@ export class ProfilePage implements OnDestroy, OnInit {
       });
       await confirm.present();
     } else {
-      await this.presentErrorToast('You are not authorized to delete this comment.');
+      await this.presentErrorToast(
+        'You are not authorized to delete this comment.'
+      );
     }
   }
 
@@ -321,7 +358,7 @@ export class ProfilePage implements OnDestroy, OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => { },
+          handler: () => {},
         },
         {
           text: 'Delete',
@@ -339,7 +376,8 @@ export class ProfilePage implements OnDestroy, OnInit {
                 this.fetchImages();
 
                 const toast = this.toastCtrl.create({
-                  message: 'Your post has been deleted from the app repository!',
+                  message:
+                    'Your post has been deleted from the app repository!',
                   duration: 5000,
                   position: 'bottom',
                   color: 'success',

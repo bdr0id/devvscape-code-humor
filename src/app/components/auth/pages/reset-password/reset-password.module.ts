@@ -11,14 +11,14 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { AuthFormModule } from '../../auth-form/auth-form.module';
 
 @NgModule({
-    declarations: [ResetPasswordPage],
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        ResetPasswordPageRoutingModule,
-        AuthFormModule,
-        TranslocoModule
-    ]
+  declarations: [ResetPasswordPage],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ResetPasswordPageRoutingModule,
+    AuthFormModule,
+    TranslocoModule,
+  ],
 })
 export class ResetPasswordPageModule {}

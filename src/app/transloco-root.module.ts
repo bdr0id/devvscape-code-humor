@@ -39,10 +39,10 @@ async function getDefaultLanguage(): Promise<string> {
 
   const { value: storedLang } = await Preferences.get({ key: 'lang' });
   if (storedLang && supportedLanguages.includes(storedLang)) {
-    return storedLang; 
+    return storedLang;
   }
 
   const browserLang = navigator.language || navigator.languages[0];
-  const langCode = browserLang.split('-')[0]; 
+  const langCode = browserLang.split('-')[0];
   return supportedLanguages.includes(langCode) ? langCode : 'en';
 }

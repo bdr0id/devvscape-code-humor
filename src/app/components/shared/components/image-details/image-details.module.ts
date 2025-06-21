@@ -8,8 +8,15 @@ import { ImageDetailsRoutingModule } from './image-details-routing.module';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, IonicModule, ImageDetailsRoutingModule, SharedModule,TranslocoModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ImageDetailsRoutingModule,
+    SharedModule,
+    TranslocoModule,
+  ],
   declarations: [ImageDetailsComponent],
-  exports: [ImageDetailsComponent]
+  exports: [ImageDetailsComponent],
 })
-export class ImageDetailsModule { }
+export class ImageDetailsModule {}

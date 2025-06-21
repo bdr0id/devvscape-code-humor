@@ -7,7 +7,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AuthFormComponent],
-  imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule, TranslocoModule],
-  exports:[AuthFormComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    ReactiveFormsModule,
+    TranslocoModule,
+  ],
+  exports: [AuthFormComponent],
 })
-export class AuthFormModule { }
+export class AuthFormModule {}

@@ -19,7 +19,7 @@ import { TranslocoModule } from '@jsverse/transloco';
     IonicModule,
     ProfilePageRoutingModule,
     SharedModule,
-    TranslocoModule
+    TranslocoModule,
   ],
 })
 export class ProfilePageModule {}

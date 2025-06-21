@@ -7,18 +7,15 @@ import { ImageService } from '../../services/image.service';
 
 @Injectable()
 export class ImageEffects {
-  constructor(
-    private actions$: Actions,
-    private imageService: ImageService
-  ) {}
+  constructor(private actions$: Actions, private imageService: ImageService) {}
 
   loadImages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.loadImages),
       mergeMap(() =>
         this.imageService.getImagePosts().pipe(
-          map((images) => ImageActions.loadImagesSuccess({ images })),
-          catchError((error) => of(ImageActions.loadImagesFailure({ error })))
+          map(images => ImageActions.loadImagesSuccess({ images })),
+          catchError(error => of(ImageActions.loadImagesFailure({ error })))
         )
       )
     )
@@ -27,10 +24,10 @@ export class ImageEffects {
   loadImageById$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.loadImageById),
-      mergeMap((action) =>
+      mergeMap(action =>
         this.imageService.getImagePostById(action.id).pipe(
-          map((image) => ImageActions.loadImageByIdSuccess({ image })),
-          catchError((error) => of(ImageActions.loadImageByIdFailure({ error })))
+          map(image => ImageActions.loadImageByIdSuccess({ image })),
+          catchError(error => of(ImageActions.loadImageByIdFailure({ error })))
         )
       )
     )
@@ -39,10 +36,16 @@ export class ImageEffects {
   reportImage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.reportImage),
-      mergeMap((action) =>
-        from(this.imageService.reportImage(action.imageId, action.userId, action.reason)).pipe(
+      mergeMap(action =>
+        from(
+          this.imageService.reportImage(
+            action.imageId,
+            action.userId,
+            action.reason
+          )
+        ).pipe(
           map(() => ImageActions.reportImageSuccess()),
-          catchError((error) => of(ImageActions.reportImageFailure({ error })))
+          catchError(error => of(ImageActions.reportImageFailure({ error })))
         )
       )
     )
@@ -53,21 +56,24 @@ export class ImageEffects {
       ofType(ImageActions.loadUserPosts),
       mergeMap(() =>
         this.imageService.getUserPosts().pipe(
-          map((images) => ImageActions.loadUserPostsSuccess({ images })),
-          catchError((error) => of(ImageActions.loadUserPostsFailure({ error })))
+          map(images => ImageActions.loadUserPostsSuccess({ images })),
+          catchError(error => of(ImageActions.loadUserPostsFailure({ error })))
         )
       )
     )
   );
-  
 
   loadUserPostsComments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.loadUserPostsComments),
-      mergeMap((action) =>
+      mergeMap(action =>
         this.imageService.getUserPostsComments(action.userId).pipe(
-          map((comments) => ImageActions.loadUserPostsCommentsSuccess({ comments })),
-          catchError((error) => of(ImageActions.loadUserPostsCommentsFailure({ error })))
+          map(comments =>
+            ImageActions.loadUserPostsCommentsSuccess({ comments })
+          ),
+          catchError(error =>
+            of(ImageActions.loadUserPostsCommentsFailure({ error }))
+          )
         )
       )
     )
@@ -76,10 +82,12 @@ export class ImageEffects {
   deleteUserPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.deleteUserPosts),
-      mergeMap((action) =>
+      mergeMap(action =>
         from(this.imageService.deleteUserPosts(action.userUid)).pipe(
           map(() => ImageActions.deleteUserPostsSuccess()),
-          catchError((error) => of(ImageActions.deleteUserPostsFailure({ error })))
+          catchError(error =>
+            of(ImageActions.deleteUserPostsFailure({ error }))
+          )
         )
       )
     )
@@ -88,10 +96,12 @@ export class ImageEffects {
   loadStarredImages$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.loadStarredImages),
-      mergeMap((action) =>
+      mergeMap(action =>
         this.imageService.getStarredImages(action.userId).pipe(
-          map((images) => ImageActions.loadStarredImagesSuccess({ images })),
-          catchError((error) => of(ImageActions.loadStarredImagesFailure({ error })))
+          map(images => ImageActions.loadStarredImagesSuccess({ images })),
+          catchError(error =>
+            of(ImageActions.loadStarredImagesFailure({ error }))
+          )
         )
       )
     )
@@ -100,10 +110,17 @@ export class ImageEffects {
   addComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.addComment),
-      mergeMap((action) =>
-        from(this.imageService.addComment(action.postId, action.userId, action.displayName, action.commentText)).pipe(
+      mergeMap(action =>
+        from(
+          this.imageService.addComment(
+            action.postId,
+            action.userId,
+            action.displayName,
+            action.commentText
+          )
+        ).pipe(
           map(() => ImageActions.addCommentSuccess()),
-          catchError((error) => of(ImageActions.addCommentFailure({ error })))
+          catchError(error => of(ImageActions.addCommentFailure({ error })))
         )
       )
     )
@@ -112,10 +129,12 @@ export class ImageEffects {
   deleteComment$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.deleteComment),
-      mergeMap((action) =>
-        from(this.imageService.deleteComment(action.imageId, action.commentId)).pipe(
+      mergeMap(action =>
+        from(
+          this.imageService.deleteComment(action.imageId, action.commentId)
+        ).pipe(
           map(() => ImageActions.deleteCommentSuccess()),
-          catchError((error) => of(ImageActions.deleteCommentFailure({ error })))
+          catchError(error => of(ImageActions.deleteCommentFailure({ error })))
         )
       )
     )
@@ -124,10 +143,19 @@ export class ImageEffects {
   uploadImageAndPostText$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.uploadImageAndPostText),
-      mergeMap((action) =>
-        from(this.imageService.uploadImageAndPostText(action.imageFile, action.postText, action.userId, action.displayName)).pipe(
+      mergeMap(action =>
+        from(
+          this.imageService.uploadImageAndPostText(
+            action.imageFile,
+            action.postText,
+            action.userId,
+            action.displayName
+          )
+        ).pipe(
           map(() => ImageActions.uploadImageAndPostTextSuccess()),
-          catchError((error) => of(ImageActions.uploadImageAndPostTextFailure({ error })))
+          catchError(error =>
+            of(ImageActions.uploadImageAndPostTextFailure({ error }))
+          )
         )
       )
     )
@@ -136,10 +164,12 @@ export class ImageEffects {
   loadImageComments$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.loadImageComments),
-      mergeMap((action) =>
+      mergeMap(action =>
         from(this.imageService.getImageComments(action.imageId)).pipe(
-          map((comments) => ImageActions.loadImageCommentsSuccess({ comments })),
-          catchError((error) => of(ImageActions.loadImageCommentsFailure({ error })))
+          map(comments => ImageActions.loadImageCommentsSuccess({ comments })),
+          catchError(error =>
+            of(ImageActions.loadImageCommentsFailure({ error }))
+          )
         )
       )
     )
@@ -148,10 +178,10 @@ export class ImageEffects {
   downloadImage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.downloadImage),
-      mergeMap((action) =>
+      mergeMap(action =>
         from(this.imageService.downloads(action.imageId, action.userId)).pipe(
           map(() => ImageActions.downloadImageSuccess()),
-          catchError((error) => of(ImageActions.downloadImageFailure({ error })))
+          catchError(error => of(ImageActions.downloadImageFailure({ error })))
         )
       )
     )
@@ -160,10 +190,10 @@ export class ImageEffects {
   likeImage$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ImageActions.likeImage),
-      mergeMap((action) =>
+      mergeMap(action =>
         from(this.imageService.likeImage(action.postId, action.userId)).pipe(
           map(() => ImageActions.likeImageSuccess()),
-          catchError((error) => of(ImageActions.likeImageFailure({ error })))
+          catchError(error => of(ImageActions.likeImageFailure({ error })))
         )
       )
     )

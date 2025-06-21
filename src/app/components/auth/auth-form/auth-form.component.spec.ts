@@ -9,8 +9,8 @@ describe('AuthFormComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AuthFormComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [AuthFormComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AuthFormComponent);

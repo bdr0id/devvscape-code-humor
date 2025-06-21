@@ -11,14 +11,14 @@ import { SharedModule } from 'src/app/core/modules/shared.module';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @NgModule({
-    declarations: [NotificationsPage],
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        NotificationsPageRoutingModule,
-        SharedModule,
-        TranslocoModule
-    ]
+  declarations: [NotificationsPage],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    NotificationsPageRoutingModule,
+    SharedModule,
+    TranslocoModule,
+  ],
 })
 export class NotificationsPageModule {}
