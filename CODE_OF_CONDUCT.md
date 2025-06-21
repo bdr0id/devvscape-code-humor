@@ -192,7 +192,7 @@ https://www.contributor-covenant.org/faq
 
 * **Code of Conduct Committee**: conduct@devvscape.com
 * **Project Maintainers**: maintainers@devvscape.com
-* **Discord**: [Join our community](https://discord.gg/devvscape)
+* **Discord**: [Join our community](https://discord.gg/vpS3Uu88)
 
 ---
 

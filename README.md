@@ -221,7 +221,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - 📧 **Email**: support@devvscape.com
 - 🐦 **Twitter**: [@l00pinfinity](https://twitter.com/l00pinfinity)
-- 💬 **Discord**: [Join our community](https://discord.gg/devvscape)
+- 💬 **Discord**: [Join our community](https://discord.gg/vpS3Uu88)
 - 📖 **Documentation**: [docs.devvscape.com](https://docs.devvscape.com)
 
 ## 📊 Project Status

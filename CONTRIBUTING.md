@@ -230,7 +230,7 @@ We are committed to providing a welcoming and inspiring community for all. Pleas
 
 ## 📞 Contact
 
-- **Discord**: [Join our community](https://discord.gg/devvscape)
+- **Discord**: [Join our community](https://discord.gg/vpS3Uu88)
 - **Email**: contributors@devvscape.com
 - **Twitter**: [@l00pinfinity](https://twitter.com/l00pinfinity)
 
