@@ -24,7 +24,9 @@
     "cap:open:android": "npx cap open android",
     "cap:run:android": "npx cap run android",
     "firebase:deploy": "firebase deploy",
-    "firebase:serve": "firebase serve"
+    "firebase:serve": "firebase serve",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -84,11 +86,12 @@
     "@angular/language-service": "^18.0.6",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "6.0.0",
+    "@cypress/schematic": "^3.0.0",
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "7.11.0",
+    "@typescript-eslint/parser": "7.11.0",
+    "eslint": "8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
     "eslint-plugin-prefer-arrow": "1.2.2",
@@ -99,7 +102,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.4.5"
+    "typescript": "~5.4.5",
+    "cypress": "latest"
   },
   "description": "Developers Escape (Devvscape)",
   "browserslist": [

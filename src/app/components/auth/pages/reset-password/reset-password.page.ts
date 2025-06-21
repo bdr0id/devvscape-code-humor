@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthFormComponent } from '../../auth-form/auth-form.component';
 import { Store } from '@ngrx/store';
 import {
@@ -12,12 +12,11 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
   templateUrl: './reset-password.page.html',
   styleUrls: ['./reset-password.page.scss'],
 })
-export class ResetPasswordPage implements OnInit {
+export class ResetPasswordPage  {
   @ViewChild(AuthFormComponent) resetPasswordForm!: AuthFormComponent;
 
   constructor(private adMobService: AdMobService, private store: Store) {}
 
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.adMobService.hideBannerAd('home-banner-ad');

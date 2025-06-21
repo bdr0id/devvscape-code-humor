@@ -9,6 +9,7 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 export class EventsPage implements OnInit {
   constructor(private adMobService: AdMobService) {}
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {}
 
   ionViewWillEnter() {
