@@ -4,7 +4,7 @@ import { ImageComponent } from './image.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { SharedModule } from 'src/app/core/modules/shared.module';
+import { SharedModule } from '../../shared.module';
 import { TranslocoModule } from '@jsverse/transloco';
 
 @NgModule({

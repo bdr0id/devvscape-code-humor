@@ -24,13 +24,14 @@ export class ImageComponent implements OnInit, OnDestroy {
   isLiked = false;
   isReplyActive = false;
   reportReasons: string[] = [
-    'Inappropriate Content',
-    'Spam or Advertisement',
-    'Harassment or Bullying',
-    'False Information',
-    'Intellectual Property Violation',
+    'Inappropriate content',
+    'Spam',
+    'Harassment',
+    'Violence',
     'Other',
   ];
+  errorMessage: string = '';
+  showError: boolean = false;
 
   constructor(
     private auth: Auth,
@@ -226,13 +227,13 @@ export class ImageComponent implements OnInit, OnDestroy {
   }
 
   private async presentErrorToast(message: string): Promise<void> {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    });
-    await toast.present();
+    this.errorMessage = message;
+    this.showError = true;
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 
   private async presentSuccessToast(message: string): Promise<void> {

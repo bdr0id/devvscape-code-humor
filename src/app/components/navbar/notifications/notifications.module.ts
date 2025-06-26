@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { NotificationsPageRoutingModule } from './notifications-routing.module';
 
 import { NotificationsPage } from './notifications.page';
-import { SharedModule } from 'src/app/core/modules/shared.module';
 import { TranslocoModule } from '@jsverse/transloco';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [NotificationsPage],

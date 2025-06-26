@@ -1,5 +1,10 @@
 <ion-item [detail]="false">
   <ion-card>
+    <app-error-banner
+      [errorMessage]="errorMessage"
+      [showError]="showError"
+      (dismissError)="dismissError()"
+    ></app-error-banner>
     <ion-item>
       <ion-avatar slot="start" (click)="openProfile(image.postedBy)">
         <img

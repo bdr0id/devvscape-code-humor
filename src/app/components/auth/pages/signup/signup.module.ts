@@ -8,7 +8,7 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { TranslocoModule } from '@jsverse/transloco';
-import { AuthFormModule } from '../../auth-form/auth-form.module';
+import { AuthModule } from "../../auth.module";
 
 @NgModule({
   declarations: [SignupPage],
@@ -17,8 +17,8 @@ import { AuthFormModule } from '../../auth-form/auth-form.module';
     FormsModule,
     IonicModule,
     SignupPageRoutingModule,
-    AuthFormModule,
     TranslocoModule,
-  ],
+    AuthModule
+],
 })
 export class SignupPageModule {}

@@ -13,14 +13,14 @@
         >
           <ion-icon name="person-outline"></ion-icon>
         </button>
-        <button
+        <!-- <button
           id="open-post-modal"
           class="top-right-button"
           aria-label="Add Post"
           (click)="openPostModal()"
         >
           <ion-icon name="add-outline"></ion-icon>
-        </button>
+        </button> -->
       </ion-col>
     </ion-row>
 
@@ -41,7 +41,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="content-with-header">
+<ion-content [fullscreen]="true" class="content-with-header ion-padding bg-primary">
+  <app-error-banner
+    [errorMessage]="errorMessage"
+    [showError]="showError"
+    (dismissError)="dismissError()"
+  ></app-error-banner>
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

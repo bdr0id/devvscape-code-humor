@@ -1,4 +1,10 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding bg-primary">
+  <app-error-banner
+    [errorMessage]="errorMessage"
+    [showError]="showError"
+    (dismissError)="dismissError()"
+  ></app-error-banner>
+
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -150,8 +156,10 @@
           </ion-label>
         </ion-item>
       </ion-list>
+    </div>
 
-      <!-- Comment Input -->
+    <!-- Floating Comment Input -->
+    <div class="comment-input-container">
       <ion-item class="comment-input">
         <ion-avatar slot="start">
           <img

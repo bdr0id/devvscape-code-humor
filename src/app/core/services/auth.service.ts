@@ -15,7 +15,7 @@ import {
   signOut,
   updateProfile,
 } from '@angular/fire/auth';
-import { Observable, from, of, throwError } from 'rxjs';
+import { Observable, from, of, throwError, Subject } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 import {
@@ -39,6 +39,9 @@ interface ErrorResponse {
   providedIn: 'root',
 })
 export class AuthService {
+  private errorSubject = new Subject<string>();
+  error$ = this.errorSubject.asObservable();
+
   constructor(
     private auth: Auth,
     private firestore: Firestore,
@@ -250,14 +253,7 @@ export class AuthService {
 
     console.error('Error message:', errorMessage);
 
-    this.toastCtrl
-      .create({
-        message: errorMessage,
-        duration: 5000,
-        position: 'bottom',
-        color: 'danger',
-      })
-      .then(toast => toast.present());
+    this.errorSubject.next(errorMessage);
 
     return throwError(() => errorMessage);
   }

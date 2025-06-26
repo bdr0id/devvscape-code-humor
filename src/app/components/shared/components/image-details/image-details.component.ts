@@ -23,7 +23,7 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 })
 export class ImageDetailsComponent implements OnInit {
   image: any;
-  errorMessage: string | null = null;
+  errorMessage: string = '';
   maxLength = 200;
   commentText = '';
   isTextTruncated = true;
@@ -31,6 +31,7 @@ export class ImageDetailsComponent implements OnInit {
   currentUser: any;
   loading!: HTMLIonLoadingElement;
   replyingTo: Comment | null = null;
+  showError: boolean = false;
 
   constructor(
     private auth: Auth,
@@ -351,14 +352,13 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   async handleError(error: any, customMessage?: string): Promise<void> {
-    const errorMessage = customMessage || error.message || 'An error occurred';
-    const toast = await this.toastCtrl.create({
-      message: errorMessage,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    });
-    await toast.present();
+    this.errorMessage = customMessage || error.message || 'An error occurred';
+    this.showError = true;
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 
   toggleText(): void {
@@ -480,13 +480,8 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   private async presentErrorToast(message: string): Promise<void> {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    });
-    await toast.present();
+    this.errorMessage = message;
+    this.showError = true;
   }
 
   private async presentSuccessToast(message: string): Promise<void> {

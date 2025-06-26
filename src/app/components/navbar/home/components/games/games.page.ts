@@ -109,6 +109,17 @@ export class GamesPage implements OnInit {
     { id: 32, name: this.cartoon },
   ];
 
+  searchTerm: string = '';
+  get filteredCategories() {
+    if (!this.searchTerm) return this.categories;
+    return this.categories.filter(cat =>
+      cat.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+  onSearchInput(event: any) {
+    this.searchTerm = event.target.value;
+  }
+
   defaultSettings = {
     amount: 10,
     difficulty: 'any',
@@ -123,7 +134,6 @@ export class GamesPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.shuffleCategories();
     this.loadPreferences();
   }
 
@@ -132,16 +142,6 @@ export class GamesPage implements OnInit {
       'game-banner-ad',
       'ca-app-pub-6424707922606590~3309927104'
     );
-  }
-
-  private shuffleCategories() {
-    for (let i = this.categories.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.categories[i], this.categories[j]] = [
-        this.categories[j],
-        this.categories[i],
-      ];
-    }
   }
 
   selectCategory(category: any) {

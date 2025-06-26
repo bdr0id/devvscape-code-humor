@@ -1,4 +1,9 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding bg-primary">
+  <app-error-banner
+    [errorMessage]="errorMessage"
+    [showError]="showError"
+    (dismissError)="dismissError()"
+  ></app-error-banner>
   <ion-row>
     <ion-col size="7">
       <h2 class="section-header">
