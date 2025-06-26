@@ -1,0 +1,5 @@
+<div *ngIf="showError" class="error-banner">
+  <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
+  <span>{{ errorMessage }}</span>
+  <ion-button size="small" fill="clear" color="danger" (click)="onDismiss()">Dismiss</ion-button>
+</div> 

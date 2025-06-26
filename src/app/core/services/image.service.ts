@@ -205,14 +205,14 @@ export class ImageService {
         `posts/${postId}/comments`
       );
 
-      const newComment: Comment = {
+      const newComment: Omit<Comment, 'id'> = {
         postedBy: userId,
         displayName,
         text: commentText,
         stars: 0,
         likedBy: [],
         createdAt: new Date(),
-        parentCommentId,
+        ...(parentCommentId && { parentCommentId }),
       };
 
       await addDoc(commentsCollection, newComment);

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastController } from '@ionic/angular';
 import { AdMobService } from 'src/app/core/services/ad-mob.service';
+import { NavController, IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,15 +21,19 @@ import { AdMobService } from 'src/app/core/services/ad-mob.service';
 })
 export class LoginPage implements OnInit {
   @ViewChild(AuthFormComponent) loginForm!: AuthFormComponent;
+  @ViewChild(IonRouterOutlet, { static: false })
+  routerOutlet!: IonRouterOutlet;
   loading$: Observable<boolean>;
   error$: Observable<any>;
+  showBackButton = false;
 
   constructor(
     private store: Store,
     private router: Router,
     private authService: AuthService,
     private adMobService: AdMobService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    private navCtrl: NavController
   ) {
     this.loading$ = this.store.select(selectAuthLoading);
     this.error$ = this.store.select(selectAuthError);
@@ -51,6 +56,9 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.adMobService.hideBannerAd('home-banner-ad');
+    setTimeout(() => {
+      this.showBackButton = this.routerOutlet && this.routerOutlet.canGoBack();
+    });
   }
 
   ionViewWillLeave() {

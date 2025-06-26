@@ -34,7 +34,7 @@ ion-item {
   --padding-end: 16px;
   --padding-top: 12px;
   --padding-bottom: 12px;
-  --background: transparent;
+  // --background: transparent;
 }
 
 ion-avatar {
@@ -142,12 +142,14 @@ ion-refresher {
   padding: 16px;
   // background: var(--ion-color-light);
   border-radius: 16px;
+  padding-bottom: 100px;
 
   h3 {
     margin: 0 0 16px 0;
     font-size: 1.2rem;
     font-weight: 600;
-    // color: var(--ion-color-dark);
+    color: var(--ion-color-medium);
+    line-height: 1.4;
   }
 }
 
@@ -213,13 +215,13 @@ ion-refresher {
     margin: 0 0 4px 0;
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--ion-color-dark);
+    // color: var(--ion-color-dark);
   }
 
   p {
     margin: 0;
     font-size: 0.85rem;
-    color: var(--ion-color-dark);
+    // color: var(--ion-color-dark);
     line-height: 1.4;
   }
 }
@@ -250,8 +252,17 @@ ion-refresher {
   color: var(--ion-color-medium);
 }
 
+.comment-input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  background: var(--ion-color-light);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .comment-input {
-  margin-top: 16px;
   border-radius: 24px;
   --padding-start: 8px;
   --padding-end: 8px;

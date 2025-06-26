@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { SharedModule } from 'src/app/core/modules/shared.module';
 import { ImageDetailsComponent } from './image-details.component';
 import { ImageDetailsRoutingModule } from './image-details-routing.module';
 import { TranslocoModule } from '@jsverse/transloco';
+import { SharedModule } from '../../shared.module';
 
 @NgModule({
   imports: [

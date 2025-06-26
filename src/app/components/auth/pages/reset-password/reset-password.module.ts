@@ -8,7 +8,7 @@ import { ResetPasswordPageRoutingModule } from './reset-password-routing.module'
 
 import { ResetPasswordPage } from './reset-password.page';
 import { TranslocoModule } from '@jsverse/transloco';
-import { AuthFormModule } from '../../auth-form/auth-form.module';
+import { AuthModule } from '../../auth.module';
 
 @NgModule({
   declarations: [ResetPasswordPage],
@@ -17,7 +17,7 @@ import { AuthFormModule } from '../../auth-form/auth-form.module';
     FormsModule,
     IonicModule,
     ResetPasswordPageRoutingModule,
-    AuthFormModule,
+    AuthModule,
     TranslocoModule,
   ],
 })

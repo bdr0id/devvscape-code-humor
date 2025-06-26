@@ -8,7 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { TranslocoModule } from '@jsverse/transloco';
-import { AuthFormModule } from '../../auth-form/auth-form.module';
+import { AuthModule } from '../../auth.module';
 
 @NgModule({
   declarations: [LoginPage],
@@ -17,7 +17,7 @@ import { AuthFormModule } from '../../auth-form/auth-form.module';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    AuthFormModule,
+    AuthModule,
     TranslocoModule,
   ],
 })

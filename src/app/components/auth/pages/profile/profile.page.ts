@@ -36,7 +36,7 @@ import { Preferences } from '@capacitor/preferences';
 export class ProfilePage implements OnDestroy, OnInit {
   maxLength = 200;
   currentUser: any;
-  selectedSegment: string = 'posts';
+  selectedSegment: string = 'comments';
   images$!: Observable<Image[]>;
   comments: Comment[] = [];
   user: any;
@@ -46,6 +46,8 @@ export class ProfilePage implements OnDestroy, OnInit {
   imageLoaded: boolean = false;
   isTextTruncated: boolean = true;
   commentsSubscription!: Subscription;
+  errorMessage: string = '';
+  showError: boolean = false;
 
   constructor(
     private auth: Auth,
@@ -341,13 +343,13 @@ export class ProfilePage implements OnDestroy, OnInit {
   }
 
   async presentErrorToast(message: string): Promise<void> {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    });
-    await toast.present();
+    this.errorMessage = message;
+    this.showError = true;
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 
   async deleteImage(image: Image) {

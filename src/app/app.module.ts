@@ -66,8 +66,12 @@ import { provideHttpCache, withHttpCacheInterceptor } from '@ngneat/cashew';
     provideAnalytics(() => getAnalytics()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    provideMessaging(() => getMessaging()),
-    providePerformance(() => getPerformance()),
+    ...(!isDevMode()
+      ? [
+          provideMessaging(() => getMessaging()),
+          providePerformance(() => getPerformance()),
+        ]
+      : []),
     provideStore({
       auth: authReducer,
       image: imageReducer,

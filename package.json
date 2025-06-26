@@ -1,6 +1,6 @@
 {
   "name": "devvscape-code-humor",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "SilkwebHQ Tech",
   "homepage": "https://devvscape.com/",
   "scripts": {
@@ -8,23 +8,16 @@
     "start": "ng serve",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
+    "build:dev": "ng build --configuration development",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
-    "test:watch": "ng test --watch",
-    "lint": "ng lint",
-    "lint:fix": "ng lint --fix",
+    "lint": "ng lint --fix",
     "format": "prettier --write \"src/**/*.{ts,html,scss,json}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,html,scss,json}\"",
+    "analyze": "ng build --configuration production && npx source-map-explorer www/*.js",
     "e2e": "ng e2e",
-    "ionic:build": "ionic build",
-    "ionic:serve": "ionic serve",
-    "cap:sync": "npx cap sync",
-    "cap:build": "npx cap build",
+    "cap:sync": "ng build --configuration production && npx cap sync",
     "cap:open:android": "npx cap open android",
-    "cap:run:android": "npx cap run android",
-    "firebase:deploy": "firebase deploy",
-    "firebase:serve": "firebase serve",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },
@@ -67,6 +60,7 @@
     "firebase": "^9.23.0",
     "ionicons": "^7.4.0",
     "ngx-online-status": "^2.0.0",
+    "ngx-quicklink": "^0.4.6",
     "rxfire": "^6.0.5",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.4",
@@ -91,6 +85,8 @@
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
+    "cypress": "latest",
+    "depcheck": "^1.4.7",
     "eslint": "8.57.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
@@ -102,8 +98,9 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "~5.4.5",
-    "cypress": "latest"
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "description": "Developers Escape (Devvscape)",
   "browserslist": [
@@ -114,5 +111,18 @@
     "last 2 Edge versions",
     "last 2 Safari versions",
     "last 2 iOS versions"
-  ]
+  ],
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/l00pinfinity/devvscape-code-humor.git"
+  },
+  "keywords": [
+    "DeveloperEscape",
+    "Devvscape"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/l00pinfinity/devvscape-code-humor/issues"
+  }
 }

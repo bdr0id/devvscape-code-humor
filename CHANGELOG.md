@@ -128,7 +128,7 @@ The initial release of Devvscape, providing basic code humor functionality with 
 
 For support and questions about releases, please:
 - Check our [Documentation](https://docs.devvscape.com)
-- Join our [Discord Community](https://discord.gg/devvscape)
+- Join our [Discord Community](https://discord.gg/vpS3Uu88)
 - Open an [Issue](https://github.com/{your-username}/devvscape-code-humor/issues)
 
 ---

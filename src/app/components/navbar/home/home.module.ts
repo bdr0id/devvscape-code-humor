@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { ImageModule } from '../../shared/components/image/image.module';
 import { TranslocoModule } from '@jsverse/transloco';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [HomePage],
@@ -20,6 +21,7 @@ import { TranslocoModule } from '@jsverse/transloco';
     HomePageRoutingModule,
     ImageModule,
     TranslocoModule,
+    SharedModule,
   ],
 })
 export class HomePageModule {}

@@ -48,6 +48,8 @@ export class SettingsPage implements OnInit {
     presentationstyle: 'pagesheet', //iOS only
     fullscreen: 'yes', //Windows only
   };
+  errorMessage: string = '';
+  showError: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -258,13 +260,12 @@ export class SettingsPage implements OnInit {
   }
 
   async handleError(error: any, customMessage?: string): Promise<void> {
-    const errorMessage = customMessage || error.message || 'An error occurred';
-    const toast = await this.toastCtrl.create({
-      message: errorMessage,
-      duration: 5000,
-      position: 'bottom',
-      color: 'danger',
-    });
-    await toast.present();
+    this.errorMessage = customMessage || error.message || 'An error occurred';
+    this.showError = true;
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, Platform } from '@ionic/angular';
 import { AdMobService } from 'src/app/core/services/ad-mob.service';
 
 @Component({
@@ -20,15 +20,19 @@ export class GameDetailsPage implements OnInit, OnDestroy {
   correctAnswers: number = 0;
   feedbacks: { [key: string]: string } = {};
   answeredQuestions: { [key: string]: boolean } = {};
+  errorMessage: string = '';
+  showError: boolean = false;
 
   private routeSub: Subscription = new Subscription();
+  private backButtonSubscription: any;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
     private adMobService: AdMobService,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private platform: Platform
   ) {}
 
   ngOnInit() {
@@ -37,8 +41,57 @@ export class GameDetailsPage implements OnInit, OnDestroy {
       this.amount = params['amount'];
       this.difficulty = params['difficulty'];
       this.type = params['type'];
-
       this.fetchQuestions();
+    });
+    this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(10, async (processNextHandler) => {
+      if (this.hasUnsavedChanges()) {
+        const alert = await this.alertCtrl.create({
+          header: 'Unsaved Answers',
+          message: 'You have unsaved answers. Are you sure you want to exit?',
+          backdropDismiss: false,
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                // Do nothing, keep user on page
+              }
+            },
+            {
+              text: 'Exit',
+              role: 'destructive',
+              handler: () => {
+                window.history.back();
+              },
+            },
+          ],
+        });
+        await alert.present();
+      } else {
+        // Only allow back if confirmed
+        const alert = await this.alertCtrl.create({
+          header: 'Exit Game',
+          message: 'Are you sure you want to exit?',
+          backdropDismiss: false,
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                // Do nothing
+              }
+            },
+            {
+              text: 'Exit',
+              role: 'destructive',
+              handler: () => {
+                window.history.back();
+              },
+            },
+          ],
+        });
+        await alert.present();
+      }
     });
   }
 
@@ -57,6 +110,9 @@ export class GameDetailsPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.routeSub) {
       this.routeSub.unsubscribe();
+    }
+    if (this.backButtonSubscription) {
+      this.backButtonSubscription.unsubscribe();
     }
   }
 
@@ -79,8 +135,11 @@ export class GameDetailsPage implements OnInit, OnDestroy {
     try {
       const response: any = await this.http.get(url).toPromise();
       this.questions = response.results;
-    } catch (error) {
-      this.presentErrorAlert(error);
+      this.errorMessage = '';
+      this.showError = false;
+    } catch (error: any) {
+      this.errorMessage = error?.message ? `Failed to load questions: ${error.message}` : 'Failed to load questions.';
+      this.showError = true;
     } finally {
       loading.dismiss();
     }
@@ -114,11 +173,11 @@ export class GameDetailsPage implements OnInit, OnDestroy {
   }
 
   async presentErrorAlert(error: any) {
-    const alert = await this.alertCtrl.create({
-      header: 'Error',
-      message: `Failed to load questions: ${error.message}`,
-      buttons: ['OK'],
-    });
-    await alert.present();
+    // No longer used, error is shown in the UI
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 }

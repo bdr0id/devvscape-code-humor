@@ -13,7 +13,6 @@ import { ActionsSubject } from '@ngrx/store';
 import * as AuthActions from '../../../core/store/actions/auth.actions';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
-import { ErrorResponse } from 'src/app/core/models/data/firebase.interface';
 import { SignupCredentials } from 'src/app/core/models/data/user.interface';
 
 @Component({
@@ -27,6 +26,8 @@ export class AuthFormComponent implements OnInit, OnDestroy {
   private loadingSubject = new Subject<boolean>();
   loading$ = this.loadingSubject.asObservable();
   private actionsSubscription!: Subscription;
+  errorMessage: string = '';
+  showError: boolean = false;
 
   @Input() actionButtonText!: string;
   @Input() isPasswordResetPage = false;
@@ -54,7 +55,8 @@ export class AuthFormComponent implements OnInit, OnDestroy {
           AuthActions.signupFailure,
           AuthActions.logoutFailure,
           AuthActions.resetPasswordFailure,
-          AuthActions.deleteAccountFailure
+          AuthActions.deleteAccountFailure,
+          AuthActions.continueWithGithubFailure
         ),
         tap(action => this.handleError(action.error))
       )
@@ -117,7 +119,17 @@ export class AuthFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleError(error: ErrorResponse): void {
-    this.hideLoading();
+  async handleError(error: any): Promise<void> {
+    if (typeof error === 'string') {
+      this.errorMessage = error;
+    } else {
+      this.errorMessage = error.message || 'An error occurred';
+    }
+    this.showError = true;
+  }
+
+  dismissError() {
+    this.showError = false;
+    this.errorMessage = '';
   }
 }
