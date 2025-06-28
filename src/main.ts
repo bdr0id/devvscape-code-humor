@@ -10,4 +10,6 @@ if (environment) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+  .catch(err => {
+    // Bootstrap error handled silently
+  });

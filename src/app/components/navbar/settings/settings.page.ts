@@ -182,7 +182,6 @@ export class SettingsPage implements OnInit {
           role: 'exit',
           handler: async data => {
             if (data && data.password) {
-              console.log(data.password);
               this.showLoading().subscribe({
                 next: () => {
                   this.authService
@@ -192,25 +191,19 @@ export class SettingsPage implements OnInit {
                       next: () => this.router.navigateByUrl('signup'),
                       error: error => {
                         if (error.code === 'auth/requires-recent-login') {
-                          console.log(
-                            'Deleting your account requires you to have logged in recently. Please log in and try again.'
-                          );
+                          // Handle recent login requirement
                         } else {
-                          console.log(
-                            'Error deleting account: ' + error.message
-                          );
+                          // Handle account deletion error
                         }
                       },
                     });
                 },
                 error: error => {
-                  console.log('Error showing loading: ' + error.message);
+                  // Handle loading error
                 },
               });
             } else {
-              console.log(
-                'You need to confirm account deletion by inputting your password'
-              );
+              // Password required for account deletion
             }
           },
         },

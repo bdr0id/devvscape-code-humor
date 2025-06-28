@@ -78,7 +78,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   }
 
   openProfile(author: string) {
-    //console.log(`Opening profile of ${author}`);
+    //// console.log removed for production
   }
 
   openImage(id: string): void {
@@ -109,7 +109,7 @@ export class ImageComponent implements OnInit, OnDestroy {
   }
 
   toggleText(): void {
-    //console.log('Working clicked');
+    //// console.log removed for production
     this.isTextTruncated = !this.isTextTruncated;
   }
 
@@ -168,12 +168,6 @@ export class ImageComponent implements OnInit, OnDestroy {
                 const currentUserUid = this.currentUser;
                 const imageId = image.id;
                 const reason = data.reason;
-
-                console.log(
-                  'CurrentUid:' + currentUserUid,
-                  'imageId' + imageId,
-                  'reason' + reason
-                );
 
                 try {
                   await this.imageService.reportImage(

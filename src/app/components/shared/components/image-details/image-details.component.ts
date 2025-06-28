@@ -71,7 +71,7 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   openProfile(author: string) {
-    console.log(`Opening profile of ${author}`);
+    // Profile opening functionality
   }
 
   generateAvatarUrl(name: string): string {
@@ -321,7 +321,7 @@ export class ImageDetailsComponent implements OnInit {
         this.hideLoading();
       }
     } else {
-      console.log('Comment text is empty.');
+      // Comment text is empty
       this.hideLoading();
     }
   }
@@ -376,7 +376,6 @@ export class ImageDetailsComponent implements OnInit {
   }
 
   async downloadImage(image: Image): Promise<void> {
-    console.log(image);
     const permissionResult = await this.androidPermissions.checkPermission(
       this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
     );

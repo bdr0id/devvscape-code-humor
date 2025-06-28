@@ -104,7 +104,7 @@ export class ProfilePage implements OnDestroy, OnInit {
   changeDP() {}
 
   openProfile(author: string) {
-    console.log(`Opening profile of ${author}`);
+    // console.log removed for production
   }
 
   generateAvatarUrl(name: string): string {
@@ -285,7 +285,7 @@ export class ProfilePage implements OnDestroy, OnInit {
   }
 
   async commentAction(comment: Comment) {
-    //console.log(comment);
+    //// console.log removed for production
     this.router.navigate(['image', comment.postId]);
   }
 

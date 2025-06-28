@@ -367,7 +367,7 @@ export class HomePage implements OnInit, OnDestroy {
 
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: Token) => {
-      console.log('Push registration success, token: ' + token.value);
+      // Push registration successful
     });
 
     // Some issue with our setup and push will not work
@@ -379,7 +379,7 @@ export class HomePage implements OnInit, OnDestroy {
     PushNotifications.addListener(
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
-        console.log('Push notification received: ', notification);
+        // Push notification received
       }
     );
 
@@ -387,8 +387,7 @@ export class HomePage implements OnInit, OnDestroy {
     PushNotifications.addListener(
       'pushNotificationActionPerformed',
       (notification: ActionPerformed) => {
-        console.log('Push notification action performed: ', notification);
-        // Handle notification action, e.g., navigate to a specific page
+        // Push notification action performed
         this.handleNotificationAction(notification);
       }
     );
