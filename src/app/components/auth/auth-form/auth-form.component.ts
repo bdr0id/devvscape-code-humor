@@ -71,7 +71,7 @@ export class AuthFormComponent implements OnInit, OnDestroy {
 
   submitCredentials(authForm: FormGroup): void {
     if (!authForm.valid) {
-      console.log('Form is not valid yet, current value:', authForm.value);
+      // console.log removed for production
     } else {
       this.showLoading()
         .pipe(

@@ -1,4 +1,13 @@
 {
+  "name": "Developer Escape - Code Humor & Developer Community",
+  "short_name": "DevEscape",
+  "description": "Join Developer Escape - the ultimate platform for developers to share code humor, memes, and connect with the developer community.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "portrait",
+  "scope": "/",
   "icons": [
     {
       "src": "../icons/icon-48.webp",

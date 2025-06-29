@@ -217,7 +217,7 @@ export class ImageService {
 
       await addDoc(commentsCollection, newComment);
 
-      console.log('Comment added successfully.');
+      // console.log removed for production
     } catch (error) {
       console.error('Error adding comment:', error);
       throw error;
@@ -240,7 +240,7 @@ export class ImageService {
         likedBy: comment.likedBy,
       });
 
-      console.log('Comment updated successfully.');
+      // console.log removed for production
     } catch (error) {
       console.error('Error updating comment:', error);
       throw error;
@@ -258,7 +258,7 @@ export class ImageService {
 
       if (commentSnapshot.exists()) {
         await deleteDoc(commentRef);
-        console.log('Comment deleted successfully.');
+        // console.log removed for production
       } else {
         console.error('Comment not found in the subcollection.');
       }
@@ -379,9 +379,9 @@ export class ImageService {
             downloads: newDownloads,
             downloadedBy: [...downloadedBy, userId],
           });
-          console.log('Image downloaded and recorded.');
+          // console.log removed for production
         } else {
-          console.log('Image has already been downloaded by this user.');
+          // console.log removed for production
         }
       } else {
         console.error('Image not found');

@@ -131,7 +131,7 @@ export class AuthEffects {
             AuthActions.continueWithGithubSuccess({ user: userCredential.user })
           ),
           catchError(error => {
-            console.log('Continue with Github', error);
+            // console.log removed for production
             return of(AuthActions.continueWithGithubFailure({ error }));
           })
         )

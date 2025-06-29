@@ -112,7 +112,7 @@ export class NotificationsPage implements OnInit {
               user.uid,
               notification.id
             );
-          // console.log('Unsupported notification type');
+          // // console.log removed for production
         }
       } else {
         console.error('Notification ID is undefined');
