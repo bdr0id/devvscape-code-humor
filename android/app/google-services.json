@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "664090009056",
+    "firebase_url": "https://devvesc-c43f9-default-rtdb.firebaseio.com",
+    "project_id": "devvesc-c43f9",
+    "storage_bucket": "devvesc-c43f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664090009056:android:68c6f342729b1a84cd5f85",
+        "android_client_info": {
+          "package_name": "com.silkwebhq.devvscapecode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664090009056-ttuds834pshh04h1tdnbk10avt5ovhj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALCDwB4U2Sd_deAxt2oBN3-FCXXYr6WP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664090009056-ttuds834pshh04h1tdnbk10avt5ovhj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
